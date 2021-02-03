@@ -1,0 +1,52 @@
+@charset "utf-8"; 
+
+/* ==============================
+
+	マニュアル（コンテンツリスト）
+
+=============================== */
+
+/* ------------------------------
+	コンテンツリスト
+------------------------------ */
+
+body{
+	background:#000;
+	color:#FFF;
+	font-size:14px;
+}
+#contentsListWrapper{
+	padding:20px;
+}
+#contentsListWrapper a{
+	color:#FFF;
+	text-decoration:none;
+}
+#contentsListWrapper h1{
+	margin:0 0 30px;
+}
+#contentsListWrapper dl{
+	margin:0 0 30px;
+}
+#contentsListWrapper dt{
+	color:#3CF;
+	font-size:16px;
+	border-left:solid 5px #3CF;
+	padding:0 0 0 5px;
+	margin:0 0 20px;
+	line-height:20px;
+	font-weight:bold;
+}
+#contentsListWrapper dd{
+	margin:15px 0;
+	padding:0 0 0 20px;
+	background:url(../img/contentslist_ic.png) no-repeat 0 5px;
+}
+#contentsListWrapper dd a{
+	display:block;
+}
+#contentsListWrapper dd:hover{
+	background:url(../img/contentslist_ic.png) no-repeat 0 -10px;
+}
+
+

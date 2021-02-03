@@ -1,0 +1,1 @@
+.\hosts.bat $Args[0] $Args[1]

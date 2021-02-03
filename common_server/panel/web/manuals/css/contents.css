@@ -1,0 +1,107 @@
+@charset "utf-8"; 
+
+/* ==============================
+
+	マニュアル（コンテンツ）
+
+=============================== */
+
+/* ------------------------------
+ 	コンテンツ
+------------------------------ */
+
+body{
+	background:#FCFCFC;
+	font-size:14px;
+}
+h1{
+	background: url(../img/caption_ic.png) no-repeat;
+	margin:10px 0 30px;
+	padding:0 0 0 10px;
+	color:#0099CC;
+	font-size:28px;
+	line-height:1;
+}
+h2{
+	color:#0099CC;
+	font-size:20px;
+	border-left:solid 5px #0099CC;
+	padding:0 0 0 5px;
+	margin:40px 0 10px;
+	line-height:24px;
+	font-weight:bold;
+}
+p{
+	line-height:1.6;
+	margin:10px 0;
+}
+a{
+	color:#003399;
+	font-weight:bold;
+}
+a:hover{
+	color:#ff9900;
+}
+img{
+	margin:20px 0 30px;
+	border:solid 1px #666;
+}
+ol{
+	margin:20px 0;
+}
+ol li{
+	list-style: decimal;
+	margin:0 0 20px 20px;
+}
+
+#contentsWrapper{
+	padding:20px;
+}
+.sourceCodeBox{
+	background:#000;
+	color:#FFF;
+	padding:20px;
+}
+.serverInfo{
+	width:50%;
+	background:#0099CC;
+	color:#FFF;
+	font-weight:bold;
+	padding:20px;
+	margin:20px 0;
+}
+
+#addDBMenu{
+	overflow:hidden;
+	_zoom:1;
+}
+#addDBMenu li{
+	float:left;
+	line-height:18px;
+	font-weight:bold;
+}
+#addDBMenu li+li{
+	border-left:solid 1px #3366FF;
+	padding:0 10px;
+	margin:0 10px;
+}
+
+#APPMenu{
+	overflow:hidden;
+	_zoom:1;
+}
+#APPMenu li{
+	float:left;
+	line-height:18px;
+	font-weight:bold;
+}
+#APPMenu li+li{
+	border-left:solid 1px #3366FF;
+	padding:0 10px;
+	margin:0 10px;
+}
+#APPMenu li+li+li{
+	border-left:solid 1px #3366FF;
+	padding:0 10px;
+	margin:0 0px;
+}

@@ -1,0 +1,76 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>【Winserver】 Windows Server 2012 共用サーバー マニュアル</title>
+<link rel="stylesheet" type="text/css" href="../css/global.css">
+<link rel="stylesheet" type="text/css" href="../css/contents.css">
+</head>
+<body>
+
+<div id="contentsWrapper">
+
+<h1>SQL Serverデータベースへの接続例</h1>
+
+<p>
+SQL Serverを弊社にてご利用でない場合は、SQL Serverのご利用を申請ください。
+</p>
+
+<ol>
+
+<li>
+<p>
+phpの場合（PDO）<br>
+※下記の例では、SQL Serverに接続して、SELECT文を実行しております。
+</p>
+<div class="sourceCodeBox">
+<p>
+$dsn = 'sqlsrv:server=*****.winserver.ne.jp;Database=example_db';
+</p>
+<p>
+$user = 'example';<br>
+$password = 'example';
+</p>
+<p>$pdo = new PDO($dsn, $user, $password);<br>
+$stmt = $pdo->query("SELECT * FROM example_table);
+</p>
+<p>
+$pdo = NULL;
+</p>
+</div>
+</li>
+
+<li>
+<p>
+ASP.NETの場合（VB.NET）<br>
+※下記の例では、SQL Serverに接続して、SELECT文を実行しております。
+</p>
+<div class="sourceCodeBox">
+<p>
+connectionString = "data source=*****.winserver.ne.jp;initial catalog=example_db;user id=example;password=example;persist security info=True;packet size=4096"
+</p>
+<p>
+dbconnection = New SqlConnection(connectionString)<br>
+dbconnection.Open()
+</p>
+<p>
+sql = "SELECT * FROM example_table"<br>
+dbcommand = New SqlCommand(sql, dbconnection)
+</p>
+<p>
+dataRead = dbcommand.ExecuteReader()
+</p>
+<p>
+dbcommand.Dispose()<br>
+dbconnection.Close()<br>
+dbconnection.Dispose()
+</p>
+</div>
+</li>
+
+</ol>
+
+<!-- /contentsWrapper -->
+</div>
+
+</body>
+</html>
