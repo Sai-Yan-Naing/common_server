@@ -12,12 +12,16 @@ $token = md5(uniqid(rand(), TRUE));
 <link rel="stylesheet" type="text/css" href="css/common.css">
 <link rel="stylesheet" type="text/css" href="css/login.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 </head>
 <body>
 
 <div id="loginWrapper">
 	<h1 style="font-size: 20px; font-weight: bold;">Winserver Controlpanel Share server</h1>
-<form action="pass_reset_confirm.php" method="post" />
+<form action="pass_reset_confirm.php" method="post" id="pass_reset_confirm" />
 <input type="hidden" name="token_" value="<?php echo $token ;?>">
 <table>
 	<tr>
@@ -35,5 +39,6 @@ $token = md5(uniqid(rand(), TRUE));
 </div>
 <!-- /loginWrapper -->
 </div>
+<script src="js/common.js"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 ﻿<?php
+
 class Account{
 	function __construct() {
 		require_once("config/all.php");
@@ -67,19 +68,29 @@ class Account{
 	}
 
 	// ログイン処理
-	function login($domain, $password) {
+	function login($domain_userid, $password) {
 		/* ハッシュ化 */
 		$pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
 
 		try {
 			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
 			$stmt = $pdo_account->prepare("SELECT COUNT(domain) as cnt FROM web_account WHERE `domain` = ? AND `password` = ? AND stopped = 0");
-			$stmt->execute(array($domain,$pass_encrypted));
+			$stmt->execute(array($domain_userid,$pass_encrypted));
 			$data = $stmt->fetch(PDO::FETCH_ASSOC);
 			if ($data['cnt'] > 0) {
-				setcookie("d", $domain, time() + 3600);
+				setcookie("d", $domain_userid, time() + 3600);
 				setcookie("p", $pass_encrypted, time() + 3600);
-				header('Location: /top.php');
+				header('Location: /dhome.php');
+			}else{
+				$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+				$stmt = $pdo_account->prepare("SELECT COUNT(user_id) as cnt1 FROM customer WHERE `user_id` = ? AND `password` = ?");
+				$stmt->execute(array($domain_userid,$pass_encrypted));
+				$data = $stmt->fetch(PDO::FETCH_ASSOC);
+				if ($data['cnt1'] > 0) {
+					setcookie("d", $domain_userid, time() + 3600);
+					setcookie("p", $pass_encrypted, time() + 3600);
+					header('Location: /home.php');
+				}
 			}
 
 
@@ -90,6 +101,191 @@ class Account{
 			$pdo_account = NULL;
 			die();
 		}
+	}
+
+	function passReset($domain_userid){
+		try {
+			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+			$stmt = $pdo_account->prepare("SELECT * FROM web_account WHERE `domain` = ? AND stopped = 0");
+			$stmt->execute(array($domain_userid));
+			$data = $stmt->fetch(PDO::FETCH_ASSOC);
+			if ($data > 0) {
+				// sendEmail()
+				$stmt1 = $pdo_account->prepare("SELECT * FROM customer WHERE `user_id` = ?");
+				$stmt1->execute(array($data['customer_id']));
+				$data1 = $stmt1->fetch(PDO::FETCH_ASSOC);
+				$this->sendEmail($data['token'], $data1['email']);
+					$stmt2 = $pdo_account->prepare("UPDATE web_account SET `status` = 0 WHERE `domain` = ?");
+					$stmt2->execute(array($domain_userid));
+				setcookie("domain_userid", $domain_userid, time() + 3600);
+				// setcookie("token", $data1['token'], time() + 3600);
+				return true;
+				// header('Location: /home.php');
+			}else{
+				$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+				$stmt = $pdo_account->prepare("SELECT * FROM customer WHERE `user_id` = ?");
+				$stmt->execute(array($domain_userid));
+				$data = $stmt->fetch(PDO::FETCH_ASSOC);
+				if ($data > 0) {
+					$this->sendEmail($data['token'], $data['email']);
+					$stmt1 = $pdo_account->prepare("UPDATE customer SET `status` = 0 WHERE `user_id` = ?");
+					$stmt1->execute(array($domain_userid));
+					// $stmt = $pdo_account->prepare("REPLACE INTO `current_pass` (`web_id`, `password`) VALUES (?, ?)");
+					// $stmt->execute(array($id,$pass_1));
+					$pdo_account = NULL;
+					setcookie("domain_userid", $domain_userid, time() + 3600);
+					setcookie("token", $data['token'], time() + 3600);
+					// header('Location: /home.php');
+				return true;
+				}
+			}
+			return false;
+
+
+		} catch (PDOException $e) {
+			print('Error ' . $e->getMessage());
+			$error_message = "データベースへの接続エラーです。";
+			require("views/allerror.php");
+			$pdo_account = NULL;
+			die();
+		}
+	}
+
+	function getDatabyToken($token, $domain_userid){
+
+		try {
+				$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+				// for domain
+				$dstmt = $pdo_account->prepare("SELECT * FROM web_account WHERE `token` = ? AND domain=? AND status=0");
+				$dstmt->execute(array($token,$domain_userid));
+				$ddata = $dstmt->fetch(PDO::FETCH_ASSOC);
+
+				// for customer
+				$stmt = $pdo_account->prepare("SELECT * FROM customer WHERE `token` = ? AND `user_id` = ?  AND `status` = 0");
+				$stmt->execute(array($token,$domain_userid));
+				$data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+				// echo $token.$domain_userid;
+				// die();
+				if ($ddata > 0) {
+					setcookie("domain_userid", $domain_userid, time() + 3600);
+					return true;
+				}else if ($data > 0) {
+					setcookie("domain_userid", $domain_userid, time() + 3600);
+					return true;
+				}else{
+					return false;
+				}
+
+			} catch (PDOException $e) {
+				print('Error ' . $e->getMessage());
+				$error_message = "データベースへの接続エラーです。";
+				require("views/allerror.php");
+				$pdo_account = NULL;
+				die();
+			}
+	}
+
+	function updatePassword($password, $domain_userid){
+		$pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
+		try {
+			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+			$stmt = $pdo_account->prepare("SELECT * FROM web_account WHERE `domain` = ? AND stopped = 0");
+			$stmt->execute(array($domain_userid));
+			$data = $stmt->fetch(PDO::FETCH_ASSOC);
+			if ($data > 0) {
+					$stmt1 = $pdo_account->prepare("UPDATE web_account SET `password` = ?, `status` = 1 WHERE `domain` = ?");
+					$stmt1->execute(array($pass_encrypted,$domain_userid));
+					// $stmt = $pdo_account->prepare("REPLACE INTO `current_pass` (`web_id`, `password`) VALUES (?, ?)");
+					// $stmt->execute(array($id,$pass_1));
+					$pdo_account = NULL;
+				// 	echo "error";
+				// 	die();
+				return true;
+			}else{
+				$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+				$stmt = $pdo_account->prepare("SELECT * FROM customer WHERE `user_id` = ?");
+				$stmt->execute(array($domain_userid));
+				$data = $stmt->fetch(PDO::FETCH_ASSOC);
+				if ($data > 0) {
+					$stmt = $pdo_account->prepare("UPDATE customer SET `password` = ? WHERE `user_id` = ?");
+					$stmt->execute(array($pass_encrypted,$domain_userid));
+					// $stmt = $pdo_account->prepare("REPLACE INTO `current_pass` (`web_id`, `password`) VALUES (?, ?)");
+					// $stmt->execute(array($id,$pass_1));
+					$pdo_account = NULL;
+					// header('Location: /home.php');
+				return true;
+				}
+			}
+
+
+		} catch (PDOException $e) {
+			print('Error ' . $e->getMessage());
+			$error_message = "データベースへの接続エラーです。";
+			require("views/allerror.php");
+			$pdo_account = NULL;
+			die();
+		}
+	}
+
+	// function addDomain($domain_userid,$password){
+	// 	$pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
+
+	// 	try {
+	// 		$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+
+	// 		// for domain
+	// 		$stmt = $pdo_account->prepare("SELECT COUNT(domain) as cnt FROM web_account WHERE `domain` = ?");
+	// 		$stmt->execute(array($domain_userid));
+	// 		$data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+	// 		if ($data['cnt'] <= 0) {
+	// 			$stmt_create = $pdo_account->prepare("INSERT INTO web_account (`domain`, `password`, `user`, `db_count`, `pass`) VALUES (:domain, :db, :db_user, 1, :db_password)") or die("insert error <br />". print_r($pdo_account->errorInfo(), true));
+	// 			$stmt_create->bindParam(":domain", $domain, PDO::PARAM_STR);
+	// 			$stmt_create->bindParam(":db", $db, PDO::PARAM_STR);
+	// 			$stmt_create->bindParam(":db_user", $db_user, PDO::PARAM_STR);
+	// 			$stmt_create->bindParam(":db_password", $db_password, PDO::PARAM_STR);
+	// 			$stmt_create->execute();
+	// 			$pdo_account = NULL;
+	// 			return true;
+	// 			// header('Location: /home.php');
+
+	// 		}else{
+	// 			echo "domain already exist.";
+	// 		}
+
+
+	// 	} catch (PDOException $e) {
+	// 		print('Error ' . $e->getMessage());
+	// 		$error_message = "データベースへの接続エラーです。";
+	// 		require("views/allerror.php");
+	// 		$pdo_account = NULL;
+	// 		die();
+	// 	}
+	// }
+
+	function sendEmail($token,$tomail){
+	
+    $transport = (new Swift_SmtpTransport('smtp.googlemail.com', 465, 'ssl'))
+      ->setUsername('capital.saiyannaing@gmail.com')
+      ->setPassword('nilar@sai2597')
+    ;
+ 
+    // Create the Mailer using your created Transport
+    $mailer = new Swift_Mailer($transport);
+		$body = 'Hello, <p><a href="http://assistup.test/new_pass.php?token='.$token.'">password reset link</a></p>';
+
+		$message = (new Swift_Message('Please change your new password.'))
+		      ->setFrom(['saiyannaing259768648@gmail.com' => 'Password Reset Link'])
+		      ->setTo($tomail)
+		      // ->setCc(['RECEPIENT_2_EMAIL_ADDRESS'])
+		      // ->setBcc(['RECEPIENT_3_EMAIL_ADDRESS'])
+		      ->setBody($body)
+		      ->setContentType('text/html')
+		    ;
+		 
+		    // Send the message
+		    $mailer->send($message);
 	}
 
 }

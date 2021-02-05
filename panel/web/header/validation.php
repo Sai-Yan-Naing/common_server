@@ -10,6 +10,7 @@ $domain = $_COOKIE["d"];
 try {
 	$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
 	$stmt = $pdo_account->prepare("SELECT COUNT(domain) as cnt FROM web_account WHERE `domain` = ? and `password` = ?");
+	// $stmt = $pdo_account->prepare("SELECT COUNT(user_id) as cnt FROM customer WHERE `user_id` = ? and `password` = ?");
 	$stmt->execute(array($domain,$password));
 	$data = $stmt->fetch(PDO::FETCH_ASSOC);
 	if ($data['cnt'] == 0) {
