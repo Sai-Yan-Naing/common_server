@@ -6,6 +6,14 @@
 <link rel="stylesheet" type="text/css" href="css/global.css">
 <link rel="stylesheet" type="text/css" href="css/common.css">
 <link rel="stylesheet" type="text/css" href="css/contents.css">
+<link rel="stylesheet" type="text/css" href="css/contract.css">
+<link rel="stylesheet" href="css/sidebar.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 </head>
 <body>
 <div id="header">
@@ -21,15 +29,5 @@
 				<li id="manual"><a href="manuals/" target="_blank">マニュアル</a></li>
 			</ul>
 		</div>
-		<ul id="nav">
-			<li id="navMyspl"><a href="mysqlform.php">MySQL追加</a></li>
-			<li id="navMsspl"><a href="mssqlform.php">Microsoft SQL Server追加</a></li>
-			<li id="navSite"><a href="site_manage.aspx">サイトの管理</a></li>
-			<li id="navApplication"><a href="app_list.aspx">アプリケーションの管理</a></li>
-			<li id="navPassword"><a href="ch_pass.php">パスワード変更</a></li>
-			<!--<li id="navSiteGuard"><a href="siteguard.php">SiteGuard</a></li>-->
-			<li id="navEasyInstall"><a href="easy_install.php">簡単インストール</a></li>
-		</ul>
 	</div>
 </div>
-<div id="contents">
