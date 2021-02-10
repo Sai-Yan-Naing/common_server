@@ -6,9 +6,6 @@
 
 =============================== */
 
-html{
-	background:#000;
-}
 body{
 	font-size:14px;
 	line-height:1.6;
@@ -136,6 +133,8 @@ label{
 	box-shadow:0 1px 2px #333;
 	-moz-box-shadow:0 1px 2px #333;
 	-webkit-box-shadow:0 1px 2px #333;
+	position: fixed;
+	z-index: 1000;
 }
 #headerBox{
 	width:1300px;
@@ -168,48 +167,6 @@ label{
 	display:block;
 	line-height:23px;
 }
-li#navMyspl{
-	background:url(../img/common/header/nav_ic_mysql.png) no-repeat 0 0;
-}
-li#navMyspl:hover{
-	background-position:0 -29px;
-}
-li#navMsspl{
-	background:url(../img/common/header/nav_ic_mssql.png) no-repeat 0 0;
-}
-li#navMsspl:hover{
-	background-position:0 -29px;
-}
-li#navSite{
-	background:url(../img/common/header/nav_ic_site.png) no-repeat 0 0;
-}
-li#navSite:hover{
-	background-position:0 -29px;
-}
-li#navApplication{
-	background:url(../img/common/header/nav_ic_application.png) no-repeat 0 0;
-}
-li#navApplication:hover{
-	background-position:0 -29px;
-}
-li#navPassword{
-	background:url(../img/common/header/nav_ic_password.png) no-repeat 0 0;
-}
-li#navPassword:hover{
-	background-position:0 -29px;
-}
-li#navSiteGuard{
-	background:url(../img/common/header/nav_ic_siteguard.png) no-repeat 0 0;
-}
-li#navSiteGuard:hover{
-	background-position:0 -29px;
-}
-li#navEasyInstall{
-	background:url(../img/common/header/nav_ic_easyinstall.png) no-repeat 0 0;
-}
-li#navEasyInstall:hover{
-	background-position:0 -29px;
-}
 
 #subNav,
 #subNavMenu{
@@ -225,7 +182,7 @@ li#navEasyInstall:hover{
 ul#subNavMenu{
 	float:right;
 	padding:5px 10px;
-	background:#666666;
+	/*background:#666666;*/
 	border-radius: 3px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -249,28 +206,6 @@ ul#subNavMenu li{
 #logout:hover{
 	background:url(../img/common/header/nav_ic_logout.png) no-repeat 0 -26px;
 }
-#manual{
-	padding:0 0 0 30px;
-	background:url(../img/common/header/nav_ic_manual.png) no-repeat;
-}
-#manual:hover{
-	background:url(../img/common/header/nav_ic_manual.png) no-repeat 0 -26px;
-}
-
-
-
-/* ------------------------------
-	フッター
------------------------------- */
-
-#footer{
-	width:100%;
-	background:#000;
-	color:#FFF;
-	padding:30px 0px;
-	bottom:0;
-}
-
 
 
 

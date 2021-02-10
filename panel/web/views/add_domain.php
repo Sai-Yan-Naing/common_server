@@ -1,20 +1,7 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Winserver Controlpanel</title>
-	<link rel="stylesheet" type="text/css" href="css/contract.css">
-	<link rel="stylesheet" href="css/sidebar.css">
-	<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-</head>
-
-<body>
+<?php require("views/header.php") ?>
 
 	<div class="main_container">
-		<div class="sidebar">
+		<div class="sidebar" style="margin-top: 85px;">
 			<div class="sidebar__inner">
 
 				<ul>
@@ -41,7 +28,7 @@
 		</div>
 
 		<div class="right-content">
-			<h1>Winserver Controlpanel Share server</h1>
+			<h1 style="margin-top: 130px;">Winserver Controlpanel Share server</h1>
 
 			<ul class="txtImg">
 				<li class="left-wrap">
@@ -83,6 +70,4 @@
 			</ul>
 		</div>
 	</div>
-</body>
-
-</html>
+<?php require("views/footer.php") ?>

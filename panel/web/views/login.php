@@ -1,3 +1,20 @@
+<?php
+ 
+session_start();
+
+// At the top of page right after session_start();
+if (isset($_SESSION["locked"]))
+{
+    $difference = time() - $_SESSION["locked"];
+    // echo $difference;
+    if ($difference > 30)
+    {
+        unset($_SESSION["locked"]);
+        unset($_SESSION["login_attempts"]);
+    }
+}
+
+?>
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
@@ -25,9 +42,30 @@
 		<th scope="row">PASSWORD</th>
 		<td><input type="password" name="password" id="password" size="40" /></td>
 	</tr>
+	<?php 
+			// In sign-in form submit button
+		if (isset($_SESSION["login_attempts"]) && $_SESSION["login_attempts"] >2)
+		{
+		    $_SESSION["locked"] = time();
+		    echo "Please wait for 30 seconds";
+	?>
+	<tr>
+		<th colspan="2" scope="row"><input type="submit" value="ログイン" id="btnLogin" disabled class="inputBtn" style="cursor: auto; background: #ccc;" /></th>
+	</tr>
+	<?php
+		}
+		else
+		{
+		 
+	?>
 	<tr>
 		<th colspan="2" scope="row"><input type="submit" value="ログイン" id="btnLogin" class="inputBtn" /></th>
-		</tr>
+	</tr>
+	<?php
+ 
+	}
+	 
+	?>
 </table>
 <div style="margin-top: -30px">
 	<a href="pass_reset.php">PASSWORDをお忘れの方はこちらから</a>

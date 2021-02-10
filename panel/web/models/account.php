@@ -1,5 +1,5 @@
 ﻿<?php
-
+session_start();
 class Account{
 	function __construct() {
 		require_once("config/all.php");
@@ -74,23 +74,26 @@ class Account{
 
 		try {
 			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
-			$stmt = $pdo_account->prepare("SELECT COUNT(domain) as cnt FROM web_account WHERE `domain` = ? AND `password` = ? AND stopped = 0");
-			$stmt->execute(array($domain_userid,$pass_encrypted));
-			$data = $stmt->fetch(PDO::FETCH_ASSOC);
-			if ($data['cnt'] > 0) {
+			$dstmt = $pdo_account->prepare("SELECT COUNT(domain) as cnt FROM web_account WHERE `domain` = ? AND `password` = ? AND stopped = 0");
+			$dstmt->execute(array($domain_userid,$pass_encrypted));
+			$ddata = $dstmt->fetch(PDO::FETCH_ASSOC);
+
+			//for customer
+			$stmt = $pdo_account->prepare("SELECT COUNT(user_id) as cnt FROM customer WHERE `user_id` = ? AND `password` = ?");
+				$stmt->execute(array($domain_userid,$pass_encrypted));
+				$data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+			if ($ddata['cnt'] > 0) {
 				setcookie("d", $domain_userid, time() + 3600);
 				setcookie("p", $pass_encrypted, time() + 3600);
 				header('Location: /dhome.php');
+			}else if($data['cnt'] > 0){
+				setcookie("d", $domain_userid, time() + 3600);
+				setcookie("p", $pass_encrypted, time() + 3600);
+				header('Location: /home.php');
 			}else{
-				$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
-				$stmt = $pdo_account->prepare("SELECT COUNT(user_id) as cnt1 FROM customer WHERE `user_id` = ? AND `password` = ?");
-				$stmt->execute(array($domain_userid,$pass_encrypted));
-				$data = $stmt->fetch(PDO::FETCH_ASSOC);
-				if ($data['cnt1'] > 0) {
-					setcookie("d", $domain_userid, time() + 3600);
-					setcookie("p", $pass_encrypted, time() + 3600);
-					header('Location: /home.php');
-				}
+				$_SESSION["login_attempts"] += 1;
+				header('Location: /login_error.php');
 			}
 
 
@@ -268,7 +271,7 @@ class Account{
 	
     $transport = (new Swift_SmtpTransport('smtp.googlemail.com', 465, 'ssl'))
       ->setUsername('capital.saiyannaing@gmail.com')
-      ->setPassword('nilar@sai2597')
+      ->setPassword('saiyannaing123!')
     ;
  
     // Create the Mailer using your created Transport
@@ -276,7 +279,7 @@ class Account{
 		$body = 'Hello, <p><a href="http://assistup.test/new_pass.php?token='.$token.'">password reset link</a></p>';
 
 		$message = (new Swift_Message('Please change your new password.'))
-		      ->setFrom(['saiyannaing259768648@gmail.com' => 'Password Reset Link'])
+		      ->setFrom(['capital.saiyannaing@gmail.com' => 'Password Reset Link'])
 		      ->setTo($tomail)
 		      // ->setCc(['RECEPIENT_2_EMAIL_ADDRESS'])
 		      // ->setBcc(['RECEPIENT_3_EMAIL_ADDRESS'])

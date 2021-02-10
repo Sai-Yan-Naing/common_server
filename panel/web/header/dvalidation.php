@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 require("config/all.php");
 
@@ -14,7 +13,7 @@ try {
 
 	// for customer id
 	// $stmt = $pdo_account->prepare("SELECT COUNT(domain) as cnt FROM web_account WHERE `domain` = ? and `password` = ?");
-	$stmt = $pdo_account->prepare("SELECT COUNT(user_id) as cnt FROM customer WHERE `user_id` = ? and `password` = ?");
+	$stmt = $pdo_account->prepare("SELECT COUNT(domain) as cnt FROM web_account WHERE `domain` = ? and `password` = ?");
 	$stmt->execute(array($domain,$password));
 	$data = $stmt->fetch(PDO::FETCH_ASSOC);
 

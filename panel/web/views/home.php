@@ -1,8 +1,7 @@
 <?php require("views/header.php") ?>
 	<div class="main_container">
-		<div class="sidebar">
+		<div class="sidebar" style="margin-top: 85px;">
 			<div class="sidebar__inner">
-
 				<ul>
 					<li>
 						<a href="#" class="active">
@@ -12,7 +11,7 @@
 					</li>
 					<li>
 						<a href="#">
-							<span class="icon"><i class="fas fa-cog"></i></span><br>
+							<span class="icon"><i class="fas fa-id-badge"></i></span><br>
 							<span class="title">ご契約情報</span>
 						</a>
 					</li>
@@ -27,110 +26,116 @@
 		</div>
 
 		<div class="right-content">
-			<h1>Winserver Controlpanel</h1>
-			<ul class="conId">
-				<li><b>契約ID</b></li>
-				<li><span>D0000000</span></li>
-			</ul>
-			<ul class="conService">
-				<li><b>契約サービス</b></li>
-				<li><span>
-						<ul class="tab-bar">
-							<li class="tabs" id="tab1" onclick="tabOne()">共用サーバー</li>
-							<li class="tabs" id="tab2" onclick="tabTwo()">VPS/デスクトッププラン</li>
-							<div class="panel" id="share-panel">
-								<!-- <h1>Share Server</h1> -->
-								<ul class="title-list">
-									<li></li>
-									<li></li>
-									<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-									<li><b>使用容量</b></li>
-									<li><b>サイト</b></li>
-									<li><b>アプリケーションプール</b></li>
-									<li><b>削除</b></li>
-								</ul>
-								<div class="conDomain">
-									<ul>
-										<li>契約ドメイン</li>
-										<li>a.com</li>
-										<li>〇〇ＧＢ</li>
-										<!-- <li class="start-stop">
-		    	    			<span class="start">起動</span>
-		    	    			<span class="stop">停止</span>
-		    	    		</li> -->
-										<li>起動/停止</li>
-										<li>起動/停止</li>
-										<li></li>
-									</ul>
-									<ul>
-										<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-										<li>b.com</li>
-										<li>〇〇ＧＢ</li>
-										<li>起動/停止</li>
-										<li>起動/停止</li>
-										<li>削除</li>
-									</ul>
-									<ul>
-										<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-										<li>c.com</li>
-										<li>〇〇ＧＢ</li>
-										<li>起動/停止</li>
-										<li>起動/停止</li>
-										<li>削除</li>
-									</ul>
-								</div>
-								<div class="conButton">
-									<a href="add_domain.php" class="domainAdd">マルチドメイン追加</a>
-						<a href="#"  class="domainAcq" data-toggle="modal" data-target="#myModal">ドメイン取得</a>
-									<a href="#" class="addServer">サーバー追加</a>
-								</div>
-							</div>
-							<div class="panel" id="vps-panel">
-								<h3>VPS/Desktop plan</h3>
-								<ul class="title-list">
-									<li></li>
-									<li></li>
-									<li></li>
-									<li><b>使用容量</b></li>
-									<li><b>サイト</b></li>
-									<li><b>アプリケーションプール</b></li>
-									<li><b>削除</b></li>
-								</ul>
-							</div>
-						</ul>
-					</span></li>
-			</ul>
+			<h1 class="title-cont text-center" style="margin-top: 130px;">Winserver Controlpanel</h1>
+			<div class="row">
+			    <div class="col-md-2">
+			    	<p><b>契約ID</b></p>
+			    </div>
+			    <div class="col-md-10">
+			    	<p class="btn btn-outline-secondary contractId"><?php echo $_COOKIE['d']; ?></p>
+			    </div>
+			</div>
 
+			<div class="row">
+				<div class="col-md-2">
+			    	<p><b>契約サービス</b></p>
+			    </div>
+			    <div class="col-md-10 conService">
+			    	<ul class="tab-bar">
+						<li class="tabs" id="tab1" onclick="tabOne()">共用サーバー</li>
+						<li class="tabs" id="tab2" onclick="tabTwo()">VPS/デスクトッププラン</li>
+						<div class="panel" id="share-panel">
+							<table class="table table-borderless">
+							  <thead>
+							    <tr>
+							      <th></th>
+							      <th></th>
+							      <th></th>
+							      <th width="100px">使用容量</th>
+							      <th width="100px">サイト</th>
+							      <th width="170px">アプリケーションプール</th>
+							      <th width="100px">削除</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							    <tr>
+							      <td>契約ドメイン</td>
+							      <td>a.com</td>
+							      <td><a href="dhome.php" class="btn btn-outline-primary btn-sm">設定</a></td>
+							      <td><span class="btn btn-outline-secondary btn-sm">〇〇ＧＢ</span></td>
+							      <td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td>
+							      <td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td>
+							      <td></td>
+							    </tr>
+							    <tr>
+							      <td></td>
+							      <td>b.com</td>
+							      <td><a href="dhome.php" class="btn btn-outline-primary btn-sm">設定</a></td>
+							      <td><span class="btn btn-outline-secondary btn-sm">〇〇ＧＢ</span></td>
+							      <td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td>
+							      <td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td>
+							      <td><span class="btn btn-outline-secondary btn-sm">削除</span></td>
+							    </tr>
+							    <tr>
+							      <td></td>
+							      <td>c.com</td>
+							      <td><a href="dhome.php" class="btn btn-outline-primary btn-sm">設定</a></td>
+							      <td><span class="btn btn-outline-secondary btn-sm">〇〇ＧＢ</span></td>
+							      <td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td>
+							      <td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td>
+							      <td><span class="btn btn-outline-secondary btn-sm">削除</span></td>
+							    </tr>
+							  </tbody>
+							</table>
+							<div class="conButton">
+								<a href="add_domain.php" class="domainAdd btn btn-outline-primary btn-sm" role="button">マルチドメイン追加</a>
+								<a href="#"  class="domainAcq btn btn-outline-secondary btn-sm">ドメイン取得</a>
+								<a href="add_server.php" class="addServer btn btn-outline-primary btn-sm">サーバー追加</a>
+							</div>
+						</div>
+						<div class="panel" id="vps-panel">
+							<table class="table table-borderless">
+							  <thead>
+							    <tr>
+							      <th></th>
+							      <th></th>
+							      <th></th>
+							      <th>使用容量</th>
+							      <th>サイト</th>
+							      <th>アプリケーションプール</th>
+							      <th>削除</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							  	<tr>
+							  		<td></td>
+							  		<td></td>
+							  		<td></td>
+							  		<td></td>
+							  		<td></td>
+							  		<td></td>
+							  		<td></td>
+							  	</tr>
+							  </tbody>
+							</table>
+						</div>
+					</ul>
+			    </div>
+			</div>
+			<!-- <div class="row">
+				<div class="col-md-2">
+					<p><b>契約ドメイン</b></p>
+				</div>
+				<div class="col-md-10">
+					
+				</div>
+			</div> -->
 		</div>
 	</div>
-<!-- The Modal -->
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Domain Checker</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
+			
 
-      <!-- Modal body -->
-      <div class="modal-body">
-        <form class="form-inline">
-		    <input class="form-control mr-sm-2" type="text" id="domainval" placeholder="Search">
-		    <button class="btn btn-success" id="domainsearch" type="button">Check</button>
-		</form>
-		<div id="result_domain"></div>
-      </div>
 
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-  </div>
-</div>
 	<script>
 		function get(obj) {
 			return document.getElementById(obj);
@@ -154,11 +159,4 @@
 			get("vps-panel").style.display = "block";
 		}
 	</script>
-
-	<div id="footer">
-		<p>copyrightc Japan System Development co.,Ltd All rights reserved.</p>
-	</div>
-	<script src="js/searchdomain.js"></script>
-</body>
-
-</html>
+	<?php require("views/footer.php") ?>

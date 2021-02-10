@@ -3,88 +3,162 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>SideBar Menu</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/sidebar.css">
+    <title>Add Server</title>
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/contents.css">
+    <link rel="stylesheet" href="css/server.css">
+    <link rel="stylesheet" href="css/sidebar1.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script>
-
-    </script>
+    <script src="js/bootstrap.min.js"></script>
 
 
 </head>
 
 <body>
-
-
-
-    <div class="main_container">
-        <div class="sidebar">
-            <div class="sidebar__inner">
-                <ul>
+    <div id="header">
+        <div id="headerBox">
+            <div id="subNav">
+                <p id="logo"><a href="home.php"><img src="img/common/header/logo.png" width="135" height="30" alt="Winserver" /></a></p>
+                <ul id="subNavMenu">
                     <li>
-                        <a href="#" class="active">
-                            <span class="icon"><i class="fas fa-desktop"></i></span><br>
-                            <span class="title">サーバー管理</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="icon"><i class="fas fa-cog"></i></span><br>
-                            <span class="title">各種設定</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="icon"><i class="fas fa-file-alt"></i></span><br>
-                            <span class="title">マニュアル</span>
-                        </a>
+                        <form action="logout.php" method="post" />
+                        <input type="submit" value="ログアウト" id="logout" />
+                        </form>
                     </li>
                 </ul>
             </div>
         </div>
-        <div class="container">
-            <h1>Winserver Controlpanel Share server</h1>
+    </div>
+    <!-- Start of Wrapper  -->
+    <div class="wrapper">
 
-            <form action="" class="form-input">
-                <label for="id">契約ID</label>
-                <input type="text" id="id" name="id" value="D0000000">
+        <!--Start of Sidebar  -->
+        <nav id="sidebar"  style="margin-top: 85px;">
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-desktop"></i></span><br>
+                        <span class="title">サーバー管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-cog"></i></span><br>
+                        <span class="title">各種設定</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fas fa-file-alt"></i></span><br>
+                        <span class="title">マニュアル</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!--End of Sidebar  -->
+
+        <!-- Start of Page Content  -->
+        <div id="content" class="server" style="margin-top: 130px;">
+            <h6 class="wserver">Winserver Controlpanel Share server</h6>
+
+            <form class="keiyaku-id">
+                <div class="form-row">
+                    <div class="col"></div>
+                    <div class="col">
+                        <label for="contract-id">契約ID</label>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" id="contract-id" value="<?php echo $_COOKIE['d']; ?>" readonly>
+                    </div>
+                    <div class="col"></div>
+                </div>
             </form>
 
-            <div class="server">
-                <div class="add-server"><span class="">サーバー追加</span></div>
-                <div class="server-type">
-                    <div class="server-name"><span>共用サーバー</span></div>
-                    <div class="server-name">
-                        <span>VPSサーバー</span>
-                        <div class="tab vps-tab">
-                            <button class="tablinks" onclick="vpsSSD()">SSD</button>
-                            <button class="tablinks" onclick="vpsHDD()">HDD</button>
 
-                        </div>
+            <p class="saba"><span class="saba-tsuika">サーバー追加</span></p>
+            <div class="row row-border">
+                <div class="col-sm-3">
+                    <div class="kyoyo-saba">共用サーバー</div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="vps-saba">VPSサーバー</div>
+                    <div class="vps-btn btn-group" role="group" data-toggle="buttons">
+                        <button type="button" class="btn btn-primary btn-ssd active" onclick="vpsSSD()" checked autocomplete="off"> SSD</button>
+                        <button type="button" class="btn btn-primary btn-hdd" onclick="vpsHDD()" autocomplete="off"> HDD</button>
                     </div>
-                    <div class="server-name">
-                        <span>WindowsDesktop</span>
-                        <div class="tab wd-tab">
-                            <button class="tablinks" id="wd1" onclick="wdSSD()">SSD</button>
-                            <button class="tablinks" id="wd2" onclick="wdHDD()">HDD</button>
-                        </div>
+
+                </div>
+                <div class="col-sm-3">
+                    <div class="wd-saba">WindowsDesktop</div>
+                    <div class="wd-btn btn-group" role="group" data-toggle="buttons">
+                        <button type="button" class="btn btn-primary btn-ssd" onclick="wdSSD()" autocomplete="off"> SSD</button>
+                        <button type="button" class="btn btn-primary btn-hdd" onclick="wdHDD()" autocomplete="off"> HDD</button>
                     </div>
-                    <div class="server-name"><span>専用サーバー</span></div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="senyo-saba">専用サーバー</div>
                 </div>
             </div>
 
-
-
-
-
-
+            <div class="row saba-result">
+                <div id="vps-ssd"> VPS SSD </div>
+                <div id="vps-hdd"> VPS HDD </div>
+                <div id="wd-ssd"> WD SSD </div>
+                <div id="wd-hdd"> WD HDD </div>
+            </div>
         </div>
+        <!--End of Page Content  -->
 
     </div>
+    <!-- End of Wrapper  -->
+    <script>
+        function vpsSSD() {
+            var a = document.getElementById("vps-ssd");
+            var b = document.getElementById("vps-hdd");
+            var c = document.getElementById("wd-ssd");
+            var d = document.getElementById("wd-hdd");
+            a.style.display = "block";
+            b.style.display = "none";
+            c.style.display = "none";
+            d.style.display = "none";
+        }
 
+        function vpsHDD() {
+            var a = document.getElementById("vps-ssd");
+            var b = document.getElementById("vps-hdd");
+            var c = document.getElementById("wd-ssd");
+            var d = document.getElementById("wd-hdd");
+            a.style.display = "none";
+            b.style.display = "block";
+            c.style.display = "none";
+            d.style.display = "none";
+        }
 
+        function wdSSD() {
+            var a = document.getElementById("vps-ssd");
+            var b = document.getElementById("vps-hdd");
+            var c = document.getElementById("wd-ssd");
+            var d = document.getElementById("wd-hdd");
+            a.style.display = "none";
+            b.style.display = "none";
+            c.style.display = "block";
+            d.style.display = "none";
+        }
+
+        function wdHDD() {
+            var a = document.getElementById("vps-ssd");
+            var b = document.getElementById("vps-hdd");
+            var c = document.getElementById("wd-ssd");
+            var d = document.getElementById("wd-hdd");
+            a.style.display = "none";
+            b.style.display = "none";
+            c.style.display = "none";
+            d.style.display = "block";
+        }
+    </script>
 </body>
 
 </html>

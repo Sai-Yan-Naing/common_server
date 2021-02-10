@@ -32,7 +32,11 @@
 
 .sidebar ul li a .icon {
     /* margin-right: 15px;*/
-    font-size: 40px;
+    /*font-size: 40px !important;*/
+}
+
+.sidebar .sidebar__inner ul li .icon i {        /*becauseo of above(.icon)font-size not work by kam*/
+    font-size: 40px !important;
 }
 
 .sidebar ul li a span {
@@ -48,3 +52,9 @@
 .sidebar__inner ul {
     text-align: center;
 }
+
+
+/*------------left-menu margin-----------------------------*/
+/*.main_container {
+    margin: -20px !important;
+}*/
