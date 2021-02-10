@@ -44,7 +44,7 @@ $domain = $_COOKIE["d"];
             <div class="row">
                 <div class="col-sm-2">
                     <div class="icon-align"><span class="domain-icon"><i class="fas fa-desktop"></i></span></div>
-                    <div class="icon-align"><span class="text-center">a.com</span></div>
+                    <div class="icon-align"><span class="text-center"><?php echo $_COOKIE['d']; ?></span></div>
                     <div class="icon-align"><span class="text-center">ドメイン</span></div>
                     <div><a href="#"><span class="icon"><i class="fas fa-laptop-code"></i></span><span>サイト設定</span></a></div>
                     <div><a href="#"><span class="icon"><i class="fas fa-cogs"></i></span><span>サイトセキュリティ</span></a></div>

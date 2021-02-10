@@ -39,7 +39,7 @@
 
 .right-content {
     padding-left: 160px;
-    height: 100vh;
+    height: auto;
     border: 1px solid #ddd;
     /*margin-left: 160px;*/
     /*height: 100vh;*/
@@ -179,4 +179,6 @@
     padding: 5px 20px;
 }
 
-/*for home page*/
+form{
+   
+}
