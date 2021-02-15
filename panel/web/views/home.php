@@ -1,6 +1,6 @@
 <?php require("views/header.php") ?>
 	<div class="main_container">
-		<div class="sidebar" style="margin-top: 85px;">
+		<div class="sidebar" style="margin-top: 50px;">        <!-- 85px -->
 			<div class="sidebar__inner">
 				<ul>
 					<li>
@@ -25,8 +25,8 @@
 			</div>
 		</div>
 
-		<div class="right-content">
-			<h1 class="title-cont text-center" style="margin-top: 130px;">Winserver Controlpanel</h1>
+		<div class="right-content" style="padding-top: 65px;">
+			<h5 class="title-cont text-center">Winserver Controlpanel</h5>         <!--  130px -->
 			<div class="row">
 			    <div class="col-md-2">
 			    	<p><b>契約ID</b></p>
@@ -48,18 +48,16 @@
 							<table class="table table-borderless">
 							  <thead>
 							    <tr>
+							      <th>契約ドメイン</th>
 							      <th></th>
-							      <th></th>
-							      <th></th>
-							      <th width="100px">使用容量</th>
-							      <th width="100px">サイト</th>
-							      <th width="170px">アプリケーションプール</th>
-							      <th width="100px">削除</th>
+							      <th>使用容量</th>
+							      <th>サイト</th>
+							      <th>アプリケーションプール</th>
+							      <th>削除</th>
 							    </tr>
 							  </thead>
 							  <tbody>
 							    <tr>
-							      <td>契約ドメイン</td>
 							      <td>a.com</td>
 							      <td><a href="dhome.php" class="btn btn-outline-primary btn-sm">設定</a></td>
 							      <td><span class="btn btn-outline-secondary btn-sm">〇〇ＧＢ</span></td>
@@ -68,7 +66,6 @@
 							      <td></td>
 							    </tr>
 							    <tr>
-							      <td></td>
 							      <td>b.com</td>
 							      <td><a href="dhome.php" class="btn btn-outline-primary btn-sm">設定</a></td>
 							      <td><span class="btn btn-outline-secondary btn-sm">〇〇ＧＢ</span></td>
@@ -77,7 +74,6 @@
 							      <td><span class="btn btn-outline-secondary btn-sm">削除</span></td>
 							    </tr>
 							    <tr>
-							      <td></td>
 							      <td>c.com</td>
 							      <td><a href="dhome.php" class="btn btn-outline-primary btn-sm">設定</a></td>
 							      <td><span class="btn btn-outline-secondary btn-sm">〇〇ＧＢ</span></td>
@@ -121,6 +117,7 @@
 						</div>
 					</ul>
 			    </div>
+			    <!-- <div class="col-md-2"></div> -->
 			</div>
 			<!-- <div class="row">
 				<div class="col-md-2">

@@ -20,7 +20,7 @@
 </head>
 <body>
 <div id="header">
-	<div id="headerBox">
+	<div id="headerBox" class="boxHeader">
 		<div id="subNav">
 			<p id="logo"><a href="home.php"><img src="img/common/header/logo.png" width="135" height="30" alt="Winserver" /></a></p>
 			<ul id="subNavMenu">

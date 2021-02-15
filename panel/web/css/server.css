@@ -29,6 +29,13 @@ span {
     display: inline-block;
 }
 
+#header {
+    position: absolute;
+}
+
+#headerBox {
+    width: 100%;
+}
 
 /* ---------------------------------------------------
     CONTENT STYLE (Server)
@@ -129,7 +136,9 @@ span {
 
 .dhome a {
     color: #000000;
+    font-weight: 300;
 }
+
 
 .dhome .tab-content>.active {
     background: #f5f5f5;
@@ -180,4 +189,9 @@ span {
 
 .error {
     color: #ff0000;
+}
+
+.back-button {
+    text-align: end;
+    margin-right: 70px;
 }

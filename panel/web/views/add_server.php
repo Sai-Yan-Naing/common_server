@@ -21,7 +21,7 @@
     <div id="header">
         <div id="headerBox">
             <div id="subNav">
-                <p id="logo"><a href="home.php"><img src="img/common/header/logo.png" width="135" height="30" alt="Winserver" /></a></p>
+                <p id="logo"><a href="home.php"><img src="img/common/header/logo.png" width="85" height="30" alt="Winserver" /></a></p>
                 <ul id="subNavMenu">
                     <li>
                         <form action="logout.php" method="post" />
@@ -61,7 +61,7 @@
         <!--End of Sidebar  -->
 
         <!-- Start of Page Content  -->
-        <div id="content" class="server" style="margin-top: 130px;">
+        <div id="content" class="server" style="margin-top: 80px;">
             <h6 class="wserver">Winserver Controlpanel Share server</h6>
 
             <form class="keiyaku-id">
@@ -109,6 +109,8 @@
                 <div id="wd-ssd"> WD SSD </div>
                 <div id="wd-hdd"> WD HDD </div>
             </div>
+            <div class="back-button"><a href="home.php"><button type="button" class="btn btn-outline-secondary">戻る</button></a></div>
+            
         </div>
         <!--End of Page Content  -->
 

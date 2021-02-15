@@ -40,19 +40,14 @@
 .right-content {
     padding-left: 160px;
     height: auto;
-    border: 1px solid #ddd;
-    /*margin-left: 160px;*/
-    /*height: 100vh;*/
+    /*border: 1px solid #ddd;*/
 }
 
 .right-content .conService li {
     display: inline-flex;
 }
 
-/*.right-content .conId span {
-    font-size: 14px;
-    padding-left: 102px !important;
-}*/
+
 
 .right-content .conService span {
     font-size: 14px;
@@ -61,6 +56,10 @@
 
 .right-content .title-cont {
     color: #6c757d;
+}
+
+.right-content .form-content {
+    padding: 0px 35px 0px 0px;
 }
 
 .conService .tab-bar {
@@ -110,20 +109,6 @@
     text-decoration: none;
 }
 
-/*.conButton a {
-    color: #000;
-    text-decoration: none;
-    border: 1px solid #ddd;
-    background: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    font-weight: 500;
-}
-
-.conButton a:hover, .addButton input[type="submit"]:hover {
-    background: #D0CECE;
-}*/
-
 
 /*===================multi domain addition========================*/
 
@@ -131,15 +116,6 @@
     overflow: hidden;
     clear: both;
 }
-
-/*.addButton input[type="submit"] {
-    width: 30%;
-    background: #fff;
-    border: 1px solid #ddd;
-    cursor: pointer;
-    padding: 2px 15px;
-    border-radius: 5px;
-}*/
 
 .addButton .cancel {
     border: 1px solid #ddd;
@@ -171,6 +147,15 @@
     color: #6c757d;
 }
 
+.right-content .contractId {
+    margin-left: 289px;
+    margin-top: 10px;
+}
+
+.right-content p {
+    color: #000;
+}
+
 .mr-t {
     margin-top: 20px;
 }
@@ -179,6 +164,20 @@
     padding: 5px 20px;
 }
 
-form{
-   
+.m-b-0 {
+    margin-bottom: 0px;
+}
+
+/*for header*/
+
+#header .boxHeader {
+    margin: 0 auto;
+}
+
+.boxHeader #subNavMenu {
+    margin-bottom: 0px;
+}
+
+.sidebar ul li .title {
+    margin-top: 10px;
 }
