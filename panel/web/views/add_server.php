@@ -1,37 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php 
 
-<head>
-    <meta charset="UTF-8">
-    <title>Add Server</title>
-    <link rel="stylesheet" type="text/css" href="css/global.css">
-    <link rel="stylesheet" type="text/css" href="css/common.css">
-    <link rel="stylesheet" type="text/css" href="css/contents.css">
-    <link rel="stylesheet" href="css/server.css">
-    <link rel="stylesheet" href="css/sidebar1.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+$password = $_COOKIE["p"];
+$domain = $_COOKIE["d"];
 
-
-</head>
-
-<body>
-    <div id="header">
-        <div id="headerBox">
-            <div id="subNav">
-                <p id="logo"><a href="home.php"><img src="img/common/header/logo.png" width="85" height="30" alt="Winserver" /></a></p>
-                <ul id="subNavMenu">
-                    <li>
-                        <form action="logout.php" method="post" />
-                        <input type="submit" value="ログアウト" id="logout" />
-                        </form>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+?>
+<?php require("views/header.php") ?>
     <!-- Start of Wrapper  -->
     <div class="wrapper">
 

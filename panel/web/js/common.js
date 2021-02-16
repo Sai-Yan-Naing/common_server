@@ -145,3 +145,10 @@ $(function() {
     });
 
 });
+
+
+$(document).ready(function(){
+  $("#data-dropdown").click(function(){
+    $("#data-item").toggle();
+  });
+});

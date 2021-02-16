@@ -137,7 +137,7 @@ label{
 	z-index: 1000;
 }
 #headerBox{
-	width:1300px;
+	width: 100%;
 	padding:0 10px 10px;
 	margin:0 0 20px;
 }

@@ -29,9 +29,9 @@ span {
     display: inline-block;
 }
 
-#header {
+/*#header {
     position: absolute;
-}
+}*/
 
 #headerBox {
     width: 100%;
@@ -195,3 +195,69 @@ span {
     text-align: end;
     margin-right: 70px;
 }
+
+
+//16/2/2021
+
+/*===========basic config===================*/
+
+.tab-content #kihon-setting {
+    padding: 0 40px;
+    overflow: hidden;
+}
+
+.tab-content #kihon-setting p {
+    color: #000;
+}
+
+.pl-0 {
+    padding-left: 30px;
+}
+
+.add-basic-auth {
+    text-decoration: none !important;
+    border: 1px solid #ced4da !important;
+    border-radius: .25rem;
+    background: #fff !important;
+}
+
+.add-basic-auth .add-icon {
+    padding: 0 15px;
+}
+
+.add-basic-auth:hover {
+    color: #007bff;
+}
+
+.basic-setting .down-icon {
+    padding-right: 5px;
+    font-size: 20px;
+}
+
+.basic-setting {
+    margin-bottom: 15px;
+}
+
+.on-off-btn .on {
+    border: 1px solid #ccc !important;
+    padding: 2px 15px;
+}
+
+.on-off-btn {
+    background: #4472c4 !important;
+}
+
+.on-off-btn .off {
+    border: 1px solid #ccc !important;
+    padding: 2px 15px;
+    margin-left: -8px;
+}
+
+/*cza*/
+#oyo-setting .oyo-set {
+    margin-left: 40px;
+}
+#oyo-setting .oyo-sett {
+    margin-left: 30px;
+}
+/*end cza*/
