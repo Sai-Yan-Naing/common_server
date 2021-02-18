@@ -415,8 +415,7 @@ th {
     width: 26px;
     left: 4px;
     bottom: 4px;
-    bac
-    kground-color: white;
+    background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -433,6 +432,62 @@ input:checked+.slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE (mail_connection)
+----------------------------------------------------- */
+
+.mail_connection .wserver {
+    text-align: left;
+}
+
+.mail_connection a {
+    color: #000000;
+    font-weight: 300;
+}
+
+.mail_connection .icon-align {
+    text-align: center;
+}
+
+.mail_connection span.icon {
+    font-size: 23px;
+}
+
+.mail_connection .domain-icon {
+    font-size: 50px;
+}
+
+.mail_connection .nav-tabs {
+    border-bottom: none!important;
+}
+
+.nav-border {
+    border: 1px solid #dee2e6;
+}
+
+.connec-tabs {
+    border: 1px solid #000000;
+    padding: 10px;
+}
+
+.connec-tabs .text-label-align {
+    padding-top: calc(.375rem + 1px);
+    padding-bottom: calc(.375rem + 2px);
+    margin-bottom: 0;
+    font-size: inherit;
+    line-height: 1.5;
+}
+
+.mail_connection .m-40 {
+    margin: 0 15%;
+}
+
+#pop-imap .notice-msg {
+    border-radius: 5px;
+    padding: 10px;
+    margin-left: 0px;
 }
 
 /*end wady*/
@@ -539,6 +594,26 @@ input:checked+.slider:before {
 .p-t-b-l-r-2 {
     padding: .5rem;
 }
+
+/*----------mail-setting--------------*/
+.sign-domain {
+    margin-top: 2.3rem;
+    padding-left: 0px;
+}
+
+/*mail connection information*/
+.m-t-0 {
+    margin-top: -33px;
+}
+
+/*--------------backup-----------------*/
+.per-backup {
+    border: 1px solid #ced4da;
+    padding: .375rem .75rem;
+    border-radius: .25rem;
+    margin-bottom: 15px;
+}
+
 
 /*end khin*/
 

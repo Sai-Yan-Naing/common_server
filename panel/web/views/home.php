@@ -87,17 +87,9 @@ $multidomain=$account->getMultiDomain($_COOKIE['d'], $_COOKIE['p']);
 							  <tbody>
 							  	<?php
 							  	foreach($multidomain as $domain) {
-							  		echo '<tr><td>'.$domain['domain'].'</td><td><a href="dhome.php" class="btn btn-outline-primary btn-sm">設定</a></td><td><span class="btn btn-outline-secondary btn-sm">'.formatBytes(disk_total_space("c:")).'</span></td><td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td><td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td><td>削除</td></tr>';
+							  		echo '<tr><td>'.$domain['domain'].'</td><td><a href="dhome.php" class="btn btn-outline-primary btn-sm">設定</a></td><td><span class="btn btn-outline-secondary btn-sm">'.formatBytes(disk_total_space("c:")).'</span></td><td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td><td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td><td><a href='.'"'.'delete_website.php?domainid='.$domain["id"].'"'.' class="btn btn-danger btn-sm">削除</a></td></tr>';
 							  	}
 							  	 ?>
-							    <!-- <tr>
-							      <td>a.com</td>
-							      <td><a href="dhome.php" class="btn btn-outline-primary btn-sm">設定</a></td>
-							      <td><span class="btn btn-outline-secondary btn-sm"><?php echo formatBytes(disk_total_space("c:")); ?></span></td>
-							      <td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td>
-							      <td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td>
-							      <td></td>
-							    </tr> -->
 							  </tbody>
 							</table>
 							<div class="conButton">

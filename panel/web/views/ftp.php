@@ -18,7 +18,7 @@ $domain = $_COOKIE["d"];
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="mail_setting.php">
                         <span class="icon"><i class="fas fa-envelope"></i></span><br>
                         <span class="title">ＭＡＩＬ設定</span>
                     </a>
@@ -47,7 +47,7 @@ $domain = $_COOKIE["d"];
                     <div class="icon-align"><span class="text-center"><?php echo $_COOKIE['d']; ?></span></div><br>
                     <div class="icon-align"><span class="text-center">ドメイン</span></div><br>
                     <div><a href="dhome.php"><span class="icon"><i class="fas fa-laptop-code"></i></span><span>サイト設定</span></a></div><br>
-                    <div><a href="#"><span class="icon"><i class="fas fa-cogs"></i></span><span>サイトセキュリティ</span></a></div><br>
+                    <div><a href="site_security.php"><span class="icon"><i class="fas fa-cogs"></i></span><span>サイトセキュリティ</span></a></div><br>
                     <div><a href="database.php"><span class="icon"><i class="fas fa-database"></i></span><span>データベース</span></a></div><br>
                     <div><a href="#"><span class="icon"><i class="fas fa-laptop-code"></i></span><span>FTP</span></a></div><br>
                     <div><a href="#"><span class="icon"><i class="fas fa-folder"></i></span><span>ファイルマネージャー</span></a></div><br>
@@ -71,53 +71,55 @@ $domain = $_COOKIE["d"];
                                 <span>FTPアカウント</span>
                             </div>
                             <div class="col-sm-9">
-                                <button class="btn btn-outline-secondary"><span class="add-db-icon"><i class="fas fa-plus"></i></span>ＦＴＰユーザー追加</button>
+                                <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseDirectory" aria-expanded="false" aria-controls="collapseDirectory"><span class="add-db-icon"><i class="fas fa-plus"></i></span>ＦＴＰユーザー追加</button>
                             </div>
                         </div>
-                        <div class="wrap">
-                            <form action="" method="post" id="ftpUser">
-                                <div class="form-group row">
-                                    <label for="" class="col-sm-3 col-form-label">FTPユーザー</label>
-                                    <div class="col-sm-8">
-                                      <input type="text" class="form-control" id="" name="ftp_user" placeholder="1-14文字、半角英数字">
-                                    </div>
-                                    <div class="col-sm-1 mt-2">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="" class="col-sm-3 col-form-label">パスワード</label>
-                                    <div class="col-sm-8">
-                                      <input type="password" class="form-control" id="" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
-                                    </div>
-                                    <div class="col-sm-1 mt-2">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <div class="form-group">
-                                            <span>接続許可ディレクトリ</span>
+                        <div class="collapse" id="collapseDirectory">
+                            <div class="wrap">
+                                <form action="" method="post" id="ftpUser">
+                                    <div class="form-group row">
+                                        <label for="" class="col-sm-3 col-form-label">FTPユーザー</label>
+                                        <div class="col-sm-8">
+                                          <input type="text" class="form-control" id="" name="ftp_user" placeholder="1-14文字、半角英数字">
+                                        </div>
+                                        <div class="col-sm-1 mt-2">
+                                            <i class="fas fa-pencil-alt"></i>
                                         </div>
                                     </div>
-                                    <div class="col-sm-9">
-                                        <div class="form-group">
-                                            <button class="btn btn-primary">全て許可</button>
-                                            <button class="btn btn-primary">ディレクトリ設定</button>
+                                    <div class="form-group row">
+                                        <label for="" class="col-sm-3 col-form-label">パスワード</label>
+                                        <div class="col-sm-8">
+                                          <input type="password" class="form-control" id="" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
+                                        </div>
+                                        <div class="col-sm-1 mt-2">
+                                            <i class="fas fa-pencil-alt"></i>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-3"></div>
-                                    <div class="col-sm-5">
-                                        <div class="document-root">Domainのドキュメントルートを表示</div>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <span>接続許可ディレクトリ</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <div class="form-group">
+                                                <button class="btn btn-primary">全て許可</button>
+                                                <button class="btn btn-primary">ディレクトリ設定</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group text-center">
-                                    <button type="cancel" class="btn btn-outline-secondary">キャンセル</button>
-                                    <button type="submit" class="btn btn-outline-secondary">作成</button>
-                                </div>
-                            </form>
+                                    <div class="row">
+                                        <div class="col-sm-3"></div>
+                                        <div class="col-sm-5">
+                                            <div class="document-root">Domainのドキュメントルートを表示</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button type="cancel" class="btn btn-outline-secondary">キャンセル</button>
+                                        <button type="submit" class="btn btn-outline-secondary">作成</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                         <div class="row mt-4 mb-2">
                             <div class="col-sm-3">

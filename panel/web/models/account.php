@@ -302,6 +302,40 @@ class Account{
 		}
 	}
 
+	function deleteDomain(int $domainid)
+	{
+		// echo gettype($domainid);
+		// die();
+		try {
+			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+
+			$stmt = $pdo_account->prepare("SELECT * FROM `web_account` WHERE `id` = ?");
+			$stmt->execute(array($domainid));
+			$data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+			$dstmt = $pdo_account->prepare("DELETE FROM `web_account` WHERE id = ?");
+			// $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
+			if($dstmt->execute(array($domainid)))
+			{
+				$root_dir = 'c:/laragon/www/'.$data['word_dir'].'/';
+				if(!rmdir($root_dir)) {
+				  echo ("Could not remove $root_dir");
+				  die();
+				}
+				return true;
+			}
+			return false;
+
+
+		} catch (PDOException $e) {
+			print('Error ' . $e->getMessage());
+			$error_message = "データベースへの接続エラーです。";
+			require("views/allerror.php");
+			$pdo_account = NULL;
+			die();
+		}
+	}
+
 	function sendEmail($token,$tomail){
 	
     $transport = (new Swift_SmtpTransport('smtp.googlemail.com', 465, 'ssl'))

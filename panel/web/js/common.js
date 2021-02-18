@@ -312,6 +312,36 @@ $(function() {
 
 });
 
+// ------mail setting-------------
+
+    $("form[id='mailSetting']").validate({
+        rules: {
+            email: {
+                required: true,
+            },
+            password: {
+                required: true,
+                minlength: 8,
+                maxlength: 70,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            email: {
+                required: "Please enter email address",
+            },
+            password: {
+                required: "Please enter password",
+                minlength: "Your password must be at least 8 characters long",
+                maxlength: "Your password must be maximum 70 characters long",
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+
 
 $(document).ready(function(){
   $("#data-dropdown").click(function(){
