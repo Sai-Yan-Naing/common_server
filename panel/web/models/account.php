@@ -1,5 +1,5 @@
 ﻿<?php
-session_start();
+// session_start();
 class Account{
 	function __construct() {
 		require_once("config/all.php");
@@ -231,41 +231,76 @@ class Account{
 		}
 	}
 
-	// function addDomain($domain_userid,$password){
-	// 	$pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
+	function addMultiDomain($domain, $web_dir, $ftp_user, $password, $token){
+		$pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
 
-	// 	try {
-	// 		$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+		try {
+			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
 
-	// 		// for domain
-	// 		$stmt = $pdo_account->prepare("SELECT COUNT(domain) as cnt FROM web_account WHERE `domain` = ?");
-	// 		$stmt->execute(array($domain_userid));
-	// 		$data = $stmt->fetch(PDO::FETCH_ASSOC);
+			// for domain
+			$stmt = $pdo_account->prepare("SELECT COUNT(domain) as cnt FROM web_account WHERE `domain` = ?");
+			$stmt->execute(array($domain));
+			$data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-	// 		if ($data['cnt'] <= 0) {
-	// 			$stmt_create = $pdo_account->prepare("INSERT INTO web_account (`domain`, `password`, `user`, `db_count`, `pass`) VALUES (:domain, :db, :db_user, 1, :db_password)") or die("insert error <br />". print_r($pdo_account->errorInfo(), true));
-	// 			$stmt_create->bindParam(":domain", $domain, PDO::PARAM_STR);
-	// 			$stmt_create->bindParam(":db", $db, PDO::PARAM_STR);
-	// 			$stmt_create->bindParam(":db_user", $db_user, PDO::PARAM_STR);
-	// 			$stmt_create->bindParam(":db_password", $db_password, PDO::PARAM_STR);
-	// 			$stmt_create->execute();
-	// 			$pdo_account = NULL;
-	// 			return true;
-	// 			// header('Location: /home.php');
+			if ($data['cnt'] <= 0) {
+				$stmt_create = $pdo_account->prepare("INSERT INTO web_account (`domain`, `password`, `user`, `word_dir`, `customer_id`, `token`) VALUES (:domain, :password, :user, :word_dir, :customer_id, :token)") or die("insert error <br />". print_r($pdo_account->errorInfo(), true));
+				$stmt_create->bindParam(":domain", $domain, PDO::PARAM_STR);
+				$stmt_create->bindParam(":password", $pass_encrypted, PDO::PARAM_STR);
+				$stmt_create->bindParam(":user", $domain, PDO::PARAM_STR);
+				$stmt_create->bindParam(":word_dir", $web_dir, PDO::PARAM_STR);
+				$stmt_create->bindParam(":customer_id", $_COOKIE["d"], PDO::PARAM_STR);
+				// $stmt_create->bindParam(":status", 1, PDO::PARAM_INT);
+				$stmt_create->bindParam(":token", $token, PDO::PARAM_STR);
+				$stmt_create->execute();
+				$pdo_account = NULL;
 
-	// 		}else{
-	// 			echo "domain already exist.";
-	// 		}
+				$root_dir = 'c:/laragon/www/'.$web_dir.'/';
+			   if (!file_exists ($root_dir))
+			      {
+			          mkdir($root_dir,0777,true);  
+				  }
+				// die();
+				return true;
+				// header('Location: /home.php');
+
+			}else{
+				return false;
+			}
 
 
-	// 	} catch (PDOException $e) {
-	// 		print('Error ' . $e->getMessage());
-	// 		$error_message = "データベースへの接続エラーです。";
-	// 		require("views/allerror.php");
-	// 		$pdo_account = NULL;
-	// 		die();
-	// 	}
-	// }
+		} catch (PDOException $e) {
+			print('Error ' . $e->getMessage());
+			$error_message = "データベースへの接続エラーです。";
+			require("views/allerror.php");
+			$pdo_account = NULL;
+			die();
+		}
+	}
+
+	function getMultiDomain($customer_id){
+		// $pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
+
+		try {
+			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+			// for customer
+			// $stmt = $pdo_account->prepare("SELECT * FROM customer WHERE `token` = ? AND `user_id` = ?  AND `status` = 0");
+			// $stmt->execute(array($token,$domain_userid));
+			// $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+			$dstmt = $pdo_account->prepare("SELECT * FROM web_account WHERE `customer_id` = ?");
+			$dstmt->execute(array($customer_id));
+			$ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
+			return $ddata;
+
+
+		} catch (PDOException $e) {
+			print('Error ' . $e->getMessage());
+			$error_message = "データベースへの接続エラーです。";
+			require("views/allerror.php");
+			$pdo_account = NULL;
+			die();
+		}
+	}
 
 	function sendEmail($token,$tomail){
 	

@@ -196,13 +196,258 @@ span {
     margin-right: 70px;
 }
 
+/* ---------------------------------------------------
+    CONTENT STYLE (home)
+
+----------------------------------------------------- */
+
+.conButton {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.home .win-cpanel {
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.home a {
+    color: #000000;
+    font-weight: 300;
+}
+
+
+.home .tab-content>.active {
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+}
+
+.home .nav-tabs .nav-link {
+    border: 1px solid #f5f5f5;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.home .nav-tabs .nav-link.active,
+.home .nav-tabs .nav-item.show .nav-link {
+    color: #000000;
+    background: #f5f5f5;
+    border-color: #ccc;
+}
+
+.home .btn-outline-dark:hover {
+    background: #ccc;
+}
+
+.home .icon-align {
+    text-align: center;
+}
+
+.home span.icon {
+    font-size: 23px;
+}
+
+.home .domain-icon {
+    font-size: 50px;
+}
+
+.home div#app-install {
+    padding: 0 40px;
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE (add_domain)
+----------------------------------------------------- */
+.wshare-server{
+    margin-bottom: 15px;
+}
+
+.add-multi{
+    margin-bottom: 10px;
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE (site_security)
+----------------------------------------------------- */
+
+.site-security .wserver {
+    text-align: left;
+}
+
+.site-security a {
+    color: #000000;
+    font-weight: 300;
+}
+
+.site-security .tab-content>.active {
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+}
+
+.site-security .nav-tabs .nav-link {
+    border: 1px solid #f5f5f5;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.site-security .nav-tabs .nav-link.active,
+.site-security .nav-tabs .nav-item.show .nav-link {
+    color: #000000;
+    background: #f5f5f5;
+    border-color: #ccc;
+}
+
+.site-security .btn-outline-dark:hover {
+    background: #ccc;
+}
+
+.site-security .icon-align {
+    text-align: center;
+}
+
+.site-security span.icon {
+    font-size: 23px;
+}
+
+.site-security .domain-icon {
+    font-size: 50px;
+}
+
+.site-security div#app-install {
+    padding: 0 40px;
+}
+
+.notice-msg {
+    border-radius: 5px;
+    padding: 8px;
+    margin-left: 15px;
+}
+
+thead th {
+    border-top: 1px solid #000000!important;
+}
+
+tbody tr:last-child td {
+    border-bottom: 1px solid #000000!important;
+}
+
+td,
+th {
+    border-left: 1px solid #000000!important;
+    border-right: 1px solid #000000!important;
+}
+
+.table-waf thead tr {
+    background-color: #4472c4;
+}
+
+.table-waf .waf-odd {
+    background-color: #cdd4ea;
+}
+
+.table-waf .waf-even {
+    background-color: #e8ebf5;
+}
+
+#collapseDirectory .card-body {
+    border-radius: 50px;
+    margin: 10px;
+}
+
+.dir-icon {
+    padding-right: 25px;
+}
+
+#directoryTab a {
+    text-decoration: none;
+    color: #000000;
+}
+
+#accordionDir {
+    margin-top: 25px;
+}
+
+.dir-icon {
+    font-size: 20px;
+}
+
+.trash-icon {
+    margin-top: 22px;
+}
+
+
+/* ---------------------------------------------------
+    CONTENT STYLE (site_security)(On OFF Switch)
+----------------------------------------------------- */
+
+
+/* The switch - the box around the slider */
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    float: right;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    bac
+    kground-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input.primary:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/*end wady*/
 
 //16/2/2021
+/*//khin*/
 
 /*===========basic config===================*/
 
 .tab-content #kihon-setting {
     padding: 0 40px;
+    /*overflow: hidden;*/
+}
+
+#data-item {
     overflow: hidden;
 }
 
@@ -238,20 +483,46 @@ span {
     margin-bottom: 15px;
 }
 
-.on-off-btn .on {
-    border: 1px solid #ccc !important;
-    padding: 2px 15px;
+/*-------------database css---------------*/
+
+.rcontent {
+    border: 1px solid #9b9ea0;
+    padding: 15px 20px;
+    margin-top: 17px;
 }
 
-.on-off-btn {
-    background: #4472c4 !important;
+.rcontent .add-db-icon {
+    padding-right: 15px;
 }
 
-.on-off-btn .off {
-    border: 1px solid #ccc !important;
-    padding: 2px 15px;
-    margin-left: -8px;
+.sql {
+    display: inline-flex;
 }
+
+.sql li {
+    border: 1px solid #ccc;
+    padding: 5px 30px;
+}
+
+.wrap {
+    border: 1px solid #b7b8b9;
+    margin-top: 10px;
+    border-radius: 50px;
+    padding: 5px 25px;
+}
+
+.db-title {
+    margin-top: 10px;
+}
+
+.wrap2 {
+    border: 1px solid #b7b8b9;
+    margin-top: 10px;
+    border-radius: 50px;
+    padding: 14px 25px;
+}
+
+/*end khin*/
 
 /*cza*/
 #oyo-setting .oyo-set {

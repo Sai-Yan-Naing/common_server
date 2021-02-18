@@ -2,7 +2,7 @@
 
 $password = $_COOKIE["p"];
 $domain = $_COOKIE["d"];
-
+$token = md5(uniqid(rand(), TRUE));
 ?>
 <?php require("views/header.php") ?>
 <!-- Start of Wrapper  -->
@@ -50,7 +50,8 @@ $domain = $_COOKIE["d"];
                     
                     <button type="submit" class="btn btn-outline-secondary add-multi">マルチドメイン追加</button>
 
-                    <form action="" method="post" id="user-home" class="form-content"/>
+                    <form action="add_multi_domain_con.php" method="post" id="user-home" class="form-content">
+                        <input type="hidden" name="token" value="<?php echo $token ;?>">
                         <div class="form-group row">
                             <label for="domain" class="col-sm-3 col-form-label">ドメイン名</label>
                             <div class="col-sm-8">
@@ -59,11 +60,11 @@ $domain = $_COOKIE["d"];
                         </div>
                         <div class="form-group row">
                             <label for="document" class="col-sm-3 col-form-label">ドキュメントルート</label>
-                            <div class="col-sm-3">
-                            	<input type="text" name="document" readonly class="form-control-plaintext" id="doc-root" value="Domainのドキュメントルートを表示/">
-                        	</div>
                             <div class="col-sm-5">
-                                <input type="text" class="form-control" id="document" name="document" placeholder="8～20文字、半角英数字記号">
+                            	Domainのドキュメントルートを表示/
+                        	</div>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="document" name="web_dir" placeholder="8～20文字、半角英数字記号">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -75,7 +76,7 @@ $domain = $_COOKIE["d"];
                         <div class="form-group row">
                             <label for="password" class="col-sm-3 col-form-label">パスワード</label>
                             <div class="col-sm-8">
-                                <input type="password" class="form-control" id="passwordpassword" name="password" placeholder="8～70文字、半角英数字記号">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="8～70文字、半角英数字記号">
                             </div>
                         </div>
 

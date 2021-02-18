@@ -144,6 +144,141 @@ $(function() {
         }
     });
 
+    $("form[id='db-page']").validate({
+        rules: {
+            db_name: {
+                required: true,
+                minlength: 8,
+                maxlength: 70,
+            },
+            user_name: {
+                required: true,
+                minlength: 8,
+                maxlength: 70,
+            },
+            password: {
+                required: true,
+                minlength: 8,
+                maxlength: 70,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            db_name: {
+                required: "Please enter database name",
+                minlength: "Your password must be at least 8 characters long",
+                maxlength: "Usernamr must be maximum 70 characters long",
+            },
+            username: {
+                required: "Please enter user name",
+                minlength: "Your password must be at least 8 characters long",
+                maxlength: "Usernamr must be maximum 70 characters long",
+            },
+            password: {
+                required: "Please enter password",
+                minlength: "Your password must be at least 8 characters long",
+                maxlength: "Your password must be maximum 70 characters long",
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+    // For Free SSl
+    $("form[id='free-ssl']").validate({
+        rules: {
+            common_name: {
+                required: true,
+            },
+            prefecture: {
+                required: true,
+            },
+            municipality: {
+                required: true,
+                maxlength: 255,
+            },
+            organization: {
+                required: true,
+            },
+            department: {
+                required: true,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            common_name: {
+                required: "Please enter common name",
+
+            },
+            prefecture: {
+                required: "Please enter prefecture",
+            },
+            municipality: {
+                required: "Please enter municipality",
+            },
+            organization: {
+                required: "Please enter organization name",
+
+            },
+            department: {
+                required: "Please enter department",
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+    // For Add Directory
+    $("form[id='add-directory']").validate({
+        rules: {
+            dir_path: {
+                required: true,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            dir_path: {
+                required: "Please enter directory path",
+
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+    // For Dir Information
+    $("form[id='dir-information']").validate({
+        rules: {
+            user: {
+                required: true,
+                maxlength: 14,
+            },
+            password: {
+                required: true,
+                minlength: 8,
+                maxlength: 70,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            user: {
+                required: "Please enter user name",
+                maxlength: "Your name must be maximum 14 characters long",
+            },
+            password: {
+                required: "Please enter password",
+                minlength: "Your password must be at least 8 characters long",
+                maxlength: "Your password must be maximum 70 characters long",
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
 });
 
 

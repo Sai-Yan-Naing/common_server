@@ -5,6 +5,13 @@ $domain = $_COOKIE["d"];
 
 ?>
 <?php require("views/header.php") ?>
+<?php 
+
+require_once('models/account.php');
+
+$account = new Account;
+$multidomain=$account->getMultiDomain($_COOKIE['d'], $_COOKIE['p']);
+?>
 <!-- Start of Wrapper  -->
     <div class="wrapper">
 
@@ -28,7 +35,7 @@ $domain = $_COOKIE["d"];
                         <span class="icon"><i class="fas fa-file-alt"></i></span><br>
                         <span class="title">マニュアル</span>
                     </a>
-                </li>s
+                </li>
             </ul>
         </nav>
         <!--End of Sidebar  -->
@@ -78,34 +85,23 @@ $domain = $_COOKIE["d"];
 							    </tr>
 							  </thead>
 							  <tbody>
-							    <tr>
+							  	<?php
+							  	foreach($multidomain as $domain) {
+							  		echo '<tr><td>'.$domain['domain'].'</td><td><a href="dhome.php" class="btn btn-outline-primary btn-sm">設定</a></td><td><span class="btn btn-outline-secondary btn-sm">'.formatBytes(disk_total_space("c:")).'</span></td><td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td><td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td><td>削除</td></tr>';
+							  	}
+							  	 ?>
+							    <!-- <tr>
 							      <td>a.com</td>
 							      <td><a href="dhome.php" class="btn btn-outline-primary btn-sm">設定</a></td>
-							      <td><span class="btn btn-outline-secondary btn-sm">〇〇ＧＢ</span></td>
+							      <td><span class="btn btn-outline-secondary btn-sm"><?php echo formatBytes(disk_total_space("c:")); ?></span></td>
 							      <td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td>
 							      <td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td>
 							      <td></td>
-							    </tr>
-							    <tr>
-							      <td>b.com</td>
-							      <td><a href="dhome.php" class="btn btn-outline-primary btn-sm">設定</a></td>
-							      <td><span class="btn btn-outline-secondary btn-sm">〇〇ＧＢ</span></td>
-							      <td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td>
-							      <td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td>
-							      <td><span class="btn btn-outline-secondary btn-sm">削除</span></td>
-							    </tr>
-							    <tr>
-							      <td>c.com</td>
-							      <td><a href="dhome.php" class="btn btn-outline-primary btn-sm">設定</a></td>
-							      <td><span class="btn btn-outline-secondary btn-sm">〇〇ＧＢ</span></td>
-							      <td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td>
-							      <td><span class="btn btn-outline-secondary btn-sm">起動/停止</span></td>
-							      <td><span class="btn btn-outline-secondary btn-sm">削除</span></td>
-							    </tr>
+							    </tr> -->
 							  </tbody>
 							</table>
 							<div class="conButton">
-								<a href="add_domain.php" class="domainAdd btn btn-outline-primary btn-sm" role="button">マルチドメイン追加</a>
+								<a href="add_multi_domain.php" class="domainAdd btn btn-outline-primary btn-sm" role="button">マルチドメイン追加</a>
 								<a href="#"  class="domainAcq btn btn-outline-secondary btn-sm">ドメイン取得</a>
 								<a href="add_server.php" class="addServer btn btn-outline-primary btn-sm">サーバー追加</a>
 							</div>
@@ -147,5 +143,17 @@ $domain = $_COOKIE["d"];
 
     </div>
     <!-- End of Wrapper  -->
+
+    <?php 
+    	function formatBytes($bytes, $precision = 2) 
+		{ 
+		    if  ($bytes == 0) return '0 B';
+		    $sizes = array('B', 'KB', 'M', 'GB', 'TB');   
+		    $base = log($bytes, 1024);
+		  
+		    return round(pow(1024, $base - floor($base)), $precision) . ' ' . $sizes[floor($base)];
+		} 
+
+	?>
 
 <?php require("views/footer.php") ?>
