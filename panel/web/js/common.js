@@ -279,6 +279,37 @@ $(function() {
         }
     });
 
+    // ------ftp js---------
+
+    $("form[id='ftpUser']").validate({
+        rules: {
+            ftp_user: {
+                required: true,
+                maxlength: 14,
+            },
+            password: {
+                required: true,
+                minlength: 8,
+                maxlength: 70,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            ftp_user: {
+                required: "Please enter FTP user",
+                maxlength: "Usernamr must be maximum 14 characters long",
+            },
+            password: {
+                required: "Please enter password",
+                minlength: "Your password must be at least 8 characters long",
+                maxlength: "Your password must be maximum 70 characters long",
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
 });
 
 

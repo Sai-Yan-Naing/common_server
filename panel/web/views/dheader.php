@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="css/common.css">
 <link rel="stylesheet" type="text/css" href="css/contents.css">
 <link rel="stylesheet" href="css/server.css">
-<link rel="stylesheet" href="css/sidebar1.css">
+<link rel="stylesheet" href="css/sidebar.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
