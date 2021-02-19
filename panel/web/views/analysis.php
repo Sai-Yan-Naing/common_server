@@ -179,7 +179,7 @@ $domain = $_COOKIE["d"];
 
                    
                     <div class="ml-2">アクセス解析  ログ</div>
-                    <table class="table table-bordered ml-2">
+                    <table class="table table-bordered ml-2 content-table">
                             <thead>
                                 <tr class="access-analysis" style="background-color: #0a48b3;">
                                     <th scope="col">日付  <i class="fa fa-caret-down" style="font-size: 20px;" aria-hidden="true"></i></th>

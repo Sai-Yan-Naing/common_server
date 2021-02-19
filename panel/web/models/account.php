@@ -232,6 +232,9 @@ class Account{
 	}
 
 	function addMultiDomain($domain, $web_dir, $ftp_user, $password, $token){
+
+		// $this->addFtp($ftp_user, $password, $_COOKIE["d"], $domain, $web_dir);
+		// die();
 		$pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
 
 		try {
@@ -257,7 +260,11 @@ class Account{
 				$root_dir = 'c:/laragon/www/'.$web_dir.'/';
 			   if (!file_exists ($root_dir))
 			      {
-			          mkdir($root_dir,0777,true);  
+			      	  // $last_id = $stmt_create->lastInsertId();
+			      	  mkdir($root_dir,0777,true);  
+			      	  $this->addFtp($ftp_user, $password, $_COOKIE["d"], $domain, $web_dir);
+					  $this->addDefaultFile($domain,$password,$web_dir);
+			          
 				  }
 				// die();
 				return true;
@@ -312,16 +319,19 @@ class Account{
 			$stmt = $pdo_account->prepare("SELECT * FROM `web_account` WHERE `id` = ?");
 			$stmt->execute(array($domainid));
 			$data = $stmt->fetch(PDO::FETCH_ASSOC);
+			$temp=$data['word_dir'];
 
 			$dstmt = $pdo_account->prepare("DELETE FROM `web_account` WHERE id = ?");
 			// $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
 			if($dstmt->execute(array($domainid)))
 			{
-				$root_dir = 'c:/laragon/www/'.$data['word_dir'].'/';
-				if(!rmdir($root_dir)) {
-				  echo ("Could not remove $root_dir");
-				  die();
-				}
+				$root_dir = 'c:/laragon/www/'.$temp.'/';
+				echo $root_dir;
+				// die();
+				// if(!rmdir($root_dir)) {
+				//   echo ("Could not remove $root_dir");
+				//   die();
+				// }
 				return true;
 			}
 			return false;
@@ -334,6 +344,176 @@ class Account{
 			$pdo_account = NULL;
 			die();
 		}
+	}
+
+	function addFtp($ftp_user, $password, $customer_id, $domain, $web_dir)
+	{
+		$pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
+
+		try {
+			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+
+			// for domain
+			$stmt = $pdo_account->prepare("SELECT COUNT(username) as cnt FROM db_ftp WHERE `username` = ? and `password` = ? and `web_dir` = ?");
+			$stmt->execute(array($domain, $password, $web_dir));
+			$data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+				if ($data['cnt'] <= 0) {
+					$stmt_create = $pdo_account->prepare("INSERT INTO db_ftp (`username`, `password`, `customer_id`, `domain`, `web_dir`) VALUES (:username, :password, :customer_id, :domain, :web_dir)") or die("insert error <br />". print_r($pdo_account->errorInfo(), true));
+					$stmt_create->bindParam(":username", $domain, PDO::PARAM_STR);
+					$stmt_create->bindParam(":password", $pass_encrypted, PDO::PARAM_STR);
+					$stmt_create->bindParam(":customer_id", $customer_id, PDO::PARAM_STR);
+					$stmt_create->bindParam(":domain", $domain, PDO::PARAM_STR);
+					$stmt_create->bindParam(":web_dir", $web_dir, PDO::PARAM_STR);
+					// $stmt_create->bindParam(":status", 1, PDO::PARAM_INT);
+					// $stmt_create->bindParam(":token", $token, PDO::PARAM_STR);
+					$stmt_create->execute();
+					$pdo_account = NULL;
+
+					// $root_dir = 'c:/laragon/www/'.$web_dir.'/';
+				 //   if (!file_exists ($root_dir))
+				 //      {
+				 //          mkdir($root_dir,0777,true);  
+					//   }
+					// die();
+					$this->ftpAccount($ftp_user, $password, $web_dir);
+					return true;
+					// header('Location: /home.php');
+
+				}else{
+					return false;
+				}
+
+			} catch (PDOException $e) {
+			print('Error ' . $e->getMessage());
+			$error_message = "データベースへの接続エラーです。";
+			require("views/allerror.php");
+			$pdo_account = NULL;
+			die();
+		}
+	}
+
+	function ftpAccount($ftp_user, $bpassword, $web_dir)
+	{
+		//user info
+		$username = $ftp_user;
+		$password = md5($bpassword);
+		$userDir = "c:/laragon/www/".$web_dir;
+
+		//location of filezilla
+		$fileloc = "C:/FileZilla Server/";
+		$filelocfile = ($fileloc."FileZilla Server.xml");
+		//echo $filelocfile;
+
+		////////////////
+		// start add filezilla user
+		////////////////
+
+		//Check to see if user name is already used
+		$fp = fopen($filelocfile,"r");
+		$data = fread($fp,filesize($filelocfile));
+		$pos1 = strpos($data,'<User Name="' . $username . '"');//find user name
+		//echo (".".$pos1.".");
+		fclose($fp);
+
+		//if user not found .. add
+		if($pos1 == ""){
+		echo "adding user......";
+
+		// user setting for FileZilla FTP
+
+		$fileread = 1;   //Files Read  1 = YES  0 = NO
+		$filewrite = 1;  //Files Write
+		$filedelete = 1; //Files Delete
+		$fileappend = 1; //Files Append, must have Write on
+		$dircreate = 1;  //Directory Create
+		$dirdelete = 1;  //Directory Delete
+		$dirlist = 1;    //Directory List
+		$dirsubdirs = 1; //Directory + Subdirs
+		 
+		// Aktuelle Config wird eingelesen
+		$lines = file($filelocfile);
+
+
+		// Copy Config for backup
+		rename($filelocfile, $fileloc . date("Y-m-d;H-i-s")." FileZilla Server.xml" );
+		 
+
+		// open Config for writing 
+		$file = fopen($filelocfile,"a");
+
+		for($i=0; $i < sizeof($lines); $i++)
+		{
+		fwrite ($file, $lines[$i]);
+		 
+		// write new information on top of list after "<Users>" 
+		if (strstr($lines[$i],"<Users>"))
+		{
+
+		fwrite($file, '<User Name="' . $username . '">
+		<Option Name="Pass">' . $password . '</Option>
+		<Option Name="Group"/>
+		<Option Name="Bypass server userlimit">0</Option>
+		<Option Name="User Limit">0</Option>
+		<Option Name="IP Limit">0</Option>
+		<Option Name="Enabled">1</Option>
+		<Option Name="Comments"/>
+		<Option Name="ForceSsl">0</Option>
+		<IpFilter>
+		<Disallowed/>
+		<Allowed/>
+		</IpFilter>
+		<Permissions>
+		<Permission Dir="'.$userDir.'">
+		<Option Name="FileRead">' . $fileread . '</Option>
+		<Option Name="FileWrite">' . $filewrite . '</Option>
+		<Option Name="FileDelete">' . $filedelete . '</Option>
+		<Option Name="FileAppend">' . $fileappend . '</Option>
+		<Option Name="DirCreate">' . $dircreate . '</Option>
+		<Option Name="DirDelete">' . $dirdelete . '</Option>
+		<Option Name="DirList">' . $dirlist . '</Option>
+		<Option Name="DirSubdirs">' . $dirsubdirs . '</Option>
+		<Option Name="IsHome">1</Option>
+		<Option Name="AutoCreate">0</Option>
+		</Permission>
+		</Permissions>
+		<SpeedLimits DlType="0" DlLimit="10" ServerDlLimitBypass="0" UlType="0" UlLimit="10" ServerUlLimitBypass="0">
+		<Download/>
+		<Upload/>
+		</SpeedLimits>
+		</User>
+		');
+		}
+		}
+
+		// Close xml file
+		fclose($file);
+
+		//added user now reload FileZilla Server XML file to add user
+		// passthru($fileloc.'filezillaserver.exe /reload-config');
+		system('"' . $fileloc.'FileZilla server.exe' . '"' . '/reload-config');
+		Echo (" filezilla reloaded, user active");
+		}else{
+		echo "user name ".$username." already used";//did not add user, user name already used
+		die();
+		}
+
+		// $this->addDefaultFile($username,$bpassword,$web_dir);
+		// echo copy("c:/laragon/www/test/index.php","c:/laragon/www/".$web_dir);
+
+		////////////////
+		// end add filezilla user
+		////////////////
+	}
+
+	function addDefaultFile($username,$password,$web_dir)
+	{
+		$default_file = fopen("c:/laragon/www/".$web_dir."/index.txt", "w") or die("Unable to open file!");
+		$txt = "Welcome\n".$username."\n";
+		fwrite($default_file, $txt);
+		$txt = "Password\n".$password;
+		fwrite($default_file, $txt);
+		fclose($default_file);
 	}
 
 	function sendEmail($token,$tomail){

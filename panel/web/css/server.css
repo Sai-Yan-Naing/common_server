@@ -667,11 +667,11 @@ input:checked+.slider:before {
 #content .access-analysis {
     background-color: #0a48b3;
 }
-#content  tr:nth-child(odd) {
+#c/*ontent  tr:nth-child(odd) {
     background-color: rgb(167, 172, 189);
-}
+}*/
 
-tr:nth-child(even) {
+.content-table tr:nth-child(even) {
     background-color: lavender;
     }
 #content .error-log {
@@ -680,6 +680,10 @@ tr:nth-child(even) {
 }
 #content .number-total {
     text-align: center;
+}
+
+.content-table  tr:nth-child(odd) {
+    background-color: rgb(167, 172, 189);
 }
 
 /*end cza*/

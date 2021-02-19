@@ -1,7 +1,7 @@
 <?php
 //user info
-$username = "koko";
-$password = md5("");
+$username = "test12";
+$password = md5("welcome");
 $userDir = "D:";
 
 //location of filezilla
@@ -16,7 +16,7 @@ $filelocfile = ($fileloc."FileZilla Server.xml");
 //Check to see if user name is already used
 $fp = fopen($filelocfile,"r");
 $data = fread($fp,filesize($filelocfile));
-$pos1 = strpos($data,'<User Name="dd');//find user name
+$pos1 = strpos($data,'<User Name="' . $username . '"');//find user name
 //echo (".".$pos1.".");
 fclose($fp);
 

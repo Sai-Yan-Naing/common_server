@@ -20,7 +20,7 @@
 <div id="header">
 	<div id="headerBox">
 		<div id="subNav">
-			<p id="logo"><a href="top.php"><img src="img/common/header/logo.png" width="135" height="30" alt="Winserver" /></a></p>
+			<p id="logo"><a href="dhome.php"><img src="img/common/header/logo.png" width="135" height="30" alt="Winserver" /></a></p>
 			<ul id="subNavMenu">
 				<li>
 					<form action="logout.php" method="post" />
