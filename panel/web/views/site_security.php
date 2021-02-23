@@ -75,63 +75,53 @@ $domain = $_COOKIE["d"];
                     <div class="tab-content">
                         <div id="ssl" class="container tab-pane active"><br>
                             <form action="" method="post" id="free-ssl" />
-	                            <div class="form-group row">
-	                                <span class="col">無料SSL設定</span>
-	                            </div>
-	                            <div class="form-group row">
-	                                <label for="common-name" class="col-sm-2 col-form-label">コモンネーム</label>
-	                                <div class="col-sm-8">
-	                                    <input type="text" class="form-control" id="common-name" name="common_name" placeholder="例：www.assistup.co.jp">
-									</div>
-									<span class="col-sm-1 mt-1">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </span>
-	                            </div>
-	                            <div class="form-group row">
-	                                <label for="country" class="col-sm-2 col-form-label">COUNTRY</label>
-	                                <div class="col-sm-8">
-	                                    <span>ＪＰ</span>
-									</div>
-	                            </div>
-								<div class="form-group row">
-	                                <label for="prefecture " class="col-sm-2 col-form-label">都道府県（Ｓ）</label>
-	                                <div class="col-sm-8">
-	                                    <input type="text" class="form-control" id="prefecture" name="prefecture" placeholder="例：Osaka">
-									</div>
-									<span class="col-sm-1 mt-1">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </span>
-	                            </div>
-								<div class="form-group row">
-	                                <label for="municipality" class="col-sm-2 col-form-label">市区町村（Ｌ）</label>
-	                                <div class="col-sm-8">
-	                                    <input type="text" class="form-control" id="municipality" name="municipality" placeholder="例：Osaka-si">
-									</div>
-									<span class="col-sm-1 mt-1">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </span>
-	                            </div>
-								<div class="form-group row">
-	                                <label for="organization" class="col-sm-2 col-form-label">組織名（Ｏ）</label>
-	                                <div class="col-sm-8">
-	                                    <input type="text" class="form-control" id="organization" name="organization" placeholder="例：assistup Inc. ">
-									</div>
-									<span class="col-sm-1 mt-1">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </span>
-	                            </div>
-								<div class="form-group row">
-	                                <label for="department" class="col-sm-2 col-form-label">部署名（ＯＵ）</label>
-	                                <div class="col-sm-8">
-	                                    <input type="text" class="form-control" id="department" name="department" placeholder="例：System Development Section">
-									</div>
-									<span class="col-sm-1 mt-1">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </span>
-	                            </div>
-								<div class="form-group row">
-									<span class="border border-danger text-danger notice-msg">入力項目については半角英数字にてご入力ください。全角では入力できません。</span>
-								</div>
+                                <div class="form-group row">
+                                    <span class="col">無料SSL設定</span>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="common-name" class="col-sm-2 col-form-label">コモンネーム</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="common-name" name="common_name" placeholder="例：www.assistup.co.jp">
+                                    </div>
+                                    <a href="#"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="country" class="col-sm-2 col-form-label">COUNTRY</label>
+                                    <div class="col-sm-8 country-jp">
+                                        <span>ＪＰ</span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="prefecture " class="col-sm-2 col-form-label">都道府県（Ｓ）</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="prefecture" name="prefecture" placeholder="例：Osaka">
+                                    </div>
+                                    <a href="#"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="municipality" class="col-sm-2 col-form-label">市区町村（Ｌ）</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="municipality" name="municipality" placeholder="例：Osaka-si">
+                                    </div>
+                                    <a href="#"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="organization" class="col-sm-2 col-form-label">組織名（Ｏ）</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="organization" name="organization" placeholder="例：assistup Inc. ">
+                                    </div>
+                                    <a href="#"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="department" class="col-sm-2 col-form-label">部署名（ＯＵ）</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="department" name="department" placeholder="例：System Development Section">
+                                    </div>
+                                    <a href="#"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
+                                </div>
+                                <div class="form-group row">
+                                    <span class="border border-danger text-danger notice-msg">入力項目については半角英数字にてご入力ください。全角では入力できません。</span>
+                                </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6"></div>
                                     <div class="col-sm-6">
@@ -139,55 +129,44 @@ $domain = $_COOKIE["d"];
                                     </div>
                                 </div>
                                 <div class="form-group row">
-	                                <span class="col">有料SSL設定</span>
-	                            </div>
+                                    <span class="col">有料SSL設定</span>
+                                </div>
                                 <div class="form-group row">
-	                                <label for="ssl-list" class="col-sm-2 col-form-label">有料SSL</label>
-	                                <div class="col-sm-8">
+                                    <label for="ssl-list" class="col-sm-2 col-form-label">有料SSL</label>
+                                    <div class="col-sm-8">
                                         <select class="form-control">
                                             <option>オプションで申し込んでいているSSL種別を記載</option>
                                         </select>
-									</div>
-	                            </div>
+                                    </div>
+                                </div>
                                 <div class="form-group row">
-	                                <label for="exp-date" class="col-sm-2 col-form-label">SSL有効期限</label>
-	                                <div class="col-sm-8">
-	                                    <input type="text" readonly class="form-control" id="exp-date" name="exp_date" value=" 2020/10/8">
-									</div>
-	                            </div>
+                                    <label for="exp-date" class="col-sm-2 col-form-label">SSL有効期限</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control" id="exp-date" name="exp_date" value=" 2020/10/8">
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         <div id="waf" class="container tab-pane fade"><br>
                             <form action="" method="post" id="" />
-	                            <div class="form-group row">
-	                                <span class="col">WAF設定</span>
-	                            </div>
-	                            <div class="form-group row">
-	                                <label for="usage-setting" class="col-sm-2 col-form-label">利用設定</label>
-                                    <label class="switch">
-                                        <input type="checkbox" class="primary">
-                                        <span class="slider"></span>
-                                    </label>
-               
-	                            </div>
-	                            <div class="form-group row">
-	                                <label for="display-switch" class="col-sm-2 col-form-label">表示切替</label>
-                                    <label class="switch">
-                                        <input type="checkbox" class="primary">
-                                        <span class="slider"></span>
-                                    </label>
-	                            </div>
                                 <div class="form-group row">
-	                                <span class="col-sm-2 text-center">日時</span>
-                                    <span class="col-sm-5 text-center">攻撃ターゲットURL</span>
-                                    <span class="col-sm-5 text-center">攻撃元IPアドレス</span>
-	                            </div>
+                                    <span class="col">WAF設定</span>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="usage-setting" class="col-sm-2 col-form-label">利用設定</label>
+                                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="ON" data-off="OFF" data-size="normal">
+               
+                                </div>
+                                <div class="form-group row">
+                                    <label for="display-switch" class="col-sm-2 col-form-label">表示切替</label>
+                                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="ログ" data-off="除外中" data-width="100" >
+                                </div>
                                 <table class="table table-bordered table-waf">
                                     <thead>
                                         <tr>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
-                                            <th scope="col"></th>
+                                            <th scope="col">日時</th>
+                                            <th scope="col">攻撃ターゲットURL</th>
+                                            <th scope="col">攻撃元IPアドレス</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -238,8 +217,8 @@ $domain = $_COOKIE["d"];
                                         <div class="form-group row">
                                             <label for="dir-path" class="col-sm-4 col-form-label">ドキュメントルートのディレクトリPATH/</label>
                                             <div class="col-sm-7">
-	                                            <input type="text" class="form-control" id="dir-path" name="dir_path">
-									        </div>
+                                                <input type="text" class="form-control" id="dir-path" name="dir_path">
+                                            </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-9"></div>
@@ -262,7 +241,7 @@ $domain = $_COOKIE["d"];
                                             <h5><span class="dir-icon"><i class="fas fa-angle-down rotate-icon"></i></span>ディレクトリ</h5>
                                         </a>
                                     </span>
-                                    <span class="col-sm-1 dir-icon"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                                    <a href="#"><span class="col-sm-1 dir-icon"><i class="fas fa-trash-alt"></i></span></a>
                                 </div>
                                 <!-- Card body -->
                                 <div id="directory" class="collapse show" role="tabpanel" aria-labelledby="directoryTab"
@@ -279,8 +258,8 @@ $domain = $_COOKIE["d"];
                                                     <input type="password" class="form-control" id="password" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
                                                 </div>
                                                 <div class="col-md-2 mb-3">
-                                                    <span class=""><i class="fas fa-pencil-alt"></i></span><br>
-                                                    <span class="dir-icon trash-icon"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                                                    <a href="#"><span class=""><i class="fas fa-pencil-alt"></i></span></a><br>
+                                                    <a href="#"><span class="dir-icon trash-icon"><i class="fas fa-trash-alt"></i></span></a>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -298,21 +277,19 @@ $domain = $_COOKIE["d"];
                         </div>
                         <div id="ip-restriction" class="container tab-pane fade"><br>
                             <form action="" method="post" id="" />
-	                            <div class="form-group row">
-	                                <span class="col">IPアクセス制限</span>
-	                            </div>
-	                            <div class="form-group row">
-	                                <label for="blacklist" class="col-sm-3 col-form-label">ブラックリスト</label>
-	                            </div>
+                                <div class="form-group row">
+                                    <span class="col">IPアクセス制限</span>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="blacklist" class="col-sm-3 col-form-label">ブラックリスト</label>
+                                </div>
                                 <div class="form-group row">
                                     <span class="col-sm-1"></span>
-	                                <div class="col-sm-6">
+                                    <div class="col-sm-6">
                                         <textarea type="text" class="form-control" id="blacklist" name="blacklist" rows="5" cols="30"></textarea>
                                     </div>
-									<span class="col-sm-1 mt-5">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </span>
-	                            </div>
+                                    <a href="#"><span class="col-sm-1 mt-5"><i class="fas fa-pencil-alt"></i></span></a>
+                                </div>
                             </form>
                         </div>
                     </div>

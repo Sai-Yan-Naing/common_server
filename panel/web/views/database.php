@@ -9,7 +9,7 @@ $domain = $_COOKIE["d"];
     <div class="wrapper">
 
         <!--Start of Sidebar  -->
-        <nav id="sidebar"  style="margin-top: 85px;">
+        <nav id="sidebar"  style="margin-top: 95px;">
             <ul class="list-unstyled components">
                 <li class="active">
                     <a href="#">
@@ -40,7 +40,7 @@ $domain = $_COOKIE["d"];
         <!--End of Sidebar  -->
 
         <!-- Start of Page Content  -->
-        <div id="content" class="dhome"  style="margin-top: 80px;">
+        <div id="content" class="dhome"  style="margin-top: 87px;">
             <div class="row">
                 <div class="col-sm-2">
                     <div class="icon-align"><span class="domain-icon"><i class="fas fa-desktop"></i></span></div><br>
@@ -68,38 +68,53 @@ $domain = $_COOKIE["d"];
                         <div class="collapse" id="collapseDirectory">
                             <div class="wrap">
                                 <form action="" method="post" id="db-page">
-                                    <div class="row">
+                                    <div class="row mb-3">
                                         <div class="col-sm-3">
                                             <span>データベース種別</span>
                                         </div>
                                         <div class="col-sm-9">
-                                            <ul class="sql">
-                                                <li>MYSQL</li>
-                                                <li>MSSQL</li>
-                                                <li>MARIADB</li>
-                                            </ul>
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                <label class="btn btn-outline-secondary active">
+                                                    <input type="radio" name="options" id="option1" autocomplete="off" checked> MYSQL
+                                                </label>
+                                                <label class="btn btn-outline-secondary">
+                                                    <input type="radio" name="options" id="option2" autocomplete="off"> MSSQL
+                                                </label>
+                                                <label class="btn btn-outline-secondary">
+                                                    <input type="radio" name="options" id="option3" autocomplete="off"> MARIADB
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="" class="col-sm-3 col-form-label">データベース名</label>
-                                        <div class="col-sm-8">
-                                          <input type="text" class="form-control" id="" name="db_name" placeholder="8～70文字、半角英数記号の組み合わせ">
+                                        <label for="dbname" class="col-sm-3 col-form-label">データベース名</label>
+                                        <div class="col-sm-7">
+                                          <input type="text" class="form-control" id="dbname" name="db_name" placeholder="8～70文字、半角英数記号の組み合わせ">
+                                        </div>
+                                        <div class="col-sm-1 mt-3">
+                                            <a href=""><i class="fas fa-pencil-alt"></i></a>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="" class="col-sm-3 col-form-label">ユーザー名</label>
-                                        <div class="col-sm-8">
-                                          <input type="text" class="form-control" id="" name="user_name" placeholder="8～70文字、半角英数記号の組み合わせ">
+                                        <label for="username" class="col-sm-3 col-form-label">ユーザー名</label>
+                                        <div class="col-sm-7">
+                                          <input type="text" class="form-control" id="username" name="user_name" placeholder="8～70文字、半角英数記号の組み合わせ">
+                                        </div>
+                                        <div class="col-sm-1 mt-3">
+                                            <a href=""><i class="fas fa-pencil-alt"></i></a>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="" class="col-sm-3 col-form-label">パスワード</label>
-                                        <div class="col-sm-8">
-                                          <input type="password" class="form-control" id="" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
+                                        <label for="pass_word" class="col-sm-3 col-form-label">パスワード</label>
+                                        <div class="col-sm-7">
+                                          <input type="password" class="form-control" id="pass_word" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
+                                        </div>
+                                        <div class="col-sm-1 mt-3">
+                                            <a href=""><i class="fas fa-pencil-alt"></i></a>
                                         </div>
                                     </div>
                                     <div class="form-group text-center">
-                                        <button type="cancel" class="btn btn-outline-secondary">キャンセル</button>
+                                        <button type="reset" class="btn btn-outline-secondary">キャンセル</button>
                                         <button type="submit" class="btn btn-outline-secondary">作成</button>
                                     </div>
                                 </form>
@@ -108,30 +123,30 @@ $domain = $_COOKIE["d"];
                         <div class="db-title">利用中データベース</div>
                         <div class="wrap2">
                             <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">データベース名</label>
+                                <label for="dbname2" class="col-sm-3 col-form-label">データベース名</label>
                                 <div class="col-sm-7">
-                                  <input type="text" class="form-control" id="">
+                                  <input type="text" readonly class="form-control" id="dbname2">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">ユーザー名</label>
+                                <label for="username2" class="col-sm-3 col-form-label">ユーザー名</label>
                                 <div class="col-sm-7">
-                                  <input type="text" class="form-control" id="">
+                                  <input type="text" readonly class="form-control" id="username2">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">パスワード</label>
+                                <label for="pass_word2" class="col-sm-3 col-form-label">パスワード</label>
                                 <div class="col-sm-7">
-                                  <input type="text" class="form-control" id="">
+                                  <input type="text" readonly class="form-control" id="pass_word2">
                                 </div>
-                                <span class="col-sm-1 mt-2">
-                                    <i class="fas fa-pencil-alt"></i>
-                                </span>
+                                <div class="col-sm-1 mt-3">
+                                    <a href=""><i class="fas fa-pencil-alt"></i></a>
+                                </div>
                             </div>
                             <div class="form-group row">
-                                <label for="" class="col-sm-3 col-form-label">接続先情報</label>
+                                <label for="conInfo" class="col-sm-3 col-form-label">接続先情報</label>
                                 <div class="col-sm-9">
-                                  <input type="text" class="form-control" id="">
+                                  <input type="text" readonly class="form-control" id="conInfo">
                                 </div>
                             </div>
                         </div>

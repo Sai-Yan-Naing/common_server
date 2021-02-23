@@ -495,6 +495,15 @@ input:checked+.slider:before {
 //16/2/2021
 /*//khin*/
 
+/*------------header----------------*/
+.boxHeader {
+    margin-bottom: 0px !important;
+}
+
+.boxHeader #subNavMenu {
+    margin-bottom: 0px !important;
+}
+
 /*===========basic config===================*/
 
 .tab-content #kihon-setting {
@@ -502,7 +511,7 @@ input:checked+.slider:before {
     /*overflow: hidden;*/
 }
 
-#data-item {
+.data-item {
     overflow: hidden;
 }
 
@@ -514,19 +523,21 @@ input:checked+.slider:before {
     padding-left: 30px;
 }
 
-.add-basic-auth {
+.add-basic-auth, .add-user {
     text-decoration: none !important;
     border: 1px solid #ced4da !important;
     border-radius: .25rem;
     background: #fff !important;
 }
 
-.add-basic-auth .add-icon {
+.add-icon {
     padding: 0 15px;
 }
 
-.add-basic-auth:hover {
-    color: #007bff;
+.add-basic-auth:hover, .add-user:hover {
+    color: #fff;
+    background-color: #6c757d !important;
+    border-color: #6c757d;
 }
 
 .basic-setting .down-icon {
@@ -536,6 +547,10 @@ input:checked+.slider:before {
 
 .basic-setting {
     margin-bottom: 15px;
+}
+
+.mt-04 {
+    margin-top: 1.97rem !important;
 }
 
 /*-------------database css---------------*/
@@ -548,15 +563,6 @@ input:checked+.slider:before {
 
 .rcontent .add-db-icon {
     padding-right: 15px;
-}
-
-.sql {
-    display: inline-flex;
-}
-
-.sql li {
-    border: 1px solid #ccc;
-    padding: 5px 30px;
 }
 
 .wrap {
@@ -593,6 +599,14 @@ input:checked+.slider:before {
 
 .p-t-b-l-r-2 {
     padding: .5rem;
+}
+
+.edit-delete-btn {
+    margin-top: -2.5rem;
+}
+
+.edit-delete-btn .edit {
+    padding-right: 10px;
 }
 
 /*----------mail-setting--------------*/
@@ -687,3 +701,66 @@ input:checked+.slider:before {
 }
 
 /*end cza*/
+
+/* ---------------------------------------------------
+    CONTENT STYLE (contract_connection)
+----------------------------------------------------- */
+
+.contract_information .wserver {
+    text-align: left;
+}
+
+.contract_information a {
+    color: #000000;
+    font-weight: 300;
+}
+
+.contract_information .gb {
+    padding-top: calc(.375rem + 1px);
+    padding-bottom: calc(.375rem + 1px);
+}
+
+.contract_information .icon-align {
+    text-align: center;
+}
+
+.contract_information span.icon {
+    font-size: 23px;
+}
+
+.contract_information .domain-icon {
+    font-size: 50px;
+}
+
+.contract_information .contract {
+    border: 1px solid #000000;
+    padding: 10px;
+}
+
+.contract_information .contract .text-label-align {
+    padding-top: calc(.375rem + 1px);
+    padding-bottom: calc(.375rem + 2px);
+    margin-bottom: 0;
+    font-size: inherit;
+    line-height: 1.5;
+}
+
+.contract_information .m-40 {
+    margin: 0 15%;
+}
+
+.contract_information .server-info {
+    margin-bottom: 50px;
+}
+
+.contract_information .server-info table,
+.contract_information .server-info tr,
+.contract_information .server-info th,
+.contract_information .server-info td {
+    border: none!important;
+    background-color: unset!important;
+}
+
+.contract_information .btn-outline-dark:hover {
+    background: #ccc;
+}

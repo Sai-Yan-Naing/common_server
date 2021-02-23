@@ -9,7 +9,7 @@ $domain = $_COOKIE["d"];
     <div class="wrapper">
 
         <!--Start of Sidebar  -->
-        <nav id="sidebar"  style="margin-top: 85px;">
+        <nav id="sidebar"  style="margin-top: 95px;">
             <ul class="list-unstyled components">
                 <li class="active">
                     <a href="#">
@@ -40,7 +40,7 @@ $domain = $_COOKIE["d"];
         <!--End of Sidebar  -->
 
         <!-- Start of Page Content  -->
-        <div id="content" class="dhome"  style="margin-top: 80px;">
+        <div id="content" class="dhome"  style="margin-top: 87px;">
             <div class="row">
                 <div class="col-sm-2">
                     <div class="icon-align"><span class="domain-icon"><i class="fas fa-desktop"></i></span></div><br>
@@ -78,21 +78,21 @@ $domain = $_COOKIE["d"];
                             <div class="wrap">
                                 <form action="" method="post" id="ftpUser">
                                     <div class="form-group row">
-                                        <label for="" class="col-sm-3 col-form-label">FTPユーザー</label>
+                                        <label for="ftpuser" class="col-sm-3 col-form-label">FTPユーザー</label>
                                         <div class="col-sm-8">
-                                          <input type="text" class="form-control" id="" name="ftp_user" placeholder="1-14文字、半角英数字">
+                                          <input type="text" class="form-control" id="ftpuser" name="ftp_user" placeholder="1-14文字、半角英数字">
                                         </div>
                                         <div class="col-sm-1 mt-2">
-                                            <i class="fas fa-pencil-alt"></i>
+                                            <a href=""><i class="fas fa-pencil-alt"></i></a>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="" class="col-sm-3 col-form-label">パスワード</label>
+                                        <label for="pass_word" class="col-sm-3 col-form-label">パスワード</label>
                                         <div class="col-sm-8">
-                                          <input type="password" class="form-control" id="" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
+                                          <input type="password" class="form-control" id="pass_word" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
                                         </div>
                                         <div class="col-sm-1 mt-2">
-                                            <i class="fas fa-pencil-alt"></i>
+                                            <a href=""><i class="fas fa-pencil-alt"></i></a>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -103,8 +103,14 @@ $domain = $_COOKIE["d"];
                                         </div>
                                         <div class="col-sm-9">
                                             <div class="form-group">
-                                                <button class="btn btn-primary">全て許可</button>
-                                                <button class="btn btn-primary">ディレクトリ設定</button>
+                                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                    <label class="btn btn-primary active">
+                                                        <input type="radio" name="options" id="option1" autocomplete="off" checked> 全て許可
+                                                    </label>
+                                                    <label class="btn btn-primary">
+                                                        <input type="radio" name="options" id="option2" autocomplete="off"> ディレクトリ設定
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -115,47 +121,43 @@ $domain = $_COOKIE["d"];
                                         </div>
                                     </div>
                                     <div class="form-group text-center">
-                                        <button type="cancel" class="btn btn-outline-secondary">キャンセル</button>
+                                        <button type="reset" class="btn btn-outline-secondary">キャンセル</button>
                                         <button type="submit" class="btn btn-outline-secondary">作成</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                        <div class="row mt-4 mb-2">
-                            <div class="col-sm-3">
-                                <div>利用中FTP情報</div>
-                            </div>
-                            <div class="col-sm-8"></div>
-                            <div class="col-sm-1 mt-3">
-                                <i class="fas fa-pencil-alt"></i>
-                            </div>
+                        <div class="mt-3 mb-3">
+                            利用中FTP情報
                         </div>
                         <div class="wrap p-t-b-l-r-2">
-                            <div class="">
+                            <form action="" method="post" id="">
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <label for="">ユーザー名</label>
+                                        <label for="user_name">ユーザー名</label>
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control" id="">
+                                        <input type="text" readonly class="form-control" id="user_name" name="username">
                                     </div>
                                     <div class="col-sm-1"></div>
-
                                     <div class="col-sm-2 ">
-                                        <label for="" >パスワード</label>
+                                        <label for="password2" >パスワード</label>
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="password" class="form-control" id="">
+                                        <input type="password" class="form-control" id="password2" name="password">
                                     </div>
-                                    <div class="col-sm-1"></div>
+                                    <div class="edit-delete-btn col-sm-1">
+                                        <a href="" class="edit"><i class="fas fa-pencil-alt"></i></a>
+                                        <a href=""><i class="fas fa-trash-alt"></i></a>
+                                    </div>
                                 </div>
-                                </div>
-                            </div>
+                            </form>
                         </div>
-                    </div> 
+                    </div>
+                </div> 
 
-                </div>
             </div>
+        </div>
 
 
         </div>

@@ -175,54 +175,57 @@ $domain = $_COOKIE["d"];
                             </div>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <p class="pl-0">402</p>
+                                    <p class="pl-4">401</p>
                                 </div>
                                 <div class="col-sm-7">
                                     <p>ドキュメントルートのカスタムエラーページPATH</p>
                                 </div>
                                 <div class="col-sm-2">
-                                   <button class="on-off-btn btn btn-primary">
-                                       ON | OFF
-                                   </button>  
+                                    <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="ON" data-off="OFF" data-size="sm">  
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <p class="pl-0">403</p>
+                                    <p class="pl-4">402</p>
                                 </div>
                                 <div class="col-sm-7">
                                     <p>ドキュメントルートのカスタムエラーページPATH</p>
                                 </div>
                                 <div class="col-sm-2">
-                                   <button class="on-off-btn btn btn-primary">
-                                       ON | OFF
-                                   </button> 
+                                    <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="ON" data-off="OFF" data-size="sm">  
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <p class="pl-0">404</p>
+                                    <p class="pl-4">403</p>
                                 </div>
                                 <div class="col-sm-7">
                                     <p>ドキュメントルートのカスタムエラーページPATH</p>
                                 </div>
                                 <div class="col-sm-2">
-                                   <button class="on-off-btn btn btn-primary">
-                                       ON | OFF
-                                   </button> 
+                                    <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="ON" data-off="OFF" data-size="sm"> 
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <p class="pl-0">500</p>
+                                    <p class="pl-4">404</p>
                                 </div>
                                 <div class="col-sm-7">
                                     <p>ドキュメントルートのカスタムエラーページPATH</p>
                                 </div>
                                 <div class="col-sm-2">
-                                   <button class="on-off-btn btn btn-primary">
-                                       ON | OFF
-                                   </button> 
+                                    <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="ON" data-off="OFF" data-size="sm"> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="pl-4">500</p>
+                                </div>
+                                <div class="col-sm-7">
+                                    <p>ドキュメントルートのカスタムエラーページPATH</p>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="ON" data-off="OFF" data-size="sm"> 
                                 </div>
                             </div>
                             <p>サイト転送</p>
@@ -230,65 +233,76 @@ $domain = $_COOKIE["d"];
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="status-code">ステータスコード</label>
-                                        <input type="text" class="form-control" id="">
+                                        <input type="text" readonly class="form-control" id="status-code">
                                     </div>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="url-spec">URL指定</label>
-                                        <input type="text" class="form-control" id="">
+                                        <input type="text" readonly class="form-control" id="url-spec">
                                     </div>
+                                </div>
+                                <div class="col-sm-1 mt-5">
+                                    <a href="" class="pr-2"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href=""><i class="fas fa-trash-alt"></i></a>
                                 </div>
                             </div>
                             <div class="row">
                                 <label for="basic-auth" class="col-sm-2 col-form-label">BASIC認</label>
                                 <div class="col-sm-5">
                                     <div class="form-group">
-                                        <a href="" class="form-control-plaintext add-basic-auth" id=""><span class="add-icon"><i class="fas fa-plus"></i></span>BASIC認証追加</a>
+                                        <a href="" class="form-control add-basic-auth" id=""><span class="add-icon"><i class="fas fa-plus"></i></span>BASIC認証追加</a>
                                     </div>
                                 </div>
                             </div>
                             <!-- basic setting1 -->
-                            <button class="basic-setting btn btn-outline-secondary" id="data-dropdown"><span class="down-icon"><i class="fas fa-angle-down"></i></span>BASIC認証設定1</button>
+                            <button class="basic-setting btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseDirectory" aria-expanded="false" aria-controls="collapseDirectory"><span class="down-icon"><i class="fas fa-angle-down"></i></span>BASIC認証設定1</button>
 
-                            <div id="data-item">
-                                <p>認証ユーザー</p>
+                            <div class="collapse data-item" id="collapseDirectory">
                                 <div class="row">
-                                    <div class="col-sm-3">
-                                        <p>ユーザー名</p>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <p>パスワード</p>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <p>パスワード変更</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <p>User1</p>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <p>PASSWORD1</p>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <input type="text" class="form-control" name="" id="" placeholder="PASSWORD1">
-                                    </div>
-                                    <div class="col-sm-2">
-                                        <button type="submit" class="btn btn-outline-dark text-dark">変更</button>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-3">
+                                    <label for="target-dir" class="col-sm-3 col-form-label">対象ディレクトリ</label>
+                                    <div class="col-sm-8">
                                         <div class="form-group">
-                                            <button type="submit" class="form-control btn btn-outline-secondary" id="">User追加</button>
+                                            <input type="text" readonly class="form-control" name="" id="target-dir" placeholder="設定しているドキュメントルートを表示">
                                         </div>
                                     </div>
+                                    <div class="col-sm-1 mt-3">
+                                        <a href="" class="pr-2"><i class="fas fa-pencil-alt"></i></a>
+                                        <a href=""><i class="fas fa-trash-alt"></i></a>
+                                    </div>
                                 </div>
-                                <div class="form-group float-right">
-                                    <button type="reset" class="btn btn-outline-dark text-dark">キャンセル</button>
-                                    <button type="submit" class="btn btn-outline-dark text-dark">保存</button>
-                                </div>
+                                <p>認証ユーザー</p>
+                                <form action="" method="post" id="passChange">
+                                    <div class="row">
+                                        <div class="form-group col-sm-3">
+                                            <label for="user">ユーザー名</label>
+                                            <input type="text" readonly class="form-control-plaintext" id="user" value="User1">
+                                        </div>
+                                        <div class="form-group col-sm-3">
+                                            <label for="pass_word">パスワード</label>
+                                            <input type="text" readonly class="form-control-plaintext" id="pass_word" value="PASSWORD1">
+                                        </div>
+                                        <div class="form-group col-sm-3">
+                                            <label for="password2">パスワード変更</label>
+                                            <input type="password" class="form-control" name="password2" id="password2" placeholder="PASSWORD1">
+                                        </div>
+                                        <div class="form-group col-sm-3 mt-04">
+                                            <button type="submit" class="btn btn-outline-dark text-dark">変更</button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <a href="" type="submit" class="form-control add-user" id=""><span class="add-icon"><i class="fas fa-plus"></i></span>User追加</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group float-right">
+                                        <button type="reset" class="btn btn-outline-dark text-dark">キャンセル</button> 
+                                        <button type="submit" class="btn btn-outline-dark text-dark">保存</button>
+                                    </div>
+                                </form>
+                                
                             </div>
                         </div>
                         <div id="oyo-setting" class="container tab-pane fade"><br>

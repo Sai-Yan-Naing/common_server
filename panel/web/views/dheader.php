@@ -15,13 +15,15 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 <script src="js/common.js"></script>
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 </head>
 <body>
-<div id="header">
-	<div id="headerBox">
+<div id="header" class="pt-3">
+	<div id="headerBox" class="boxHeader">
 		<div id="subNav">
 			<p id="logo"><a href="dhome.php"><img src="img/common/header/logo.png" width="135" height="30" alt="Winserver" /></a></p>
-			<ul id="subNavMenu">
+			<ul id="subNavMenu" class="mt-2">
 				<li>
 					<form action="logout.php" method="post" />
 					<input type="submit" value="ログアウト" id="logout" />

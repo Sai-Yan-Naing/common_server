@@ -310,9 +310,7 @@ $(function() {
         }
     });
 
-});
-
-// ------mail setting-------------
+    // ------mail setting-------------
 
     $("form[id='mailSetting']").validate({
         rules: {
@@ -341,10 +339,25 @@ $(function() {
         }
     });
 
+    // -----------basic setting of password change-----------
 
+    $("form[id='passChange']").validate({
+        rules: {
+            password: {
+                minlength: 8,
+                maxlength: 70,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            password: {
+                minlength: "Your password must be at least 8 characters long",
+                maxlength: "Your password must be maximum 70 characters long",
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
 
-$(document).ready(function(){
-  $("#data-dropdown").click(function(){
-    $("#data-item").toggle();
-  });
 });

@@ -9,7 +9,7 @@ $domain = $_COOKIE["d"];
     <div class="wrapper">
 
         <!--Start of Sidebar  -->
-        <nav id="sidebar"  style="margin-top: 85px;">
+        <nav id="sidebar"  style="margin-top: 95px;">
             <ul class="list-unstyled components">
                 <li>
                     <a href="dhome.php">
@@ -40,7 +40,7 @@ $domain = $_COOKIE["d"];
         <!--End of Sidebar  -->
 
         <!-- Start of Page Content  -->
-        <div id="content" class="dhome"  style="margin-top: 80px;">
+        <div id="content" class="dhome"  style="margin-top: 87px;">
             <div class="row">
                 <div class="col-sm-2">
                     <div class="icon-align"><span class="domain-icon"><i class="fas fa-desktop"></i></span></div><br>
@@ -53,31 +53,31 @@ $domain = $_COOKIE["d"];
                 <div class="col-sm-10">
                     <h6 class="wserver">Winserver Controlpanel Share server</h6>
                     <div class="rcontent">
-                    	<div class="mt-3 mb-3">ドメイン</div>
+                        <div class="mt-3 mb-3">ドメイン</div>
                         <div class="mt-3 mb-4">ドメイン移管（他社から弊社に移管）</div>
                         <form action="" method="post">
                             <div class="row">
                                 <div class="col-sm-7">
                                     <div class="form-group row">
-                                        <label for="" class="col-sm-3 col-form-label">ドメイン名</label>
+                                        <label for="domainname" class="col-sm-3 col-form-label">ドメイン名</label>
                                         <div class="col-sm-9">
-                                          <input type="text" class="form-control" id="" name="domain_name">
+                                          <input type="text" class="form-control" id="domainname" name="domain_name">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3 m-t-0">
                                     <div class="form-group">
-                                        <label for="">ドメイン種別</label>
-                                        <input type="text" class="form-control" id="" >
+                                        <label for="domaintype">ドメイン種別</label>
+                                        <input type="text" class="form-control" id="domaintype" name="domain_type">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-7">
                                     <div class="form-group row">
-                                        <label for="" class="col-sm-3 col-form-label">AuthCode</label>
+                                        <label for="authcode" class="col-sm-3 col-form-label">AuthCode</label>
                                         <div class="col-sm-9">
-                                          <input type="text" class="form-control" id="" name="auth_code">
+                                          <input type="text" class="form-control" id="authcode" name="auth_code">
                                         </div>
                                     </div>
                                 </div>
@@ -91,16 +91,16 @@ $domain = $_COOKIE["d"];
                             <div class="row">
                                 <div class="col-sm-7">
                                     <div class="form-group row">
-                                        <label for="" class="col-sm-3 col-form-label">ドメイン名</label>
+                                        <label for="doname" class="col-sm-3 col-form-label">ドメイン名</label>
                                         <div class="col-sm-9">
-                                          <input type="text" class="form-control" id="" name="domain_name">
+                                          <input type="text" class="form-control" id="doname" name="domain_name">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-3 m-t-0">
                                     <div class="form-group">
-                                        <label for="">ドメイン種別</label>
-                                        <input type="text" class="form-control" id="" >
+                                        <label for="dotype">ドメイン種別</label>
+                                        <input type="text" class="form-control" id="dotype" name="domain_type">
                                     </div>
                                 </div>
                             </div>
