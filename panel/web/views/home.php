@@ -8,6 +8,7 @@ $domain = $_COOKIE["d"];
 <?php 
 
 require_once('models/account.php');
+require_once('views/directory_size.php');
 
 $account = new Account;
 $multidomain=$account->getMultiDomain($_COOKIE['d'], $_COOKIE['p']);
@@ -87,7 +88,7 @@ $multidomain=$account->getMultiDomain($_COOKIE['d'], $_COOKIE['p']);
 							  <tbody>
 							  	<?php
 							  	foreach($multidomain as $domain) {
-							  		echo '<tr><td>'.$domain['domain'].'</td><td><a href="dhome.php" class="btn btn-outline-primary btn-sm">設定</a></td><td><span class="btn btn-outline-secondary btn-sm">'.formatBytes(disk_total_space("c:")).'</span></td><td><input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="起動" data-off="停止" data-size="sm"></td><td><input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="起動" data-off="停止" data-size="sm"></td><td><a href='.'"'.'delete_website.php?domainid='.$domain["id"].'"'.' class="btn btn-danger btn-sm">削除</a></td></tr>';
+							  		echo '<tr><td>'.$domain['domain'].'</td><td><a href="dhome.php" class="btn btn-outline-primary btn-sm">設定</a></td><td><span class="btn btn-outline-secondary btn-sm">'.sizeFormat(folderSize("c:/laragon/www/$domain[web_dir]")).'</span></td><td><input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="起動" data-off="停止" data-size="sm"></td><td><input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="起動" data-off="停止" data-size="sm"></td><td><a href='.'"'.'delete_website.php?domainid='.$domain["id"].'"'.' class="btn btn-danger btn-sm">削除</a></td></tr>';
 							  	}
 							  	 ?>
 							  </tbody>
@@ -136,16 +137,5 @@ $multidomain=$account->getMultiDomain($_COOKIE['d'], $_COOKIE['p']);
     </div>
     <!-- End of Wrapper  -->
 
-    <?php 
-    	function formatBytes($bytes, $precision = 2) 
-		{ 
-		    if  ($bytes == 0) return '0 B';
-		    $sizes = array('B', 'KB', 'M', 'GB', 'TB');   
-		    $base = log($bytes, 1024);
-		  
-		    return round(pow(1024, $base - floor($base)), $precision) . ' ' . $sizes[floor($base)];
-		} 
-
-	?>
 
 <?php require("views/footer.php") ?>

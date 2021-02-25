@@ -71,15 +71,15 @@ $domain = $_COOKIE["d"];
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div id="app-install" class="container tab-pane active"><br>
-                            <form action="click_site_setting.php" method="post" id="domain-homepage" />
+                            <form action="install_app.php" method="post" id="domain-homepage" />
                                 <div class="form-group row">
                                     <label for="application" class="col-sm-4 col-form-label">アプリケーション</label>
                                     <div class="col-sm-3 custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="wordpress" name="app" class="custom-control-input" checked="checked">
+                                        <input type="radio" id="wordpress" name="app" value="wordpress" class="custom-control-input" checked="checked">
                                         <label class="custom-control-label" for="wordpress">Wordpress</label>
                                     </div>
                                     <div class="col-sm-3 custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="eccube" name="app" class="custom-control-input">
+                                        <input type="radio" id="eccube" name="app" value="eccube" class="custom-control-input">
                                         <label class="custom-control-label" for="eccube">ECCUBE</label>
                                     </div>
                                 </div>

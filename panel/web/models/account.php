@@ -246,11 +246,11 @@ class Account{
 			$data = $stmt->fetch(PDO::FETCH_ASSOC);
 
 			if ($data['cnt'] <= 0) {
-				$stmt_create = $pdo_account->prepare("INSERT INTO web_account (`domain`, `password`, `user`, `word_dir`, `customer_id`, `token`) VALUES (:domain, :password, :user, :word_dir, :customer_id, :token)") or die("insert error <br />". print_r($pdo_account->errorInfo(), true));
+				$stmt_create = $pdo_account->prepare("INSERT INTO web_account (`domain`, `password`, `user`, `web_dir`, `customer_id`, `token`) VALUES (:domain, :password, :user, :web_dir, :customer_id, :token)") or die("insert error <br />". print_r($pdo_account->errorInfo(), true));
 				$stmt_create->bindParam(":domain", $domain, PDO::PARAM_STR);
 				$stmt_create->bindParam(":password", $pass_encrypted, PDO::PARAM_STR);
 				$stmt_create->bindParam(":user", $domain, PDO::PARAM_STR);
-				$stmt_create->bindParam(":word_dir", $web_dir, PDO::PARAM_STR);
+				$stmt_create->bindParam(":web_dir", $web_dir, PDO::PARAM_STR);
 				$stmt_create->bindParam(":customer_id", $_COOKIE["d"], PDO::PARAM_STR);
 				// $stmt_create->bindParam(":status", 1, PDO::PARAM_INT);
 				$stmt_create->bindParam(":token", $token, PDO::PARAM_STR);
@@ -319,19 +319,42 @@ class Account{
 			$stmt = $pdo_account->prepare("SELECT * FROM `web_account` WHERE `id` = ?");
 			$stmt->execute(array($domainid));
 			$data = $stmt->fetch(PDO::FETCH_ASSOC);
-			$temp=$data['word_dir'];
+			$temp=$data['web_dir'];
+			$ftp_temp=$data['domain'];
 
 			$dstmt = $pdo_account->prepare("DELETE FROM `web_account` WHERE id = ?");
 			// $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
 			if($dstmt->execute(array($domainid)))
 			{
-				$root_dir = 'c:/laragon/www/'.$temp.'/';
+				$root_dir = 'c:/laragon/www/'.$temp;
 				echo $root_dir;
 				// die();
-				// if(!rmdir($root_dir)) {
-				//   echo ("Could not remove $root_dir");
-				//   die();
-				// }
+				if(file_exists($root_dir)){
+					// die("error");
+					if(!$this->rrmdir($root_dir)) {
+					  echo ("Could not remove $root_dir");
+					  die();
+					}
+				}
+
+				if ($ftp_temp) {
+					$ftpstmt = $pdo_account->prepare("SELECT * FROM `db_ftp` WHERE `domain` = ?");
+					if($ftpstmt->execute(array($ftp_temp))){
+						$ftpdata = $ftpstmt->fetch(PDO::FETCH_ASSOC);
+						echo $ftpdata['domain'];
+						$dftp_stmt = $pdo_account->prepare("DELETE FROM `db_ftp` WHERE domain = ?");
+						// $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
+						$dftp_stmt->execute(array($ftp_temp));
+						// if($dftp_stmt->execute(array($ftp_temp)))
+						// {
+						// 	die();
+						// }
+						
+
+					}
+					
+				}
+				
 				return true;
 			}
 			return false;
@@ -376,7 +399,7 @@ class Account{
 				 //          mkdir($root_dir,0777,true);  
 					//   }
 					// die();
-					$this->ftpAccount($ftp_user, $password, $web_dir);
+					// $this->ftpAccount($ftp_user, $password, $web_dir);
 					return true;
 					// header('Location: /home.php');
 
@@ -515,6 +538,23 @@ class Account{
 		fwrite($default_file, $txt);
 		fclose($default_file);
 	}
+
+	function rrmdir($dir) {
+	  if (is_dir($dir)) {
+	    $objects = scandir($dir);
+	    foreach ($objects as $object) {
+	      if ($object != "." && $object != "..") {
+	        if (filetype($dir."/".$object) == "dir") 
+	           $this->rrmdir($dir."/".$object); 
+	        else unlink   ($dir."/".$object);
+	      }
+	    }
+	    reset($objects);
+	    rmdir($dir);
+	    return true;
+	  }
+
+	 }
 
 	function sendEmail($token,$tomail){
 	

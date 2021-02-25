@@ -6,6 +6,9 @@ require_once('models/easyinstall.php');
 require_once('models/mysql.php');
 
 $dir = $_POST["dir"];
+$dbname = $_POST["dbname"];
+$username = $_POST["username"];
+$password = $_POST["password"];
 $mysql = new MySQL;
 
 if ($mysql->domain_check($domain) == false) {

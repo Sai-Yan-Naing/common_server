@@ -55,7 +55,7 @@ class MySQL{
 
 	function addUserAndDB($db, $db_user, $db_password){
 		try {
-			$dsn2 = 'mysql:host=mysql3.winserver.ne.jp';
+			$dsn2 = 'mysql:host=localhost';
 			$pdo = new PDO($dsn2, ROOT, ROOT_PASS);
 			$db = trim($pdo->quote($db), "'\"");
 			$stmt = $pdo->prepare("CREATE DATABASE `$db`;");
