@@ -8,51 +8,12 @@ $domain = $_COOKIE["d"];
 <!-- Start of Wrapper  -->
     <div class="wrapper">
 
-        <!--Start of Sidebar  -->
-        <nav id="sidebar"  style="margin-top: 95px;">
-            <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-server"></i></span><br>
-                        <span class="title">サーバー設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="mail_setting.php">
-                        <span class="icon"><i class="fas fa-envelope"></i></span><br>
-                        <span class="title">ＭＡＩＬ設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-cog"></i></span><br>
-                        <span class="title">各種設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-file-alt"></i></span><br>
-                        <span class="title">マニュアル</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!--End of Sidebar  -->
+        <?php require("views/sidebar_menu.php") ?>
 
         <!-- Start of Page Content  -->
         <div id="content" class="dhome"  style="margin-top: 87px;">
             <div class="row">
-                <div class="col-sm-2">
-                    <div class="icon-align"><span class="domain-icon"><i class="fas fa-desktop"></i></span></div><br>
-                    <div class="icon-align"><span class="text-center"><?php echo $_COOKIE['d']; ?></span></div><br>
-                    <div class="icon-align"><span class="text-center">ドメイン</span></div><br>
-                    <div><a href="dhome.php"><span class="icon"><i class="fas fa-laptop-code"></i></span><span>サイト設定</span></a></div><br>
-                    <div><a href="site_security.php"><span class="icon"><i class="fas fa-cogs"></i></span><span>サイトセキュリティ</span></a></div><br>
-                    <div><a href="database.php"><span class="icon"><i class="fas fa-database"></i></span><span>データベース</span></a></div><br>
-                    <div><a href="ftp.php"><span class="icon"><i class="fas fa-laptop-code"></i></span><span>FTP</span></a></div><br>
-                    <div><a href="#"><span class="icon"><i class="fas fa-folder"></i></span><span>ファイルマネージャー</span></a></div><br>
-                    <div><a href="#"><span class="icon"><i class="fas fa-chart-pie"></i></span><span>アクセス解析</span></a></div><br>
-                </div>
+                <?php require("views/server_setting_menu.php") ?>
                 <div class="col-sm-10">
                     <h6 class="wserver">Winserver Controlpanel Share server</h6>
                     
@@ -74,13 +35,13 @@ $domain = $_COOKIE["d"];
                                         </div>
                                         <div class="col-sm-9">
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                <label class="btn btn-outline-secondary active">
+                                                <label class="btn btn-outline-primary active">
                                                     <input type="radio" name="options" id="option1" autocomplete="off" checked> MYSQL
                                                 </label>
-                                                <label class="btn btn-outline-secondary">
+                                                <label class="btn btn-outline-primary">
                                                     <input type="radio" name="options" id="option2" autocomplete="off"> MSSQL
                                                 </label>
-                                                <label class="btn btn-outline-secondary">
+                                                <label class="btn btn-outline-primary">
                                                     <input type="radio" name="options" id="option3" autocomplete="off"> MARIADB
                                                 </label>
                                             </div>
@@ -92,7 +53,7 @@ $domain = $_COOKIE["d"];
                                           <input type="text" class="form-control" id="dbname" name="db_name" placeholder="8～70文字、半角英数記号の組み合わせ">
                                         </div>
                                         <div class="col-sm-1 mt-3">
-                                            <a href=""><i class="fas fa-pencil-alt"></i></a>
+                                            <a href="javascript:;" data-toggle="modal" data-target="#databaseNameModal"><i class="fas fa-pencil-alt"></i></a>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -101,7 +62,7 @@ $domain = $_COOKIE["d"];
                                           <input type="text" class="form-control" id="username" name="user_name" placeholder="8～70文字、半角英数記号の組み合わせ">
                                         </div>
                                         <div class="col-sm-1 mt-3">
-                                            <a href=""><i class="fas fa-pencil-alt"></i></a>
+                                            <a href="javascript:;" data-toggle="modal" data-target="#userNameModal"><i class="fas fa-pencil-alt"></i></a>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -110,11 +71,11 @@ $domain = $_COOKIE["d"];
                                           <input type="password" class="form-control" id="pass_word" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
                                         </div>
                                         <div class="col-sm-1 mt-3">
-                                            <a href=""><i class="fas fa-pencil-alt"></i></a>
+                                            <a href="javascript:;" data-toggle="modal" data-target="#passwordModal"><i class="fas fa-pencil-alt"></i></a>
                                         </div>
                                     </div>
                                     <div class="form-group text-center">
-                                        <button type="reset" class="btn btn-outline-secondary">キャンセル</button>
+                                        <button type="reset" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#collapseDirectory">キャンセル</button>
                                         <button type="submit" class="btn btn-outline-secondary">作成</button>
                                     </div>
                                 </form>
@@ -140,7 +101,7 @@ $domain = $_COOKIE["d"];
                                   <input type="text" readonly class="form-control" id="pass_word2">
                                 </div>
                                 <div class="col-sm-1 mt-3">
-                                    <a href=""><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="javascript:;" data-toggle="modal" data-target="#usePasswordModal"><i class="fas fa-pencil-alt"></i></a>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -154,6 +115,109 @@ $domain = $_COOKIE["d"];
 
                 </div>
             </div>
+
+            <!-- Start database addition Modals -->
+
+            <!--Start database name Modal -->
+            <div class="modal fade" id="databaseNameModal" tabindex="-1" role="dialog" aria-labelledby="databaseNameModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-less">
+                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change Database Name</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body row border-less">
+                            <label for="dbname3" class="col-sm-4 col-form-label">データベース名</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="dbname3" value="データベース名">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-less">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--End database name Modal -->
+            <!--Start username Modal -->
+            <div class="modal fade" id="userNameModal" tabindex="-1" role="dialog" aria-labelledby="userNameModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-less">
+                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change User Name</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body row border-less">
+                            <label for="username3" class="col-sm-4 col-form-label">ユーザー名</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="username3" value="ユーザー名">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-less">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End username Modal -->
+
+            <!--Start password Modal -->
+            <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-less">
+                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change Password</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body row border-less">
+                            <label for="pass_word3" class="col-sm-4 col-form-label">パスワード</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="pass_word3" value="パスワード">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-less">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End password Modal -->
+            <!-- End database addition Modals -->
+
+            <!--Start database in use password Modal -->
+            <div class="modal fade" id="usePasswordModal" tabindex="-1" role="dialog" aria-labelledby="usePasswordModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-less">
+                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change Password</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body row border-less">
+                            <label for="pass_word4" class="col-sm-4 col-form-label">パスワード</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="pass_word4" value="パスワード">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-less">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End database in use password Modal -->
 
 
         </div>

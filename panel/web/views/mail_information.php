@@ -8,36 +8,7 @@ $domain = $_COOKIE["d"];
 <!-- Start of Wrapper  -->
     <div class="wrapper">
 
-        <!--Start of Sidebar  -->
-        <nav id="sidebar"  style="margin-top: 95px;">
-            <ul class="list-unstyled components">
-                <li>
-                    <a href="dhome.php">
-                        <span class="icon"><i class="fas fa-server"></i></span><br>
-                        <span class="title">サーバー設定</span>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="mail_setting.php">
-                        <span class="icon"><i class="fas fa-envelope"></i></span><br>
-                        <span class="title">ＭＡＩＬ設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-cog"></i></span><br>
-                        <span class="title">各種設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-file-alt"></i></span><br>
-                        <span class="title">マニュアル</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!--End of Sidebar  -->
+        <?php require("views/sidebar_menu.php") ?>
 
         <!-- Start of Page Content  -->
         <div id="content" class="dhome"  style="margin-top: 87px;">
@@ -55,7 +26,7 @@ $domain = $_COOKIE["d"];
                     <div class="rcontent">
                         <div class="mt-3 mb-3">ドメイン</div>
                         <div class="mt-3 mb-4">ドメイン移管（他社から弊社に移管）</div>
-                        <form action="" method="post">
+                        <form action="" method="post" id="application">
                             <div class="row">
                                 <div class="col-sm-7">
                                     <div class="form-group row">
@@ -87,7 +58,7 @@ $domain = $_COOKIE["d"];
                             </div>
                         </form>
                         <div class="mt-4 mb-5">ドメイン移管（弊社から他社に移管）</div>
-                        <form action="" method="post">
+                        <form action="" method="post" id="another-app">
                             <div class="row">
                                 <div class="col-sm-7">
                                     <div class="form-group row">

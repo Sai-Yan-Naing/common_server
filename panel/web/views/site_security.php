@@ -8,51 +8,12 @@ $domain = $_COOKIE["d"];
 <!-- Start of Wrapper  -->
     <div class="wrapper">
 
-        <!--Start of Sidebar  -->
-        <nav id="sidebar"  style="margin-top: 85px;">
-            <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-server"></i></span><br>
-                        <span class="title">サーバー設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-envelope"></i></span><br>
-                        <span class="title">ＭＡＩＬ設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-cog"></i></span><br>
-                        <span class="title">各種設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-file-alt"></i></span><br>
-                        <span class="title">マニュアル</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!--End of Sidebar  -->
+        <?php require("views/sidebar_menu.php") ?>
 
         <!-- Start of Page Content  -->
-        <div id="content" class="site-security"  style="margin-top: 80px;">
+        <div id="content" class="site-security"  style="margin-top: 87px;">
             <div class="row">
-                <div class="col-sm-2">
-                    <div class="icon-align"><span class="domain-icon"><i class="fas fa-desktop"></i></span></div><br>
-                    <div class="icon-align"><span class="text-center"><?php echo $_COOKIE['d']; ?></span></div><br>
-                    <div class="icon-align"><span class="text-center">ドメイン</span></div><br>
-                    <div><a href="dhome.php"><span class="icon"><i class="fas fa-laptop-code"></i></span><span>サイト設定</span></a></div><br>
-                    <div><a href="site_security.php"><span class="icon"><i class="fas fa-cogs"></i></span><span>サイトセキュリティ</span></a></div><br>
-                    <div><a href="database.php"><span class="icon"><i class="fas fa-database"></i></span><span>データベース</span></a></div><br>
-                    <div><a href="#"><span class="icon"><i class="fas fa-laptop-code"></i></span><span>FTP</span></a></div><br>
-                    <div><a href="#"><span class="icon"><i class="fas fa-folder"></i></span><span>ファイルマネージャー</span></a></div><br>
-                    <div><a href="#"><span class="icon"><i class="fas fa-chart-pie"></i></span><span>アクセス解析</span></a></div><br>
-                </div>
+                <?php require("views/server_setting_menu.php") ?>
                 <div class="col-sm-10">
                     <h6 class="wserver">Winserver Controlpanel Share server</h6>
                     <!-- Nav tabs -->
@@ -81,10 +42,11 @@ $domain = $_COOKIE["d"];
                                 <div class="form-group row">
                                     <label for="common-name" class="col-sm-2 col-form-label">コモンネーム</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="common-name" name="common_name" placeholder="例：www.assistup.co.jp">
+                                        <input type="text" class="form-control" id="common-name" name="common_name" placeholder="例：www.assistup.co.jp" readonly>
                                     </div>
-                                    <a href="#"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
+                                    <a href="#" data-toggle="modal" data-target="#nameModal"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
                                 </div>
+                                
                                 <div class="form-group row">
                                     <label for="country" class="col-sm-2 col-form-label">COUNTRY</label>
                                     <div class="col-sm-8 country-jp">
@@ -94,31 +56,35 @@ $domain = $_COOKIE["d"];
                                 <div class="form-group row">
                                     <label for="prefecture " class="col-sm-2 col-form-label">都道府県（Ｓ）</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="prefecture" name="prefecture" placeholder="例：Osaka">
+                                        <input type="text" class="form-control" id="prefecture" name="prefecture" placeholder="例：Osaka" readonly>
                                     </div>
-                                    <a href="#"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
+                                    <a href="#" data-toggle="modal" data-target="#prefectureModal"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
                                 </div>
+                                
                                 <div class="form-group row">
                                     <label for="municipality" class="col-sm-2 col-form-label">市区町村（Ｌ）</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="municipality" name="municipality" placeholder="例：Osaka-si">
+                                        <input type="text" class="form-control" id="municipality" name="municipality" placeholder="例：Osaka-si" readonly>
                                     </div>
-                                    <a href="#"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
+                                    <a href="#" data-toggle="modal" data-target="#municipalityModal"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
                                 </div>
+                                
                                 <div class="form-group row">
                                     <label for="organization" class="col-sm-2 col-form-label">組織名（Ｏ）</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="organization" name="organization" placeholder="例：assistup Inc. ">
+                                        <input type="text" class="form-control" id="organization" name="organization" placeholder="例：assistup Inc. " readonly>
                                     </div>
-                                    <a href="#"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
+                                    <a href="#" data-toggle="modal" data-target="#organizationModal"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
                                 </div>
+                                
                                 <div class="form-group row">
                                     <label for="department" class="col-sm-2 col-form-label">部署名（ＯＵ）</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="department" name="department" placeholder="例：System Development Section">
+                                        <input type="text" class="form-control" id="department" name="department" placeholder="例：System Development Section" readonly>
                                     </div>
-                                    <a href="#"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
+                                    <a href="#" data-toggle="modal" data-target="#departmentModal"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
                                 </div>
+                                
                                 <div class="form-group row">
                                     <span class="border border-danger text-danger notice-msg">入力項目については半角英数字にてご入力ください。全角では入力できません。</span>
                                 </div>
@@ -154,43 +120,43 @@ $domain = $_COOKIE["d"];
                                 </div>
                                 <div class="form-group row">
                                     <label for="usage-setting" class="col-sm-2 col-form-label">利用設定</label>
-                                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="ON" data-off="OFF" data-size="normal">
+                                    <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="ON" data-off="OFF" data-size="normal">
                
                                 </div>
                                 <div class="form-group row">
                                     <label for="display-switch" class="col-sm-2 col-form-label">表示切替</label>
-                                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="ログ" data-off="除外中" data-width="100" >
+                                    <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="ログ" data-off="除外中" data-width="100" >
                                 </div>
                                 <table class="table table-bordered table-waf">
                                     <thead>
-                                        <tr>
+                                        <tr class="table-title">
                                             <th scope="col">日時</th>
                                             <th scope="col">攻撃ターゲットURL</th>
                                             <th scope="col">攻撃元IPアドレス</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="waf-odd">
+                                        <tr>
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                         </tr>
-                                        <tr class="waf-even">
+                                        <tr>
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                         </tr>
-                                        <tr class="waf-odd">
+                                        <tr>
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                         </tr>
-                                        <tr class="waf-even">
+                                        <tr>
                                             <td></td>
                                             <td></td>
                                             <td></td>
                                         </tr>
-                                        <tr class="waf-odd">
+                                        <tr>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -241,7 +207,7 @@ $domain = $_COOKIE["d"];
                                             <h5><span class="dir-icon"><i class="fas fa-angle-down rotate-icon"></i></span>ディレクトリ</h5>
                                         </a>
                                     </span>
-                                    <a href="#"><span class="col-sm-1 dir-icon"><i class="fas fa-trash-alt"></i></span></a>
+                                    <a href="#" onclick="return confirm('Are you sure to delete?')"><span class="col-sm-1 dir-icon"><i class="fas fa-trash-alt"></i></span></a>
                                 </div>
                                 <!-- Card body -->
                                 <div id="directory" class="collapse show" role="tabpanel" aria-labelledby="directoryTab"
@@ -258,8 +224,8 @@ $domain = $_COOKIE["d"];
                                                     <input type="password" class="form-control" id="password" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
                                                 </div>
                                                 <div class="col-md-2 mb-3">
-                                                    <a href="#"><span class=""><i class="fas fa-pencil-alt"></i></span></a><br>
-                                                    <a href="#"><span class="dir-icon trash-icon"><i class="fas fa-trash-alt"></i></span></a>
+                                                    <a href="#" data-toggle="modal" data-target="#directoryPasswordModal"><span class=""><i class="fas fa-pencil-alt"></i></span></a><br>
+                                                    <a href="#" onclick="return confirm('Are you sure to delete?')"><span class="dir-icon trash-icon"><i class="fas fa-trash-alt"></i></span></a>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -286,9 +252,9 @@ $domain = $_COOKIE["d"];
                                 <div class="form-group row">
                                     <span class="col-sm-1"></span>
                                     <div class="col-sm-6">
-                                        <textarea type="text" class="form-control" id="blacklist" name="blacklist" rows="5" cols="30"></textarea>
+                                        <textarea type="text" class="form-control" id="blacklist" name="blacklist" rows="5" cols="30" readonly></textarea>
                                     </div>
-                                    <a href="#"><span class="col-sm-1 mt-5"><i class="fas fa-pencil-alt"></i></span></a>
+                                    <a href="#" data-toggle="modal" data-target="#blacklistModal"><span class="col-sm-1 mt-5"><i class="fas fa-pencil-alt"></i></span></a>
                                 </div>
                             </form>
                         </div>
@@ -297,11 +263,193 @@ $domain = $_COOKIE["d"];
             </div>
 
 
+
+            <!--Start Common Name Modal -->
+            <div class="modal fade" id="nameModal" tabindex="-1" role="dialog" aria-labelledby="nameModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-less">
+                            <h5 class="modal-title" id="nameModalTitle">Change Common Name</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body row border-less">
+                            <label for="common-name" class="col-sm-4 col-form-label">コモンネーム</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="common-name" name="common_name" value="例：www.assistup.co.jp">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-less">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Common Name Modal -->
+            <!--Start Prefecture Modal -->
+            <div class="modal fade" id="prefectureModal" tabindex="-1" role="dialog" aria-labelledby="prefectureModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-less">
+                            <h5 class="modal-title" id="prefectureModalTitle">Change Prefecture</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body row border-less">
+                            <label for="prefecture " class="col-sm-4 col-form-label">都道府県（Ｓ）</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="prefecture" name="prefecture" value="例：Osaka">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-less">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Prefecture Modal -->
+            <!--Start Municipality Modal -->
+            <div class="modal fade" id="municipalityModal" tabindex="-1" role="dialog" aria-labelledby="municipalityModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-less">
+                            <h5 class="modal-title" id="municipalityModalTitle">Change Municipality</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body row border-less">
+                            <label for="municipality" class="col-sm-4 col-form-label">市区町村（Ｌ）</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="municipality" name="municipality" value="例：Osaka-si">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-less">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Municipality Modal -->
+            <!--Start Organization Modal -->
+            <div class="modal fade" id="organizationModal" tabindex="-1" role="dialog" aria-labelledby="organizationModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-less">
+                            <h5 class="modal-title" id="organizationModalTitle">Change Organization</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body row border-less">
+                            <label for="organization" class="col-sm-4 col-form-label">組織名（Ｏ）</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="organization" name="organization" value="例：assistup Inc. ">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-less">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Organization Modal -->
+            <!--Start Department Modal -->
+            <div class="modal fade" id="departmentModal" tabindex="-1" role="dialog" aria-labelledby="departmentModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-less">
+                            <h5 class="modal-title" id="departmentModalTitle">Change Department</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body row border-less">
+                            <label for="department" class="col-sm-4 col-form-label">部署名（ＯＵ）</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="department" name="department" value="例：System Development Section">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-less">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Department Modal -->
+            <!--Start Directory Password Modal -->
+            <div class="modal fade" id="directoryPasswordModal" tabindex="-1" role="dialog" aria-labelledby="directoryPasswordModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-less">
+                            <h5 class="modal-title" id="directoryPasswordModalTitle">Change Directory Password</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body border-less">
+                            <div class="model-line-spacing row">
+                                <label for="user" class="col-sm-4 col-form-label">ユーザー名</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="user" name="user" value="CKM" readonly>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="password" class="col-sm-4 col-form-label">パスワード</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" id="password" name="password" value="G5wkzXimeHtky5Jt">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-less">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Department Modal -->
+            <!--Start Blacklist Modal -->
+            <div class="modal fade" id="blacklistModal" tabindex="-1" role="dialog" aria-labelledby="blacklistModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-less">
+                            <h5 class="modal-title" id="blacklistModalTitle">Change Blacklist</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body border-less">
+                            <label for="blacklist" class="col-form-label">ブラックリスト</label>
+                            <div class="row">
+                                <span class="col-sm-1"></span>
+                                <div class="col-sm-10">
+                                    <textarea type="text" class="form-control" id="blacklist" name="blacklist" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-less">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Blacklist Modal -->
+
         </div>
         <!--End of Page Content  -->
 
 
     </div>
     <!-- End of Wrapper  -->
+    
 
 <?php require("views/footer.php") ?>

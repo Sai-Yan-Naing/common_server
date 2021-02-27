@@ -8,39 +8,10 @@ $domain = $_COOKIE["d"];
 <!-- Start of Wrapper  -->
     <div class="wrapper">
 
-        <!--Start of Sidebar  -->
-        <nav id="sidebar"  style="margin-top: 85px;">
-            <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-server"></i></span><br>
-                        <span class="title">サーバー設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-envelope"></i></span><br>
-                        <span class="title">ＭＡＩＬ設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-cog"></i></span><br>
-                        <span class="title">各種設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-file-alt"></i></span><br>
-                        <span class="title">マニュアル</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!--End of Sidebar  -->
+        <?php require("views/sidebar_menu.php") ?>
 
         <!-- Start of Page Content  -->
-        <div id="content" class="mail_connection"  style="margin-top: 80px;">
+        <div id="content" class="mail_connection"  style="margin-top: 87px;">
             <div class="row">
                 <div class="col-sm-2">
                     <div class="icon-align"><span class="domain-icon"><i class="fas fa-desktop"></i></span></div><br>

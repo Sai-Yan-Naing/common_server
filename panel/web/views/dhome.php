@@ -9,50 +9,13 @@ $domain = $_COOKIE["d"];
     <div class="wrapper">
 
         <!--Start of Sidebar  -->
-        <nav id="sidebar"  style="margin-top: 85px;">
-            <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-server"></i></span><br>
-                        <span class="title">サーバー設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-envelope"></i></span><br>
-                        <span class="title">ＭＡＩＬ設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-cog"></i></span><br>
-                        <span class="title">各種設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-file-alt"></i></span><br>
-                        <span class="title">マニュアル</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        <?php require("views/sidebar_menu.php") ?>
         <!--End of Sidebar  -->
 
         <!-- Start of Page Content  -->
-        <div id="content" class="dhome"  style="margin-top: 80px;">
+        <div id="content" class="dhome"  style="margin-top: 87px;">
             <div class="row">
-                <div class="col-sm-2">
-                    <div class="icon-align"><span class="domain-icon"><i class="fas fa-desktop"></i></span></div><br>
-                    <div class="icon-align"><span class="text-center"><?php echo $_COOKIE['d']; ?></span></div><br>
-                    <div class="icon-align"><span class="text-center">ドメイン</span></div><br>
-                    <div><a href="#"><span class="icon"><i class="fas fa-laptop-code"></i></span><span>サイト設定</span></a></div><br>
-                    <div><a href="site_security.php"><span class="icon"><i class="fas fa-cogs"></i></span><span>サイトセキュリティ</span></a></div><br>
-                    <div><a href="database.php"><span class="icon"><i class="fas fa-database"></i></span><span>データベース</span></a></div><br>
-                    <div><a href="#"><span class="icon"><i class="fas fa-laptop-code"></i></span><span>FTP</span></a></div><br>
-                    <div><a href="#"><span class="icon"><i class="fas fa-folder"></i></span><span>ファイルマネージャー</span></a></div><br>
-                    <div><a href="#"><span class="icon"><i class="fas fa-chart-pie"></i></span><span>アクセス解析</span></a></div><br>
-                </div>
+                <?php require("views/server_setting_menu.php") ?>
                 <div class="col-sm-10">
                     <h6 class="wserver">Winserver Controlpanel Share server</h6>
                     <!-- Nav tabs -->
@@ -92,11 +55,11 @@ $domain = $_COOKIE["d"];
                                 <div class="form-group row">
                                     <label for="version" class="col-sm-4 col-form-label">バージョン</label>
                                     <div class="col-sm-3 custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="ver-4" name="ver" class="custom-control-input" checked="checked">
+                                        <input type="radio" id="ver-4" name="version" value="4.9.12" class="custom-control-input" checked="checked">
                                         <label class="custom-control-label" for="ver-4">4.9.12</label>
                                     </div>
                                     <div class="col-sm-3 custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="ver-5" name="ver" class="custom-control-input">
+                                        <input type="radio" id="ver-5" name="version" value="5.5.0" class="custom-control-input">
                                         <label class="custom-control-label" for="ver-5">5.5.0</label>
                                     </div>
                                 </div>
@@ -243,8 +206,8 @@ $domain = $_COOKIE["d"];
                                     </div>
                                 </div>
                                 <div class="col-sm-1 mt-5">
-                                    <a href="" class="pr-2"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href=""><i class="fas fa-trash-alt"></i></a>
+                                    <a href="javascript:;" class="pr-2" data-toggle="modal" data-target="#statusURLModal"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="javascript:;" onclick="return confirm('Are you sure to delete?')"><i class="fas fa-trash-alt"></i></a>
                                 </div>
                             </div>
                             <div class="row">
@@ -267,8 +230,8 @@ $domain = $_COOKIE["d"];
                                         </div>
                                     </div>
                                     <div class="col-sm-1 mt-3">
-                                        <a href="" class="pr-2"><i class="fas fa-pencil-alt"></i></a>
-                                        <a href=""><i class="fas fa-trash-alt"></i></a>
+                                        <a href="javascript:;" class="pr-2" data-toggle="modal" data-target="#targetDirectoryModal"><i class="fas fa-pencil-alt"></i></a>
+                                        <a href="#" onclick="return confirm('Are you sure to delete?')"><i class="fas fa-trash-alt"></i></a>
                                     </div>
                                 </div>
                                 <p>認証ユーザー</p>
@@ -280,14 +243,14 @@ $domain = $_COOKIE["d"];
                                         </div>
                                         <div class="form-group col-sm-3">
                                             <label for="pass_word">パスワード</label>
-                                            <input type="text" readonly class="form-control-plaintext" id="pass_word" value="PASSWORD1">
+                                            <input type="password" readonly class="form-control-plaintext" id="pass_word" value="PASSWORD1">
                                         </div>
                                         <div class="form-group col-sm-3">
                                             <label for="password2">パスワード変更</label>
-                                            <input type="password" class="form-control" name="password2" id="password2" placeholder="PASSWORD1">
+                                            <input type="password" readonly class="form-control" name="password" id="password2" value="PASSWORD1">
                                         </div>
                                         <div class="form-group col-sm-3 mt-04">
-                                            <button type="submit" class="btn btn-outline-dark text-dark">変更</button>
+                                            <a href="javascript:;" class="btn btn-outline-dark text-dark" data-toggle="modal" data-target="#passwordChangeModal">変更</a>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -298,7 +261,7 @@ $domain = $_COOKIE["d"];
                                         </div>
                                     </div>
                                     <div class="form-group float-right">
-                                        <button type="reset" class="btn btn-outline-dark text-dark">キャンセル</button> 
+                                        <button type="reset" class="btn btn-outline-dark text-dark" data-toggle="collapse" data-target="#collapseDirectory">キャンセル</button> 
                                         <button type="submit" class="btn btn-outline-dark text-dark">保存</button>
                                     </div>
                                 </form>
@@ -338,6 +301,89 @@ $domain = $_COOKIE["d"];
                     </div>
                 </div>
             </div>
+
+            <!--Start Status Code and URL Modal -->
+            <div class="modal fade" id="statusURLModal" tabindex="-1" role="dialog" aria-labelledby="statusURLModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-less">
+                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change IP Address Name</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body border-less">
+                            <div class="model-line-spacing row">
+                                <label for="status-code2" class="col-sm-4 col-form-label">ステータスコード</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="status-code2" value="ステータスコード">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="url-spec2" class="col-sm-4 col-form-label">URL指定</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="url-spec2" name="ip-address" value="URL指定">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-less">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Status Code and URL Modal -->
+
+            <!--Start target directory Modal -->
+            <div class="modal fade" id="targetDirectoryModal" tabindex="-1" role="dialog" aria-labelledby="targetDirectoryModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-less">
+                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change Target Directory</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body row border-less">
+                            <label for="target-dir2" class="col-sm-4 col-form-label">対象ディレクトリ</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="target-dir2" value="設定しているドキュメントルートを表示">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-less">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End target directory Modal -->
+
+            <!--Start authenticated user password change Modal -->
+            <div class="modal fade" id="passwordChangeModal" tabindex="-1" role="dialog" aria-labelledby="passwordChangeModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-less">
+                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change Password</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body row border-less">
+                            <label for="password3" class="col-sm-4 col-form-label">パスワード変更</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="password3" value="PASSWORD1">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-less">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End authenticated user password change Modal -->
 
 
         </div>

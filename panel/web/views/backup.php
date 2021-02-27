@@ -8,36 +8,7 @@ $domain = $_COOKIE["d"];
 <!-- Start of Wrapper  -->
     <div class="wrapper">
 
-        <!--Start of Sidebar  -->
-        <nav id="sidebar"  style="margin-top: 95px;">
-            <ul class="list-unstyled components">
-                <li>
-                    <a href="dhome.php">
-                        <span class="icon"><i class="fas fa-server"></i></span><br>
-                        <span class="title">サーバー設定</span>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="mail_setting.php">
-                        <span class="icon"><i class="fas fa-envelope"></i></span><br>
-                        <span class="title">ＭＡＩＬ設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-cog"></i></span><br>
-                        <span class="title">各種設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-file-alt"></i></span><br>
-                        <span class="title">マニュアル</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!--End of Sidebar  -->
+       <?php require("views/sidebar_menu.php") ?>
 
         <!-- Start of Page Content  -->
         <div id="content" class="dhome"  style="margin-top: 87px;">
@@ -67,15 +38,14 @@ $domain = $_COOKIE["d"];
                                 <span>自動バックアップ</span>
                             </div>
                             <div class="col-sm-5">
-                                <div class="per-backup">バックアップを実施</div>
+                                <button class="btn btn-outline-secondary">バックアップを実施</button>
                             </div>
                         </div>
-                        <!-- <div class="mt-4 mb-3">バックアップデータ</div> -->
-                        <form action="" method="post" id="">
+                        <form action="" method="post" id="" class="mt-4">
                             <div class="row">
                                 <div class="form-group col-sm-4 mb-2">
-                                    <label for="backup">バックアップデータ</label>
-                                    <input type="text" class="form-control" id="backup" name="" placeholder="バックアップデータ日付">
+                                    <div>バックアップデータ</div>
+                                    <div class="date-backup mt-2">バックアップデータ日付</div>
                                 </div>
                                 <div class="form-group col-sm-6 mt-04">
                                     <button type="submit" class="btn btn-outline-secondary mb-2 mr-3">リストア</button>

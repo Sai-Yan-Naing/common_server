@@ -4,55 +4,17 @@ $password = $_COOKIE["p"];
 $domain = $_COOKIE["d"];
 
 ?>
+
 <?php require("views/dheader.php") ?>
 <!-- Start of Wrapper  -->
     <div class="wrapper">
 
-        <!--Start of Sidebar  -->
-        <nav id="sidebar"  style="margin-top: 95px;">
-            <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-server"></i></span><br>
-                        <span class="title">サーバー設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="mail_setting.php">
-                        <span class="icon"><i class="fas fa-envelope"></i></span><br>
-                        <span class="title">ＭＡＩＬ設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-cog"></i></span><br>
-                        <span class="title">各種設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-file-alt"></i></span><br>
-                        <span class="title">マニュアル</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!--End of Sidebar  -->
+        <?php require("views/sidebar_menu.php") ?>
 
         <!-- Start of Page Content  -->
         <div id="content" class="dhome"  style="margin-top: 87px;">
             <div class="row">
-                <div class="col-sm-2">
-                    <div class="icon-align"><span class="domain-icon"><i class="fas fa-desktop"></i></span></div><br>
-                    <div class="icon-align"><span class="text-center"><?php echo $_COOKIE['d']; ?></span></div><br>
-                    <div class="icon-align"><span class="text-center">ドメイン</span></div><br>
-                    <div><a href="dhome.php"><span class="icon"><i class="fas fa-laptop-code"></i></span><span>サイト設定</span></a></div><br>
-                    <div><a href="site_security.php"><span class="icon"><i class="fas fa-cogs"></i></span><span>サイトセキュリティ</span></a></div><br>
-                    <div><a href="database.php"><span class="icon"><i class="fas fa-database"></i></span><span>データベース</span></a></div><br>
-                    <div><a href="#"><span class="icon"><i class="fas fa-laptop-code"></i></span><span>FTP</span></a></div><br>
-                    <div><a href="#"><span class="icon"><i class="fas fa-folder"></i></span><span>ファイルマネージャー</span></a></div><br>
-                    <div><a href="#"><span class="icon"><i class="fas fa-chart-pie"></i></span><span>アクセス解析</span></a></div><br>
-                </div>
+                <?php require("views/server_setting_menu.php") ?>
                 <div class="col-sm-10">
                     <h6 class="wserver">Winserver Controlpanel Share server</h6>
                     
@@ -83,7 +45,7 @@ $domain = $_COOKIE["d"];
                                           <input type="text" class="form-control" id="ftpuser" name="ftp_user" placeholder="1-14文字、半角英数字">
                                         </div>
                                         <div class="col-sm-1 mt-2">
-                                            <a href=""><i class="fas fa-pencil-alt"></i></a>
+                                            <a href="javascript:;" data-toggle="modal" data-target="#ftpUserModal"><i class="fas fa-pencil-alt"></i></a>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -92,7 +54,7 @@ $domain = $_COOKIE["d"];
                                           <input type="password" class="form-control" id="pass_word" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
                                         </div>
                                         <div class="col-sm-1 mt-2">
-                                            <a href=""><i class="fas fa-pencil-alt"></i></a>
+                                            <a href="" data-toggle="modal" data-target="#passwordModal"><i class="fas fa-pencil-alt"></i></a>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -104,10 +66,10 @@ $domain = $_COOKIE["d"];
                                         <div class="col-sm-9">
                                             <div class="form-group">
                                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                    <label class="btn btn-primary active">
+                                                    <label class="btn btn-outline-primary active">
                                                         <input type="radio" name="options" id="option1" autocomplete="off" checked> 全て許可
                                                     </label>
-                                                    <label class="btn btn-primary">
+                                                    <label class="btn btn-outline-primary">
                                                         <input type="radio" name="options" id="option2" autocomplete="off"> ディレクトリ設定
                                                     </label>
                                                 </div>
@@ -116,17 +78,18 @@ $domain = $_COOKIE["d"];
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-3"></div>
-                                        <div class="col-sm-5">
-                                            <div class="document-root">Domainのドキュメントルートを表示</div>
+                                        <div class="col-sm-5 mb-3">
+                                            <input type="text" name="" id="" class="form-control" placeholder="Domainのドキュメントルートを表示">
                                         </div>
                                     </div>
                                     <div class="form-group text-center">
-                                        <button type="reset" class="btn btn-outline-secondary">キャンセル</button>
+                                        <button type="reset" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#collapseDirectory">キャンセル</button>
                                         <button type="submit" class="btn btn-outline-secondary">作成</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
+
                         <div class="mt-3 mb-3">
                             利用中FTP情報
                         </div>
@@ -144,11 +107,11 @@ $domain = $_COOKIE["d"];
                                         <label for="password2" >パスワード</label>
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="password" class="form-control" id="password2" name="password">
+                                        <input type="password" readonly class="form-control" id="password2" name="password">
                                     </div>
                                     <div class="edit-delete-btn col-sm-1">
-                                        <a href="" class="edit"><i class="fas fa-pencil-alt"></i></a>
-                                        <a href=""><i class="fas fa-trash-alt"></i></a>
+                                        <a href="javascript:;" class="edit" data-toggle="modal" data-target="#ftpUseInformationModal"><i class="fas fa-pencil-alt"></i></a>
+                                        <a href="javascript:;" onclick="return confirm('Are you sure to delete?')"><i class="fas fa-trash-alt"></i></a>
                                     </div>
                                 </div>
                             </form>
@@ -158,6 +121,90 @@ $domain = $_COOKIE["d"];
 
             </div>
         </div>
+
+
+        <!--Start ftp user Modal -->
+            <div class="modal fade" id="ftpUserModal" tabindex="-1" role="dialog" aria-labelledby="ftpUserModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-less">
+                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change FTP User</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body row border-less">
+                            <label for="ftpuser2" class="col-sm-4 col-form-label">FTPユーザー</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="ftpuser2" value="FTPユーザー">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-less">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End ftp user Modal -->
+
+            <!--Start password Modal -->
+            <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-less">
+                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change Password</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body row border-less">
+                            <label for="pass_word2" class="col-sm-4 col-form-label">パスワード</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="pass_word2" value="パスワード">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-less">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End password Modal -->
+
+            <!--Start ftp information in use Modal -->
+            <div class="modal fade" id="ftpUseInformationModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-less">
+                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change FTP Information Password</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body border-less">
+                            <div class="model-line-spacing row">
+                                <label for="user_name2" class="col-sm-4 col-form-label">ユーザー名</label>
+                                <div class="col-sm-8">
+                                    <input type="text" readonly class="form-control" id="user_name2" value="ユーザー名">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="pass_word3" class="col-sm-4 col-form-label">パスワード</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" id="pass_word3" value="パスワード">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-less">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End password Modal -->
 
 
         </div>

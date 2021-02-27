@@ -302,6 +302,11 @@ span {
     background: #ccc;
 }
 
+.site-security .country-jp {
+    padding-top: calc(.375rem + 1px);
+    padding-bottom: calc(.375rem + 1px);
+}
+
 .site-security .icon-align {
     text-align: center;
 }
@@ -318,121 +323,72 @@ span {
     padding: 0 40px;
 }
 
-.notice-msg {
+.site-security .notice-msg {
     border-radius: 5px;
     padding: 8px;
     margin-left: 15px;
 }
 
-thead th {
+.site-security thead th {
     border-top: 1px solid #000000!important;
 }
 
-tbody tr:last-child td {
+.site-security tbody tr:last-child td {
     border-bottom: 1px solid #000000!important;
 }
 
-td,
-th {
+.site-security td,
+.site-security th {
     border-left: 1px solid #000000!important;
     border-right: 1px solid #000000!important;
 }
 
-.table-waf thead tr {
+.site-security .table-title {
     background-color: #4472c4;
 }
 
-.table-waf .waf-odd {
+.site-security .table-waf tbody tr:nth-child(odd) {
     background-color: #cdd4ea;
 }
 
-.table-waf .waf-even {
+.site-security .table-waf tbody tr:nth-child(even) {
     background-color: #e8ebf5;
 }
 
-#collapseDirectory .card-body {
+.site-security #collapseDirectory .card-body {
     border-radius: 50px;
     margin: 10px;
 }
 
-.dir-icon {
+.site-security .dir-icon {
     padding-right: 25px;
 }
 
-#directoryTab a {
+.site-security #directoryTab a {
     text-decoration: none;
     color: #000000;
 }
 
-#accordionDir {
+.site-security #accordionDir {
     margin-top: 25px;
 }
 
-.dir-icon {
+.site-security .dir-icon {
     font-size: 20px;
 }
 
-.trash-icon {
+.site-security .trash-icon {
     margin-top: 22px;
 }
 
-
-/* ---------------------------------------------------
-    CONTENT STYLE (site_security)(On OFF Switch)
------------------------------------------------------ */
-
-
-/* The switch - the box around the slider */
-
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-    float: right;
+.border-less {
+    border: none !important;
 }
 
-.switch input {
-    display: none;
+.model-line-spacing {
+    margin-bottom: 10px;
 }
 
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-}
-
-input.primary:checked+.slider {
-    background-color: #2196F3;
-}
-
-input:focus+.slider {
-    box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked+.slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-}
 
 /* ---------------------------------------------------
     CONTENT STYLE (mail_connection)
@@ -490,15 +446,78 @@ input:checked+.slider:before {
     margin-left: 0px;
 }
 
+
+/* ---------------------------------------------------
+    CONTENT STYLE (contract_connection)
+----------------------------------------------------- */
+
+.contract_information .wserver {
+    text-align: left;
+}
+
+.contract_information a {
+    color: #000000;
+    font-weight: 300;
+}
+
+.contract_information .gb {
+    padding-top: calc(.375rem + 1px);
+    padding-bottom: calc(.375rem + 1px);
+}
+
+.contract_information .icon-align {
+    text-align: center;
+}
+
+.contract_information span.icon {
+    font-size: 23px;
+}
+
+.contract_information .domain-icon {
+    font-size: 50px;
+}
+
+.contract_information .contract {
+    border: 1px solid #000000;
+    padding: 10px;
+}
+
+.contract_information .contract .text-label-align {
+    padding-top: calc(.375rem + 1px);
+    padding-bottom: calc(.375rem + 2px);
+    margin-bottom: 0;
+    font-size: inherit;
+    line-height: 1.5;
+}
+
+.contract_information .m-40 {
+    margin: 0 15%;
+}
+
+.contract_information .server-info {
+    margin-bottom: 50px;
+}
+
+.contract_information .server-info table,
+.contract_information .server-info tr,
+.contract_information .server-info th,
+.contract_information .server-info td {
+    border: none!important;
+    background-color: unset!important;
+}
+
+.contract_information .btn-outline-dark:hover {
+    background: #ccc;
+}
+
+
 /*end wady*/
 
-//16/2/2021
+/*16/2/2021*/
+
 /*//khin*/
 
 /*------------header----------------*/
-.boxHeader {
-    margin-bottom: 0px !important;
-}
 
 .boxHeader #subNavMenu {
     margin-bottom: 0px !important;
@@ -508,7 +527,6 @@ input:checked+.slider:before {
 
 .tab-content #kihon-setting {
     padding: 0 40px;
-    /*overflow: hidden;*/
 }
 
 .data-item {
@@ -590,12 +608,6 @@ input:checked+.slider:before {
     margin-bottom: 15px;
 }
 
-.document-root {
-    border: 1px solid #ced4da;
-    padding: .375rem .75rem;
-    border-radius: .25rem;
-    margin-bottom: 15px;
-}
 
 .p-t-b-l-r-2 {
     padding: .5rem;
@@ -621,8 +633,9 @@ input:checked+.slider:before {
 }
 
 /*--------------backup-----------------*/
-.per-backup {
-    border: 1px solid #ced4da;
+
+.date-backup {
+    border: 1px solid #6c757d;
     padding: .375rem .75rem;
     border-radius: .25rem;
     margin-bottom: 15px;
@@ -681,9 +694,6 @@ input:checked+.slider:before {
 #content .access-analysis {
     background-color: #0a48b3;
 }
-#c/*ontent  tr:nth-child(odd) {
-    background-color: rgb(167, 172, 189);
-}*/
 
 .content-table tr:nth-child(even) {
     background-color: lavender;

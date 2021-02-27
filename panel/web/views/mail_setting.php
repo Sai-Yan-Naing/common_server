@@ -8,39 +8,10 @@ $domain = $_COOKIE["d"];
 <!-- Start of Wrapper  -->
     <div class="wrapper">
 
-        <!--Start of Sidebar  -->
-        <nav id="sidebar"  style="margin-top: 95px;">
-            <ul class="list-unstyled components">
-                <li>
-                    <a href="dhome.php">
-                        <span class="icon"><i class="fas fa-server"></i></span><br>
-                        <span class="title">サーバー設定</span>
-                    </a>
-                </li>
-                <li class="active">
-                    <a href="mail_setting.php">
-                        <span class="icon"><i class="fas fa-envelope"></i></span><br>
-                        <span class="title">ＭＡＩＬ設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-cog"></i></span><br>
-                        <span class="title">各種設定</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="icon"><i class="fas fa-file-alt"></i></span><br>
-                        <span class="title">マニュアル</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!--End of Sidebar  -->
+        <?php require("views/sidebar_menu.php") ?>
 
         <!-- Start of Page Content  -->
-        <div id="content" class="dhome"  style="margin-top: 80px;">
+        <div id="content" class="dhome"  style="margin-top: 87px;">
             <div class="row">
                 <div class="col-sm-2">
                     <div class="icon-align"><span class="domain-icon"><i class="fas fa-desktop"></i></span></div><br>
@@ -71,10 +42,10 @@ $domain = $_COOKIE["d"];
                                             <div class="form-group">
                                                 <div class="form-group">
                                                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                                                        <label class="btn btn-primary active">
+                                                        <label class="btn btn-outline-primary active">
                                                             <input type="radio" name="options" id="option1" autocomplete="off" checked> 個別入力
                                                         </label>
-                                                        <label class="btn btn-primary">
+                                                        <label class="btn btn-outline-primary">
                                                             <input type="radio" name="options" id="option2" autocomplete="off"> CSV
                                                         </label>
                                                     </div>
@@ -99,7 +70,7 @@ $domain = $_COOKIE["d"];
                                         </div>
                                     </div>
                                     <div class="form-group float-right">
-                                        <button type="reset" class="btn btn-outline-secondary">キャンセル</button>
+                                        <button type="reset" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#collapseDirectory">キャンセル</button>
                                         <button type="submit" class="btn btn-outline-secondary">作成</button>
                                     </div>
                                 </form>
@@ -119,8 +90,8 @@ $domain = $_COOKIE["d"];
                               <input type="text" readonly class="form-control" id="douser" name="">
                             </div>
                             <div class="col-sm-1 mt-2">
-                                <a href="" class="pr-2"><i class="fas fa-pencil-alt"></i></a>
-                                <a href=""><i class="fas fa-trash-alt"></i></a>
+                                <a href="javascript:;" class="pr-2" data-toggle="modal" data-target="#passwordModal"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="javascript:;" onclick="return confirm('Are you sure to delete?')"><i class="fas fa-trash-alt"></i></a>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -129,8 +100,8 @@ $domain = $_COOKIE["d"];
                               <input type="text" readonly class="form-control" id="douser2" name="">
                             </div>
                             <div class="col-sm-1 mt-2">
-                                <a href="" class="pr-2"><i class="fas fa-pencil-alt"></i></a>
-                                <a href=""><i class="fas fa-trash-alt"></i></a>
+                                <a href="javascript:;" class="pr-2" data-toggle="modal" data-target="#passwordModal"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="javascript:;" onclick="return confirm('Are you sure to delete?')"><i class="fas fa-trash-alt"></i></a>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -139,8 +110,8 @@ $domain = $_COOKIE["d"];
                               <input type="text" readonly class="form-control" id="douser3" name="">
                             </div>
                             <div class="col-sm-1 mt-2">
-                                <a href="" class="pr-2"><i class="fas fa-pencil-alt"></i></a>
-                                <a href=""><i class="fas fa-trash-alt"></i></a>
+                                <a href="javascript:;" class="pr-2" data-toggle="modal" data-target="#passwordModal"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="javascript:;" onclick="return confirm('Are you sure to delete?')"><i class="fas fa-trash-alt"></i></a>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -149,8 +120,8 @@ $domain = $_COOKIE["d"];
                               <input type="text" readonly class="form-control" id="douser4" name="">
                             </div>
                             <div class="col-sm-1 mt-2">
-                                <a href="" class="pr-2"><i class="fas fa-pencil-alt"></i></a>
-                                <a href=""><i class="fas fa-trash-alt"></i></a>
+                                <a href="javascript:;" class="pr-2" data-toggle="modal" data-target="#passwordModal"><i class="fas fa-pencil-alt"></i></a>
+                                <a href="javascript:;" onclick="return confirm('Are you sure to delete?')"><i class="fas fa-trash-alt"></i></a>
                             </div>
                         </div>
                         <div class="btn btn-outline-danger mt-3 mb-3">
@@ -163,6 +134,30 @@ $domain = $_COOKIE["d"];
         </div>
         <!--End of Page Content  -->
 
+        <!--Start register password Modal -->
+            <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header border-less">
+                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change Password</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body row border-less">
+                            <label for="pass_word2" class="col-sm-4 col-form-label">パスワード</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" id="pass_word2" value="パスワード">
+                            </div>
+                        </div>
+                        <div class="modal-footer border-less">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End password Modal -->
 
     </div>
     <!-- End of Wrapper  -->

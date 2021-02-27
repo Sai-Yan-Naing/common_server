@@ -169,7 +169,7 @@ $(function() {
                 minlength: "Your password must be at least 8 characters long",
                 maxlength: "Usernamr must be maximum 70 characters long",
             },
-            username: {
+            user_name: {
                 required: "Please enter user name",
                 minlength: "Your password must be at least 8 characters long",
                 maxlength: "Usernamr must be maximum 70 characters long",
@@ -316,6 +316,7 @@ $(function() {
         rules: {
             email: {
                 required: true,
+                email: false,
             },
             password: {
                 required: true,
@@ -353,6 +354,81 @@ $(function() {
             password: {
                 minlength: "Your password must be at least 8 characters long",
                 maxlength: "Your password must be maximum 70 characters long",
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+    // -----------------mail information------------------
+
+    $("form[id='application']").validate({
+
+        rules: {
+            domain_name: {
+                required: true,
+            },
+            domain_type: {
+                required: true,
+            },
+            auth_code: {
+                required: true,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            domain_name: {
+                required: "Please enter domain name",
+            },
+            domain_type: {
+                required: "Please enter domain type",
+            },
+            auth_code: {
+                required: "Please enter auth code",
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+    $("form[id='another-app']").validate({
+
+        rules: {
+            domain_name: {
+                required: true,
+            },
+            domain_type: {
+                required: true,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            domain_name: {
+                required: "Please enter domain name",
+            },
+            domain_type: {
+                required: "Please enter domain type",
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+    // For server information (contract_information.php)
+    $("form[id='server-information']").validate({
+        rules: {
+            capacity_used: {
+                required: true,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            capacity_used: {
+                required: "Please enter disk capacity used",
+
             }
         },
         submitHandler: function(form) {
