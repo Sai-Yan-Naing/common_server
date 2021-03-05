@@ -54,3 +54,73 @@ Stack trace:
 [27-Feb-2021 02:19:40 UTC] PHP Notice:  Undefined index: d in C:\laragon\www\assistup\common_server\panel\web\views\home.php on line 14
 [27-Feb-2021 02:19:40 UTC] PHP Notice:  Undefined index: p in C:\laragon\www\assistup\common_server\panel\web\views\home.php on line 14
 [27-Feb-2021 02:19:40 UTC] PHP Notice:  Undefined index: d in C:\laragon\www\assistup\common_server\panel\web\views\home.php on line 53
+[03-Mar-2021 10:51:34 UTC] PHP Notice:  Undefined index: p in C:\laragon\www\assistup\common_server\panel\web\views\site_security.php on line 3
+[03-Mar-2021 10:51:34 UTC] PHP Notice:  Undefined index: d in C:\laragon\www\assistup\common_server\panel\web\views\site_security.php on line 4
+[03-Mar-2021 10:51:35 UTC] PHP Notice:  Undefined index: p in C:\laragon\www\assistup\common_server\panel\web\header\dvalidation.php on line 5
+[03-Mar-2021 10:51:35 UTC] PHP Notice:  Undefined index: d in C:\laragon\www\assistup\common_server\panel\web\header\dvalidation.php on line 6
+[03-Mar-2021 10:51:46 UTC] PHP Notice:  Undefined index: p in C:\laragon\www\assistup\common_server\panel\web\views\dhome.php on line 3
+[03-Mar-2021 10:51:46 UTC] PHP Notice:  Undefined index: d in C:\laragon\www\assistup\common_server\panel\web\views\dhome.php on line 4
+[03-Mar-2021 10:51:46 UTC] PHP Notice:  Undefined index: p in C:\laragon\www\assistup\common_server\panel\web\header\dvalidation.php on line 5
+[03-Mar-2021 10:51:46 UTC] PHP Notice:  Undefined index: d in C:\laragon\www\assistup\common_server\panel\web\header\dvalidation.php on line 6
+[04-Mar-2021 02:05:23 UTC] PHP Notice:  Undefined variable: _SESSION in C:\laragon\www\assistup\common_server\panel\web\models\account.php on line 95
+[04-Mar-2021 02:05:23 UTC] PHP Notice:  Undefined index: login_attempts in C:\laragon\www\assistup\common_server\panel\web\models\account.php on line 95
+[04-Mar-2021 08:30:46 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\laragon\www\assistup\common_server\panel\web\install_app.php on line 58
+[04-Mar-2021 08:52:14 UTC] PHP Notice:  Constant PASS_KEY already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 6
+[04-Mar-2021 08:52:14 UTC] PHP Notice:  Constant ROOT already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 7
+[04-Mar-2021 08:52:14 UTC] PHP Notice:  Constant ROOT_PASS already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 8
+[04-Mar-2021 08:52:14 UTC] PHP Notice:  Constant DSN already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 9
+[04-Mar-2021 08:52:14 UTC] PHP Notice:  Constant STARTER_PLAN already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 10
+[04-Mar-2021 08:52:14 UTC] PHP Notice:  Constant COMMON_PLAN already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 11
+[04-Mar-2021 08:52:14 UTC] PHP Notice:  Constant PREMIUM_PLAN already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 12
+[04-Mar-2021 08:52:14 UTC] PHP Notice:  Constant SQLSERVER_2016_HOST_NAME already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 13
+[04-Mar-2021 08:52:14 UTC] PHP Notice:  Constant SQLSERVER_2016_HOST_IP already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 14
+[04-Mar-2021 08:52:14 UTC] PHP Notice:  Constant SQLSERVER_2016_DSN already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 15
+[04-Mar-2021 08:52:14 UTC] PHP Notice:  Constant SQLSERVER_2016_USER already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 16
+[04-Mar-2021 08:52:14 UTC] PHP Notice:  Constant SQLSERVER_2016_PASS already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 17
+[04-Mar-2021 08:52:14 UTC] PHP Notice:  Constant SQLSERVER_2014_HOST_NAME already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 18
+[04-Mar-2021 08:52:14 UTC] PHP Notice:  Constant SQLSERVER_2014_HOST_IP already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 19
+[04-Mar-2021 08:52:14 UTC] PHP Notice:  Constant SQLSERVER_2014_DSN already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 20
+[04-Mar-2021 08:52:14 UTC] PHP Notice:  Constant SQLSERVER_2014_USER already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 21
+[04-Mar-2021 08:52:14 UTC] PHP Notice:  Constant SQLSERVER_2014_PASS already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 22
+[04-Mar-2021 08:52:14 UTC] PHP Notice:  Undefined index: p in C:\laragon\www\assistup\common_server\panel\web\header\validation.php on line 6
+[04-Mar-2021 08:56:02 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\laragon\www\assistup\common_server\panel\web\install_app.php on line 58
+[04-Mar-2021 08:57:47 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\laragon\www\assistup\common_server\panel\web\models\mysql.php on line 106
+[04-Mar-2021 09:02:33 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\laragon\www\assistup\common_server\panel\web\models\mysql.php on line 106
+[04-Mar-2021 09:41:31 UTC] PHP Notice:  Constant PASS_KEY already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 6
+[04-Mar-2021 09:41:31 UTC] PHP Notice:  Constant ROOT already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 7
+[04-Mar-2021 09:41:31 UTC] PHP Notice:  Constant ROOT_PASS already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 8
+[04-Mar-2021 09:41:31 UTC] PHP Notice:  Constant DSN already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 9
+[04-Mar-2021 09:41:31 UTC] PHP Notice:  Constant STARTER_PLAN already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 10
+[04-Mar-2021 09:41:31 UTC] PHP Notice:  Constant COMMON_PLAN already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 11
+[04-Mar-2021 09:41:31 UTC] PHP Notice:  Constant PREMIUM_PLAN already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 12
+[04-Mar-2021 09:41:31 UTC] PHP Notice:  Constant SQLSERVER_2016_HOST_NAME already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 13
+[04-Mar-2021 09:41:31 UTC] PHP Notice:  Constant SQLSERVER_2016_HOST_IP already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 14
+[04-Mar-2021 09:41:31 UTC] PHP Notice:  Constant SQLSERVER_2016_DSN already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 15
+[04-Mar-2021 09:41:31 UTC] PHP Notice:  Constant SQLSERVER_2016_USER already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 16
+[04-Mar-2021 09:41:31 UTC] PHP Notice:  Constant SQLSERVER_2016_PASS already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 17
+[04-Mar-2021 09:41:31 UTC] PHP Notice:  Constant SQLSERVER_2014_HOST_NAME already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 18
+[04-Mar-2021 09:41:31 UTC] PHP Notice:  Constant SQLSERVER_2014_HOST_IP already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 19
+[04-Mar-2021 09:41:31 UTC] PHP Notice:  Constant SQLSERVER_2014_DSN already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 20
+[04-Mar-2021 09:41:31 UTC] PHP Notice:  Constant SQLSERVER_2014_USER already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 21
+[04-Mar-2021 09:41:31 UTC] PHP Notice:  Constant SQLSERVER_2014_PASS already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 22
+[04-Mar-2021 09:41:31 UTC] PHP Notice:  Undefined index: p in C:\laragon\www\assistup\common_server\panel\web\header\validation.php on line 6
+[05-Mar-2021 02:46:46 UTC] PHP Notice:  Constant PASS_KEY already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 6
+[05-Mar-2021 02:46:46 UTC] PHP Notice:  Constant ROOT already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 7
+[05-Mar-2021 02:46:46 UTC] PHP Notice:  Constant ROOT_PASS already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 8
+[05-Mar-2021 02:46:46 UTC] PHP Notice:  Constant DSN already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 9
+[05-Mar-2021 02:46:46 UTC] PHP Notice:  Constant STARTER_PLAN already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 10
+[05-Mar-2021 02:46:46 UTC] PHP Notice:  Constant COMMON_PLAN already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 11
+[05-Mar-2021 02:46:47 UTC] PHP Notice:  Constant PREMIUM_PLAN already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 12
+[05-Mar-2021 02:46:47 UTC] PHP Notice:  Constant SQLSERVER_2016_HOST_NAME already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 13
+[05-Mar-2021 02:46:47 UTC] PHP Notice:  Constant SQLSERVER_2016_HOST_IP already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 14
+[05-Mar-2021 02:46:47 UTC] PHP Notice:  Constant SQLSERVER_2016_DSN already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 15
+[05-Mar-2021 02:46:47 UTC] PHP Notice:  Constant SQLSERVER_2016_USER already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 16
+[05-Mar-2021 02:46:47 UTC] PHP Notice:  Constant SQLSERVER_2016_PASS already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 17
+[05-Mar-2021 02:46:47 UTC] PHP Notice:  Constant SQLSERVER_2014_HOST_NAME already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 18
+[05-Mar-2021 02:46:47 UTC] PHP Notice:  Constant SQLSERVER_2014_HOST_IP already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 19
+[05-Mar-2021 02:46:47 UTC] PHP Notice:  Constant SQLSERVER_2014_DSN already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 20
+[05-Mar-2021 02:46:47 UTC] PHP Notice:  Constant SQLSERVER_2014_USER already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 21
+[05-Mar-2021 02:46:47 UTC] PHP Notice:  Constant SQLSERVER_2014_PASS already defined in C:\laragon\www\assistup\common_server\panel\web\config\all.php on line 22
+[05-Mar-2021 02:46:47 UTC] PHP Notice:  Undefined index: p in C:\laragon\www\assistup\common_server\panel\web\header\validation.php on line 6
+[05-Mar-2021 02:46:47 UTC] PHP Notice:  Undefined index: d in C:\laragon\www\assistup\common_server\panel\web\header\validation.php on line 7
+[05-Mar-2021 05:44:42 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\laragon\www\assistup\common_server\panel\web\install_app.php on line 59

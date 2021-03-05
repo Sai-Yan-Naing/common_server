@@ -1,5 +1,4 @@
 <?php 
-
 $password = $_COOKIE["p"];
 $domain = $_COOKIE["d"];
 

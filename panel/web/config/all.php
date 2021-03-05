@@ -5,7 +5,7 @@
 // define("DSN", 'mysql:host=mysql3.winserver.ne.jp;dbname=japan_system_development');
 define("PASS_KEY", "cee358b7cd218370be64e518934687be");
 define("ROOT", 'root');
-define("ROOT_PASS", "welcome");
+define("ROOT_PASS", "");
 define("DSN", 'mysql:host=localhost;dbname=japan_system_development');
 define("STARTER_PLAN", 1);
 define("COMMON_PLAN", 1);
