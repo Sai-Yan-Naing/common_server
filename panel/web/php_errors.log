@@ -124,3 +124,37 @@ Stack trace:
 [05-Mar-2021 02:46:47 UTC] PHP Notice:  Undefined index: p in C:\laragon\www\assistup\common_server\panel\web\header\validation.php on line 6
 [05-Mar-2021 02:46:47 UTC] PHP Notice:  Undefined index: d in C:\laragon\www\assistup\common_server\panel\web\header\validation.php on line 7
 [05-Mar-2021 05:44:42 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in C:\laragon\www\assistup\common_server\panel\web\install_app.php on line 59
+[08-Mar-2021 02:57:38 UTC] PHP Notice:  Undefined index: p in C:\laragon\www\assistup\common_server\panel\web\views\dhome.php on line 2
+[08-Mar-2021 02:57:38 UTC] PHP Notice:  Undefined index: d in C:\laragon\www\assistup\common_server\panel\web\views\dhome.php on line 3
+[08-Mar-2021 02:57:38 UTC] PHP Notice:  Undefined index: p in C:\laragon\www\assistup\common_server\panel\web\header\dvalidation.php on line 5
+[08-Mar-2021 02:57:38 UTC] PHP Notice:  Undefined index: d in C:\laragon\www\assistup\common_server\panel\web\header\dvalidation.php on line 6
+[08-Mar-2021 02:57:38 UTC] PHP Notice:  Undefined index: d in C:\laragon\www\assistup\common_server\panel\web\views\server_setting_menu.php on line 3
+[09-Mar-2021 07:09:41 UTC] PHP Warning:  scandir(c:/laragon/www/hello6.com,c:/laragon/www/hello6.com): The system cannot find the file specified. (code: 2) in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 6
+[09-Mar-2021 07:09:42 UTC] PHP Warning:  scandir(c:/laragon/www/hello6.com): failed to open dir: No such file or directory in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 6
+[09-Mar-2021 07:09:42 UTC] PHP Warning:  scandir(): (errno 2): No such file or directory in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 6
+[09-Mar-2021 07:09:42 UTC] PHP Warning:  Invalid argument supplied for foreach() in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 7
+[09-Mar-2021 07:09:42 UTC] PHP Warning:  scandir(c:/laragon/www/hello7.com,c:/laragon/www/hello7.com): The system cannot find the file specified. (code: 2) in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 6
+[09-Mar-2021 07:09:42 UTC] PHP Warning:  scandir(c:/laragon/www/hello7.com): failed to open dir: No such file or directory in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 6
+[09-Mar-2021 07:09:42 UTC] PHP Warning:  scandir(): (errno 2): No such file or directory in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 6
+[09-Mar-2021 07:09:42 UTC] PHP Warning:  Invalid argument supplied for foreach() in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 7
+[09-Mar-2021 07:09:42 UTC] PHP Warning:  scandir(c:/laragon/www/hello11.com,c:/laragon/www/hello11.com): The system cannot find the file specified. (code: 2) in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 6
+[09-Mar-2021 07:09:42 UTC] PHP Warning:  scandir(c:/laragon/www/hello11.com): failed to open dir: No such file or directory in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 6
+[09-Mar-2021 07:09:42 UTC] PHP Warning:  scandir(): (errno 2): No such file or directory in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 6
+[09-Mar-2021 07:09:42 UTC] PHP Warning:  Invalid argument supplied for foreach() in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 7
+[09-Mar-2021 07:09:52 UTC] PHP Warning:  scandir(c:/laragon/www/hello6.com,c:/laragon/www/hello6.com): The system cannot find the file specified. (code: 2) in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 6
+[09-Mar-2021 07:09:52 UTC] PHP Warning:  scandir(c:/laragon/www/hello6.com): failed to open dir: No such file or directory in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 6
+[09-Mar-2021 07:09:52 UTC] PHP Warning:  scandir(): (errno 2): No such file or directory in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 6
+[09-Mar-2021 07:09:52 UTC] PHP Warning:  Invalid argument supplied for foreach() in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 7
+[09-Mar-2021 07:09:52 UTC] PHP Warning:  scandir(c:/laragon/www/hello7.com,c:/laragon/www/hello7.com): The system cannot find the file specified. (code: 2) in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 6
+[09-Mar-2021 07:09:52 UTC] PHP Warning:  scandir(c:/laragon/www/hello7.com): failed to open dir: No such file or directory in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 6
+[09-Mar-2021 07:09:52 UTC] PHP Warning:  scandir(): (errno 2): No such file or directory in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 6
+[09-Mar-2021 07:09:52 UTC] PHP Warning:  Invalid argument supplied for foreach() in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 7
+[09-Mar-2021 07:09:52 UTC] PHP Warning:  scandir(c:/laragon/www/hello11.com,c:/laragon/www/hello11.com): The system cannot find the file specified. (code: 2) in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 6
+[09-Mar-2021 07:09:52 UTC] PHP Warning:  scandir(c:/laragon/www/hello11.com): failed to open dir: No such file or directory in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 6
+[09-Mar-2021 07:09:52 UTC] PHP Warning:  scandir(): (errno 2): No such file or directory in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 6
+[09-Mar-2021 07:09:52 UTC] PHP Warning:  Invalid argument supplied for foreach() in C:\laragon\www\assistup\common_server\panel\web\views\directory_size.php on line 7
+[09-Mar-2021 07:10:07 UTC] PHP Notice:  Trying to access array offset on value of type bool in C:\laragon\www\assistup\common_server\panel\web\models\account.php on line 16
+[09-Mar-2021 07:10:14 UTC] PHP Warning:  fopen(C:/JP-Secure/SiteGuard Lite/conf/waf/sig_custom.txt): failed to open stream: No such file or directory in C:\laragon\www\assistup\common_server\panel\web\models\siteguard.php on line 51
+[09-Mar-2021 07:10:14 UTC] PHP Warning:  fclose() expects parameter 1 to be resource, bool given in C:\laragon\www\assistup\common_server\panel\web\models\siteguard.php on line 54
+[09-Mar-2021 07:10:14 UTC] PHP Warning:  Invalid argument supplied for foreach() in C:\laragon\www\assistup\common_server\panel\web\models\siteguard.php on line 204
+[09-Mar-2021 07:10:24 UTC] PHP Notice:  Trying to access array offset on value of type bool in C:\laragon\www\assistup\common_server\panel\web\models\mysql.php on line 88

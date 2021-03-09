@@ -44,17 +44,11 @@ $domain = $_COOKIE["d"];
                                         <div class="col-sm-8">
                                           <input type="text" class="form-control" id="ftpuser" name="ftp_user" placeholder="1-14文字、半角英数字">
                                         </div>
-                                        <div class="col-sm-1 mt-2">
-                                            <a href="javascript:;" data-toggle="modal" data-target="#ftpUserModal"><i class="fas fa-pencil-alt"></i></a>
-                                        </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="pass_word" class="col-sm-3 col-form-label">パスワード</label>
                                         <div class="col-sm-8">
                                           <input type="password" class="form-control" id="pass_word" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
-                                        </div>
-                                        <div class="col-sm-1 mt-2">
-                                            <a href="" data-toggle="modal" data-target="#passwordModal"><i class="fas fa-pencil-alt"></i></a>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -122,85 +116,36 @@ $domain = $_COOKIE["d"];
             </div>
         </div>
 
-
-        <!--Start ftp user Modal -->
-            <div class="modal fade" id="ftpUserModal" tabindex="-1" role="dialog" aria-labelledby="ftpUserModalTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header border-less">
-                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change FTP User</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body row border-less">
-                            <label for="ftpuser2" class="col-sm-4 col-form-label">FTPユーザー</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="ftpuser2" value="FTPユーザー">
-                            </div>
-                        </div>
-                        <div class="modal-footer border-less">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--End ftp user Modal -->
-
-            <!--Start password Modal -->
-            <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header border-less">
-                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change Password</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body row border-less">
-                            <label for="pass_word2" class="col-sm-4 col-form-label">パスワード</label>
-                            <div class="col-sm-8">
-                                <input type="password" class="form-control" id="pass_word2" value="パスワード">
-                            </div>
-                        </div>
-                        <div class="modal-footer border-less">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--End password Modal -->
-
             <!--Start ftp information in use Modal -->
             <div class="modal fade" id="ftpUseInformationModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <div class="modal-header border-less">
-                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change FTP Information Password</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body border-less">
-                            <div class="model-line-spacing row">
-                                <label for="user_name2" class="col-sm-4 col-form-label">ユーザー名</label>
-                                <div class="col-sm-8">
-                                    <input type="text" readonly class="form-control" id="user_name2" value="ユーザー名">
+                        <form action="" method="" id="ftp-password">
+                            <div class="modal-header border-less">
+                                <h5 class="modal-title" id="ipAddressNameModalTitle">Change FTP Information Password</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body border-less">
+                                <div class="model-line-spacing row">
+                                    <label for="user_name2" class="col-sm-4 col-form-label">ユーザー名</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" readonly class="form-control" id="user_name2" value="ユーザー名">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label for="pass_word3" class="col-sm-4 col-form-label">パスワード</label>
+                                    <div class="col-sm-8">
+                                        <input type="password" class="form-control" id="pass_word3" name="pass_word2" value="パスワード">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <label for="pass_word3" class="col-sm-4 col-form-label">パスワード</label>
-                                <div class="col-sm-8">
-                                    <input type="password" class="form-control" id="pass_word3" value="パスワード">
-                                </div>
+                            <div class="modal-footer border-less">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
-                        </div>
-                        <div class="modal-footer border-less">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

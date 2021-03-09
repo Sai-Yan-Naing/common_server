@@ -17,10 +17,10 @@ $domain = $_COOKIE["d"];
                     <div class="icon-align"><span class="domain-icon"><i class="fas fa-desktop"></i></span></div><br>
                     <div class="icon-align"><span class="text-center"><?php echo $_COOKIE['d']; ?></span></div><br>
                     <div class="icon-align"><span class="text-center">ドメイン</span></div><br>
-                    <div class="icon-align"><span class="text-center">メール設定</span></div><br>
-                    <div class="icon-align"><span class="text-center"><a href="mail_information.php">メール接続情報</a></span></div><br>
-                    <div class="icon-align"><span class="text-center">WEBメール</span></div><br>
-                    <div class="icon-align"><span class="text-center">メーリングリスト</span></div><br>
+                    <div class="icon-align"><a href="">メール設定</a></div><br>
+                    <div class="icon-align"><a href="mail_connection.php">メール接続情報</a></div><br>
+                    <div class="icon-align"><a href="">WEBメール</a></div><br>
+                    <div class="icon-align"><a href="">メーリングリスト</a></div><br>
                 </div>
                 <div class="col-sm-10">
                     <h6 class="wserver">Winserver Controlpanel Share server</h6>
@@ -138,22 +138,24 @@ $domain = $_COOKIE["d"];
             <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <div class="modal-header border-less">
-                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change Password</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body row border-less">
-                            <label for="pass_word2" class="col-sm-4 col-form-label">パスワード</label>
-                            <div class="col-sm-8">
-                                <input type="password" class="form-control" id="pass_word2" value="パスワード">
+                        <form action="" id="mailSetting-edit">
+                            <div class="modal-header border-less">
+                                <h5 class="modal-title" id="ipAddressNameModalTitle">Change Password</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                        </div>
-                        <div class="modal-footer border-less">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                            <div class="modal-body row border-less">
+                                <label for="pass_word2" class="col-sm-4 col-form-label">パスワード</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" id="pass_word2" name="password2" value="パスワード">
+                                </div>
+                            </div>
+                            <div class="modal-footer border-less">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

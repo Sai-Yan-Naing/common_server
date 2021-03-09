@@ -52,26 +52,17 @@ $domain = $_COOKIE["d"];
                                         <div class="col-sm-7">
                                           <input type="text" class="form-control" id="dbname" name="db_name" placeholder="8～70文字、半角英数記号の組み合わせ">
                                         </div>
-                                        <div class="col-sm-1 mt-3">
-                                            <a href="javascript:;" data-toggle="modal" data-target="#databaseNameModal"><i class="fas fa-pencil-alt"></i></a>
-                                        </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="username" class="col-sm-3 col-form-label">ユーザー名</label>
                                         <div class="col-sm-7">
                                           <input type="text" class="form-control" id="username" name="user_name" placeholder="8～70文字、半角英数記号の組み合わせ">
                                         </div>
-                                        <div class="col-sm-1 mt-3">
-                                            <a href="javascript:;" data-toggle="modal" data-target="#userNameModal"><i class="fas fa-pencil-alt"></i></a>
-                                        </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="pass_word" class="col-sm-3 col-form-label">パスワード</label>
                                         <div class="col-sm-7">
                                           <input type="password" class="form-control" id="pass_word" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
-                                        </div>
-                                        <div class="col-sm-1 mt-3">
-                                            <a href="javascript:;" data-toggle="modal" data-target="#passwordModal"><i class="fas fa-pencil-alt"></i></a>
                                         </div>
                                     </div>
                                     <div class="form-group text-center">
@@ -116,105 +107,29 @@ $domain = $_COOKIE["d"];
                 </div>
             </div>
 
-            <!-- Start database addition Modals -->
-
-            <!--Start database name Modal -->
-            <div class="modal fade" id="databaseNameModal" tabindex="-1" role="dialog" aria-labelledby="databaseNameModalTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header border-less">
-                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change Database Name</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body row border-less">
-                            <label for="dbname3" class="col-sm-4 col-form-label">データベース名</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="dbname3" value="データベース名">
-                            </div>
-                        </div>
-                        <div class="modal-footer border-less">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--End database name Modal -->
-            <!--Start username Modal -->
-            <div class="modal fade" id="userNameModal" tabindex="-1" role="dialog" aria-labelledby="userNameModalTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header border-less">
-                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change User Name</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body row border-less">
-                            <label for="username3" class="col-sm-4 col-form-label">ユーザー名</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="username3" value="ユーザー名">
-                            </div>
-                        </div>
-                        <div class="modal-footer border-less">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--End username Modal -->
-
-            <!--Start password Modal -->
-            <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header border-less">
-                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change Password</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body row border-less">
-                            <label for="pass_word3" class="col-sm-4 col-form-label">パスワード</label>
-                            <div class="col-sm-8">
-                                <input type="password" class="form-control" id="pass_word3" value="パスワード">
-                            </div>
-                        </div>
-                        <div class="modal-footer border-less">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--End password Modal -->
-            <!-- End database addition Modals -->
-
             <!--Start database in use password Modal -->
             <div class="modal fade" id="usePasswordModal" tabindex="-1" role="dialog" aria-labelledby="usePasswordModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header border-less">
-                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change Password</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body row border-less">
-                            <label for="pass_word4" class="col-sm-4 col-form-label">パスワード</label>
-                            <div class="col-sm-8">
-                                <input type="password" class="form-control" id="pass_word4" value="パスワード">
+                    <form action="" id="database-use">
+                        <div class="modal-content">
+                            <div class="modal-header border-less">
+                                <h5 class="modal-title" id="ipAddressNameModalTitle">Change Password</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body row border-less">
+                                <label for="pass_word4" class="col-sm-4 col-form-label">パスワード</label>
+                                <div class="col-sm-8">
+                                    <input type="password" class="form-control" id="pass_word4" name="password2" value="パスワード">
+                                </div>
+                            </div>
+                            <div class="modal-footer border-less">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
                         </div>
-                        <div class="modal-footer border-less">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
             <!--End database in use password Modal -->

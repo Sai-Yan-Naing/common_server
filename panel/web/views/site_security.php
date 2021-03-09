@@ -42,9 +42,9 @@ $domain = $_COOKIE["d"];
                                 <div class="form-group row">
                                     <label for="common-name" class="col-sm-2 col-form-label">コモンネーム</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="common-name" name="common_name" placeholder="例：www.assistup.co.jp" readonly>
+                                        <input type="text" class="form-control" id="common-name" name="common_name" placeholder="例：www.assistup.co.jp">
                                     </div>
-                                    <a href="#" data-toggle="modal" data-target="#nameModal"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
+                                    <a href="#" data-toggle="modal" data-target="#"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
                                 </div>
                                 
                                 <div class="form-group row">
@@ -56,33 +56,33 @@ $domain = $_COOKIE["d"];
                                 <div class="form-group row">
                                     <label for="prefecture " class="col-sm-2 col-form-label">都道府県（Ｓ）</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="prefecture" name="prefecture" placeholder="例：Osaka" readonly>
+                                        <input type="text" class="form-control" id="prefecture" name="prefecture" placeholder="例：Osaka">
                                     </div>
-                                    <a href="#" data-toggle="modal" data-target="#prefectureModal"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
+                                    <a href="#" data-toggle="modal" data-target="#"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
                                 </div>
                                 
                                 <div class="form-group row">
                                     <label for="municipality" class="col-sm-2 col-form-label">市区町村（Ｌ）</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="municipality" name="municipality" placeholder="例：Osaka-si" readonly>
+                                        <input type="text" class="form-control" id="municipality" name="municipality" placeholder="例：Osaka-si">
                                     </div>
-                                    <a href="#" data-toggle="modal" data-target="#municipalityModal"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
+                                    <a href="#" data-toggle="modal" data-target="#"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
                                 </div>
                                 
                                 <div class="form-group row">
                                     <label for="organization" class="col-sm-2 col-form-label">組織名（Ｏ）</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="organization" name="organization" placeholder="例：assistup Inc. " readonly>
+                                        <input type="text" class="form-control" id="organization" name="organization" placeholder="例：assistup Inc. ">
                                     </div>
-                                    <a href="#" data-toggle="modal" data-target="#organizationModal"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
+                                    <a href="#" data-toggle="modal" data-target="#"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
                                 </div>
                                 
                                 <div class="form-group row">
                                     <label for="department" class="col-sm-2 col-form-label">部署名（ＯＵ）</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="department" name="department" placeholder="例：System Development Section" readonly>
+                                        <input type="text" class="form-control" id="department" name="department" placeholder="例：System Development Section">
                                     </div>
-                                    <a href="#" data-toggle="modal" data-target="#departmentModal"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
+                                    <a href="#" data-toggle="modal" data-target="#"><span class="col-sm-1 mt-1"><i class="fas fa-pencil-alt"></i></span></a>
                                 </div>
                                 
                                 <div class="form-group row">
@@ -394,24 +394,26 @@ $domain = $_COOKIE["d"];
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body border-less">
-                            <div class="model-line-spacing row">
-                                <label for="user" class="col-sm-4 col-form-label">ユーザー名</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="user" name="user" value="CKM" readonly>
+                        <form action="" method="post" id="edit-dir-information" />
+                            <div class="modal-body border-less">
+                                <div class="model-line-spacing form-group row">
+                                    <label for="user" class="col-sm-4 col-form-label">ユーザー名</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="user" name="user" value="CKM" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="password" class="col-sm-4 col-form-label">パスワード</label>
+                                    <div class="col-sm-8">
+                                        <input type="password" class="form-control" id="password" name="password" value="G5wkzXimeHtky5Jt">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <label for="password" class="col-sm-4 col-form-label">パスワード</label>
-                                <div class="col-sm-8">
-                                    <input type="password" class="form-control" id="password" name="password" value="G5wkzXimeHtky5Jt">
-                                </div>
+                            <div class="form-group modal-footer border-less">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
-                        </div>
-                        <div class="modal-footer border-less">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

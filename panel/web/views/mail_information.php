@@ -17,9 +17,9 @@ $domain = $_COOKIE["d"];
                     <div class="icon-align"><span class="domain-icon"><i class="fas fa-desktop"></i></span></div><br>
                     <div class="icon-align"><span class="text-center"><?php echo $_COOKIE['d']; ?></span></div><br>
                     <div class="icon-align"><span class="text-center">ドメイン</span></div><br>
-                    <div class="icon-align"><span class="text-center">ご契約情報</span></div><br>
-                    <div class="icon-align"><span class="text-center">ドメイン</span></div><br>
-                    <div class="icon-align"><span class="text-center">自動バックアップ</span></div><br>
+                    <div class="icon-align"><a href="">ご契約情報</a></div><br>
+                    <div class="icon-align"><a href="mail_information.php">ドメイン</a></div><br>
+                    <div class="icon-align"><a href="backup.php">自動バックアップ</a></div><br>
                 </div>
                 <div class="col-sm-10">
                     <h6 class="wserver">Winserver Controlpanel Share server</h6>

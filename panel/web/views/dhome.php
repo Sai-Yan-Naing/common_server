@@ -305,30 +305,32 @@ $domain = $_COOKIE["d"];
             <div class="modal fade" id="statusURLModal" tabindex="-1" role="dialog" aria-labelledby="statusURLModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <div class="modal-header border-less">
-                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change IP Address Name</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body border-less">
-                            <div class="model-line-spacing row">
-                                <label for="status-code2" class="col-sm-4 col-form-label">ステータスコード</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="status-code2" value="ステータスコード">
+                        <form action="" id="changeIp">
+                            <div class="modal-header border-less">
+                                <h5 class="modal-title" id="ipAddressNameModalTitle">Change IP Address Name</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body border-less">
+                                <div class="model-line-spacing row">
+                                    <label for="status-code2" class="col-sm-4 col-form-label">ステータスコード</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="status-code2" name="status_code" value="401">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label for="url-spec2" class="col-sm-4 col-form-label">URL指定</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="url-spec2" name="url_spec" value="ドキュメントルートのカスタムエラーページPATH">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <label for="url-spec2" class="col-sm-4 col-form-label">URL指定</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="url-spec2" name="ip-address" value="URL指定">
-                                </div>
+                            <div class="modal-footer border-less">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
-                        </div>
-                        <div class="modal-footer border-less">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -338,22 +340,24 @@ $domain = $_COOKIE["d"];
             <div class="modal fade" id="targetDirectoryModal" tabindex="-1" role="dialog" aria-labelledby="targetDirectoryModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <div class="modal-header border-less">
-                            <h5 class="modal-title" id="ipAddressNameModalTitle">Change Target Directory</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body row border-less">
-                            <label for="target-dir2" class="col-sm-4 col-form-label">対象ディレクトリ</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="target-dir2" value="設定しているドキュメントルートを表示">
+                        <form action="" id="target-directory">
+                            <div class="modal-header border-less">
+                                <h5 class="modal-title" id="ipAddressNameModalTitle">Change Target Directory</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                        </div>
-                        <div class="modal-footer border-less">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                            <div class="modal-body row border-less">
+                                <label for="target-dir2" class="col-sm-4 col-form-label">対象ディレクトリ</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="target-dir2" name="target_dir" value="設定しているドキュメントルートを表示">
+                                </div>
+                            </div>
+                            <div class="modal-footer border-less">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

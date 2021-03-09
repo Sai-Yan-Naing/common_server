@@ -166,12 +166,12 @@ $(function() {
         messages: {
             db_name: {
                 required: "Please enter database name",
-                minlength: "Your password must be at least 8 characters long",
+                minlength: "Database name must be at least 8 characters long",
                 maxlength: "Usernamr must be maximum 70 characters long",
             },
             user_name: {
                 required: "Please enter user name",
-                minlength: "Your password must be at least 8 characters long",
+                minlength: "Username must be at least 8 characters long",
                 maxlength: "Usernamr must be maximum 70 characters long",
             },
             password: {
@@ -279,6 +279,9 @@ $(function() {
         }
     });
 
+
+
+
     // ------ftp js---------
 
     $("form[id='ftpUser']").validate({
@@ -363,17 +366,28 @@ $(function() {
 
     // -----------------mail information------------------
 
-    $("form[id='application']").validate({
+    jQuery.validator.addMethod("emailordomain", function(value, element) {
+        return this.optional(element) || /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(value) || /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/.test(value);
+    }, "Please must fill include(.)");
 
+
+    jQuery.validator.setDefaults({
+        debug: true,
+        success: "valid"
+    });
+
+    $("form[id='application']").validate({
         rules: {
             domain_name: {
                 required: true,
+                emailordomain: true,
             },
             domain_type: {
                 required: true,
             },
             auth_code: {
                 required: true,
+                digits: true,
             }
         },
         // Specify validation error messages
@@ -386,6 +400,7 @@ $(function() {
             },
             auth_code: {
                 required: "Please enter auth code",
+                digits: "Please fill only integer"
             }
         },
         submitHandler: function(form) {
@@ -398,6 +413,7 @@ $(function() {
         rules: {
             domain_name: {
                 required: true,
+                emailordomain: true,
             },
             domain_type: {
                 required: true,
@@ -417,17 +433,171 @@ $(function() {
         }
     });
 
-    // For server information (contract_information.php)
-    $("form[id='server-information']").validate({
+    // For Edit Dir Information
+    $("form[id='edit-dir-information']").validate({
         rules: {
-            capacity_used: {
+            password: {
+                required: true,
+                minlength: 8,
+                maxlength: 70,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            password: {
+                required: "Please enter password",
+                minlength: "Your password must be at least 8 characters long",
+                maxlength: "Your password must be maximum 70 characters long",
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+    // For Edit server information (contract_information.php)
+    $("form[id='edit-server-information']").validate({
+        rules: {
+            hostname: {
+                required: true,
+            },
+            ip_address: {
                 required: true,
             }
         },
         // Specify validation error messages
         messages: {
-            capacity_used: {
-                required: "Please enter disk capacity used",
+            hostname: {
+                required: "Please enter hostname",
+            },
+            ip_address: {
+                required: "Please enter ip address",
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+    // -----------status code and url eidt validate---------
+
+    $("form[id='changeIp']").validate({
+        rules: {
+            status_code: {
+                required: true,
+                digits: true
+            },
+            url_spec: {
+                required: true,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            status_code: {
+                required: "Please enter status code",
+                digits: "Please must fill integer"
+            },
+            url_spec: {
+                required: "Please enter url specification",
+
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+    // -----------change target directory edit validate---------
+
+    $("form[id='target-directory']").validate({
+        rules: {
+            target_dir: {
+                required: true,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            target_dir: {
+                required: "Please enter document root",
+
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+    // -----------authenticated user edit validate---------
+
+    $("form[id='changePassword']").validate({
+        rules: {
+            pass_word: {
+                required: true,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            pass_word: {
+                required: "Please enter password",
+
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+    // -----------ftp edit validate---------
+
+    $("form[id='ftp-password']").validate({
+        rules: {
+            pass_word2: {
+                required: true,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            pass_word2: {
+                required: "Please enter password",
+
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+    // -----------database in use edit validate---------
+
+    $("form[id='database-use']").validate({
+        rules: {
+            password2: {
+                required: true,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            password2: {
+                required: "Please enter password",
+
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+    // -----------mail-setting edit validate---------
+
+    $("form[id='mailSetting-edit']").validate({
+        rules: {
+            password2: {
+                required: true,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            password2: {
+                required: "Please enter password",
 
             }
         },
@@ -437,3 +607,12 @@ $(function() {
     });
 
 });
+
+// dhome add button click
+
+function addBasic() {
+    var foo = document.getElementById('basicSetting').innerHTML;
+    foo++;
+    document.getElementById('basicSetting').innerHTML = foo;
+    // alert("Hello World"); 
+}

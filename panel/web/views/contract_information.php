@@ -18,7 +18,7 @@ $domain = $_COOKIE["d"];
                     <div class="icon-align"><span class="text-center"><?php echo $_COOKIE['d']; ?></span></div><br>
                     <div class="m-40"><span>ドメイン</span></div><br>
                     <div class="m-40"><a href="#"><span>ご契約情報</span></a></div><br>
-                    <div class="m-40"><a href="mail_connection.php"><span >ドメイン</span></a></div><br>
+                    <div class="m-40"><a href="mail_information.php"><span >ドメイン</span></a></div><br>
                     <div class="m-40"><a href="#"><span>自動バックアップ</span></a></div><br>
                 </div>
                 <div class="col-sm-10">
@@ -48,7 +48,7 @@ $domain = $_COOKIE["d"];
                                 </div>
                                 <div class="form-group row">
                                     <label for="capacity-used" class="col-sm-3 col-form-label">使用ディスク容量</label>
-                                    <div class="col-sm-4"> <input type="text" class="form-control" id="capacity-used" name="capacity_used"></div>
+                                    <div class="col-sm-4" id="chartContainer" style="height: 300px; width: 100%;"> </div>
                                     <div class="col-sm-4"><span class="gb"> 〇〇ＧＢ </span></div>
                                 </div>
                             
@@ -58,7 +58,6 @@ $domain = $_COOKIE["d"];
                                 <div class="form-group row">
                                     <div class="col-sm-1 col-form-label">タイプ</div>
                                     <div class="col-sm-2 col-form-label text-center">ホスト名</div>
-                                    <div class="col-sm-1"></div>
                                     <div class="col-sm-2 col-form-label">ドメイン名</div>
                                     <div class="col-sm-3 col-form-label">ＩＰアドレス/ドメイン名</div>
                                     <div class="col-sm-1"></div>
@@ -66,7 +65,6 @@ $domain = $_COOKIE["d"];
                                 <div class="form-group row">
                                     <div class="col-sm-1 col-form-label">A</div>
                                     <div class="col-sm-2 col-form-label"><input type="text" class="form-control" id="hostname" name="hostname" value="mail" readonly></div>
-                                    <div class="col-sm-1 mt-2"><a href="#" data-toggle="modal" data-target="#hostnameModal"><i class="fas fa-pencil-alt"></i> </a></div>
                                     <div class="col-sm-2 col-form-label">ドメイン名</div>
                                     <div class="col-sm-3 col-form-label text-center"><input type="text" class="form-control" id="ip_address" name="ip-address" value="ＩＰアドレス" readonly></div>
                                     <div class="col-sm-1 mt-2"><a href="#" data-toggle="modal" data-target="#ipAddressNameModal"><i class="fas fa-pencil-alt"></i> </a></div>
@@ -74,7 +72,6 @@ $domain = $_COOKIE["d"];
                                 <div class="form-group row">
                                     <div class="col-sm-1 col-form-label">A</div>
                                     <div class="col-sm-2 col-form-label"><input type="text" class="form-control" id="hostname" name="hostname" value="www" readonly></div>
-                                    <div class="col-sm-1 mt-2"><a href="#" data-toggle="modal" data-target="#hostnameModal"><i class="fas fa-pencil-alt"></i> </a></div>
                                     <div class="col-sm-2 col-form-label">ドメイン名</div>
                                     <div class="col-sm-3 col-form-label text-center"><input type="text" class="form-control" id="ip_address" name="ip-address" value="ＩＰアドレス" readonly></div>
                                     <div class="col-sm-1 mt-2"><a href="#" data-toggle="modal" data-target="#ipAddressNameModal"><i class="fas fa-pencil-alt"></i> </a></div>
@@ -82,7 +79,6 @@ $domain = $_COOKIE["d"];
                                 <div class="form-group row">
                                     <div class="col-sm-1 col-form-label">A</div>
                                     <div class="col-sm-2 col-form-label"><input type="text" class="form-control" id="hostname" name="hostname" value="" readonly></div>
-                                    <div class="col-sm-1 mt-2"><a href="#" data-toggle="modal" data-target="#hostnameModal"><i class="fas fa-pencil-alt"></i> </a></div>
                                     <div class="col-sm-2 col-form-label">ドメイン名</div>
                                     <div class="col-sm-3 col-form-label text-center"><input type="text" class="form-control" id="ip_address" name="ip-address" value="ＩＰアドレス" readonly></div>
                                     <div class="col-sm-1 mt-2"><a href="#" data-toggle="modal" data-target="#ipAddressNameModal"><i class="fas fa-pencil-alt"></i> </a></div>
@@ -90,7 +86,6 @@ $domain = $_COOKIE["d"];
                                 <div class="form-group row">
                                     <div class="col-sm-1 col-form-label">A</div>
                                     <div class="col-sm-2 col-form-label"><input type="text" class="form-control" id="hostname" name="hostname" value="" readonly></div>
-                                    <div class="col-sm-1 mt-2"><a href="#" data-toggle="modal" data-target="#hostnameModal"><i class="fas fa-pencil-alt"></i> </a></div>
                                     <div class="col-sm-2 col-form-label">ドメイン名</div>
                                     <div class="col-sm-3 col-form-label text-center"><input type="text" class="form-control" id="ip_address" name="ip-address" value="ＩＰアドレス" readonly></div>
                                     <div class="col-sm-1 mt-2"><a href="#" data-toggle="modal" data-target="#ipAddressNameModal"><i class="fas fa-pencil-alt"></i> </a></div>
@@ -109,31 +104,6 @@ $domain = $_COOKIE["d"];
             </div>
 
 
-
-            <!--Start Hostname Modal -->
-            <div class="modal fade" id="hostnameModal" tabindex="-1" role="dialog" aria-labelledby="hostnameModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header border-less">
-                            <h5 class="modal-title" id="hostnameModalTitle">Change Hostname</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body row border-less">
-                            <label for="hostname" class="col-sm-3 col-form-label">ホスト名</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" id="hostname" name="hostname" value="mail">    
-                            </div>
-                        </div>
-                        <div class="modal-footer border-less">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--End Hostname Modal -->
             <!--Start IP Address Name Modal -->
             <div class="modal fade" id="ipAddressNameModal" tabindex="-1" role="dialog" aria-labelledby="ipAddressNameModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -144,25 +114,59 @@ $domain = $_COOKIE["d"];
                             <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body row border-less">
-                            <label for="ip-address" class="col-sm-7 col-form-label">ＩＰアドレス/ドメイン名</label>
-                            <div class="col-sm-5">
-                                <input type="text" class="form-control" id="ip_address" name="ip-address" value="ＩＰアドレス">
+                        <form action="" method="post" id="edit-server-information" />
+                            <div class="modal-body border-less">
+                                <div class="model-line-spacing form-group row">
+                                    <label for="hostname" class="col-sm-7 col-form-label">ホスト名</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" id="hostname" name="hostname" value="mail">    
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="ip-address" class="col-sm-7 col-form-label">ＩＰアドレス/ドメイン名</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" class="form-control" id="ip-address" name="ip_address" value="ＩＰアドレス">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="modal-footer border-less">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                            <div class="form-group modal-footer border-less">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
             <!--End IP Address Name Modal -->
         </div>
         <!--End of Page Content  -->
-
-
     </div>
     <!-- End of Wrapper  -->
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var chart = new CanvasJS.Chart("chartContainer",
+            {
+            axisY: {
+                maximum: 1000,
+                minimum:100
+            },
+            data: [
+            {
+                type: "bar",
+                showInLegend: true,
+                legendText: "Data Usage",
+                color: "blue",
+                dataPoints: [
+                { y: 957, label: "Disk capacity used"},
+        
+                ]
+            }
+            ]
+            });
+
+        chart.render();
+        }
+    </script>
 
 <?php require("views/footer.php") ?>
