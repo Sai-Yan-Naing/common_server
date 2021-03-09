@@ -195,13 +195,13 @@ $domain = $_COOKIE["d"];
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="status-code">ステータスコード</label>
-                                        <input type="text" readonly class="form-control" id="status-code">
+                                        <input type="text" readonly class="form-control" id="status-code" value="401">
                                     </div>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="url-spec">URL指定</label>
-                                        <input type="text" readonly class="form-control" id="url-spec">
+                                        <input type="text" readonly class="form-control" id="url-spec" value="ドキュメントルートのカスタムエラーページPATH">
                                     </div>
                                 </div>
                                 <div class="col-sm-1 mt-5">
@@ -212,13 +212,13 @@ $domain = $_COOKIE["d"];
                             <div class="row">
                                 <label for="basic-auth" class="col-sm-2 col-form-label">BASIC認</label>
                                 <div class="col-sm-5">
-                                    <div class="form-group">
-                                        <a href="" class="form-control add-basic-auth" id=""><span class="add-icon"><i class="fas fa-plus"></i></span>BASIC認証追加</a>
+                                    <div class="form-group added-basic">
+                                        <a href="javascript:;" type="button" class="form-control add-basic-auth" onclick="addBasic()"><span class="add-icon"><i class="fas fa-plus"></i></span>BASIC認証追加</a>
                                     </div>
                                 </div>
                             </div>
                             <!-- basic setting1 -->
-                            <button class="basic-setting btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseDirectory" aria-expanded="false" aria-controls="collapseDirectory"><span class="down-icon"><i class="fas fa-angle-down"></i></span>BASIC認証設定1</button>
+                            <button class="basic-setting btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseDirectory" aria-expanded="false" aria-controls="collapseDirectory"><span class="down-icon"><i class="fas fa-angle-down"></i></span>BASIC認証設定<span id="basicSetting">1</span></button>
 
                             <div class="collapse data-item" id="collapseDirectory">
                                 <div class="row">
@@ -237,12 +237,13 @@ $domain = $_COOKIE["d"];
                                 <form action="" method="post" id="passChange">
                                     <div class="row">
                                         <div class="form-group col-sm-3">
-                                            <label for="user">ユーザー名</label>
-                                            <input type="text" readonly class="form-control-plaintext" id="user" value="User1">
+                                            <label for="">ユーザー名</label>
+                                            <div id="user">User1</div>
                                         </div>
                                         <div class="form-group col-sm-3">
                                             <label for="pass_word">パスワード</label>
-                                            <input type="password" readonly class="form-control-plaintext" id="pass_word" value="PASSWORD1">
+                                            <div type="password">Password1</div>
+                                            <!-- <input type="password" readonly class="form-control-plaintext" id="pass_word" value="PASSWORD1"> -->
                                         </div>
                                         <div class="form-group col-sm-3">
                                             <label for="password2">パスワード変更</label>
@@ -255,7 +256,7 @@ $domain = $_COOKIE["d"];
                                     <div class="row">
                                         <div class="col-sm-3">
                                             <div class="form-group">
-                                                <a href="" type="submit" class="form-control add-user" id=""><span class="add-icon"><i class="fas fa-plus"></i></span>User追加</a>
+                                                <a href="javascript:;" onclick="addUser()" type="submit" class="form-control add-user" id=""><span class="add-icon"><i class="fas fa-plus"></i></span>User追加</a>
                                             </div>
                                         </div>
                                     </div>
