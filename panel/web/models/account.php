@@ -74,7 +74,7 @@ class Account{
 
 		try {
 			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
-			$dstmt = $pdo_account->prepare("SELECT COUNT(domain) as cnt FROM web_account WHERE `domain` = ? AND `password` = ? AND stopped = 0");
+			$dstmt = $pdo_account->prepare("SELECT COUNT(domain) as cnt FROM web_account WHERE `domain` = ? AND `password` = ?");
 			$dstmt->execute(array($domain_userid,$pass_encrypted));
 			$ddata = $dstmt->fetch(PDO::FETCH_ASSOC);
 
@@ -236,6 +236,7 @@ class Account{
 		// $this->addFtp($ftp_user, $password, $_COOKIE["d"], $domain, $web_dir);
 		// die();
 		$pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
+		$site_init=1;
 
 		try {
 			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
@@ -246,18 +247,23 @@ class Account{
 			$data = $stmt->fetch(PDO::FETCH_ASSOC);
 
 			if ($data['cnt'] <= 0) {
-				$stmt_create = $pdo_account->prepare("INSERT INTO web_account (`domain`, `password`, `user`, `web_dir`, `customer_id`, `token`) VALUES (:domain, :password, :user, :web_dir, :customer_id, :token)") or die("insert error <br />". print_r($pdo_account->errorInfo(), true));
+				$stmt_create = $pdo_account->prepare("INSERT INTO web_account (`domain`, `password`, `user`, `stopped`, `appstopped`, `web_dir`, `customer_id`, `token`) VALUES (:domain, :password, :user, :stopped, :appstopped, :web_dir, :customer_id, :token)") or die("insert error <br />". print_r($pdo_account->errorInfo(), true));
 				$stmt_create->bindParam(":domain", $domain, PDO::PARAM_STR);
 				$stmt_create->bindParam(":password", $pass_encrypted, PDO::PARAM_STR);
 				$stmt_create->bindParam(":user", $domain, PDO::PARAM_STR);
+				$stmt_create->bindParam(":stopped", $site_init, PDO::PARAM_INT);
+				$stmt_create->bindParam(":appstopped", $site_init, PDO::PARAM_INT);
 				$stmt_create->bindParam(":web_dir", $web_dir, PDO::PARAM_STR);
 				$stmt_create->bindParam(":customer_id", $_COOKIE["d"], PDO::PARAM_STR);
-				// $stmt_create->bindParam(":status", 1, PDO::PARAM_INT);
 				$stmt_create->bindParam(":token", $token, PDO::PARAM_STR);
 				$stmt_create->execute();
 				$pdo_account = NULL;
 
 				$root_dir = 'c:/laragon/www/'.$web_dir.'/';
+				$physicalpath='c:/laragon/www/';
+				$physicalpath=str_replace('/', '\rev_del', "c:/laragon/www/");
+				$physicalpath=str_replace('rev_del', '', "$physicalpath");
+				$physicalpath=$physicalpath.$web_dir;
 			   if (!file_exists ($root_dir))
 			      {
 			      	  // $last_id = $stmt_create->lastInsertId();
@@ -266,6 +272,17 @@ class Account{
 					  $this->addDefaultFile($domain,$password,$web_dir);
 			          
 				  }
+
+				 Shell_Exec ("%windir%\system32\inetsrv\appcmd.exe add site /name:$domain /bindings:http://$domain:80 /physicalpath:$physicalpath");
+				 Shell_Exec ("%windir%\system32\inetsrv\appcmd.exe add apppool /name:$domain");
+				 Shell_Exec ("%windir%\system32\inetsrv\appcmd.exe set config /section:applicationPools /[name=$domain].processModel.identityType:ApplicationPoolIdentity");
+				 Shell_Exec ("%windir%\system32\inetsrv\appcmd.exe set site /site.name:$domain /[path='/'].applicationPool:$domain");
+
+				 // add to host file
+				 $fp = fopen('C:\Windows\System32\drivers\etc\hosts','a');
+				fwrite($fp, "127.0.0.1      $domain" . "\n");  
+				fclose($fp);
+
 				// die();
 				return true;
 				// header('Location: /home.php');
@@ -531,10 +548,10 @@ class Account{
 
 	function addDefaultFile($username,$password,$web_dir)
 	{
-		$default_file = fopen("c:/laragon/www/".$web_dir."/index.txt", "w") or die("Unable to open file!");
-		$txt = "Welcome\n".$username."\n";
+		$default_file = fopen("c:/laragon/www/".$web_dir."/index.html", "w") or die("Unable to open file!");
+		$txt = "Welcome<br>".$username."<br>";
 		fwrite($default_file, $txt);
-		$txt = "Password\n".$password;
+		$txt = "Password<br>".$password;
 		fwrite($default_file, $txt);
 		fclose($default_file);
 	}
@@ -555,6 +572,114 @@ class Account{
 	  }
 
 	 }
+
+	 function Site($app, $status, $domain){
+		// $pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
+
+		try {
+			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+			// for customer
+			// $stmt = $pdo_account->prepare("SELECT * FROM customer WHERE `token` = ? AND `user_id` = ?  AND `status` = 0");
+			// $stmt->execute(array($token,$domain_userid));
+			// $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+			$dstmt = $pdo_account->prepare("SELECT COUNT(domain) as cnt FROM web_account WHERE `domain` = ?");
+			$dstmt->execute(array($domain));
+			$ddata = $dstmt->fetch(PDO::FETCH_ASSOC);
+			if($ddata['cnt'] ==1)
+			{
+				if($app=="site")
+				{
+					$stmt = $pdo_account->prepare("UPDATE web_account SET `stopped` = ? WHERE `domain` = ?");
+					$stmt->execute(array($status,$domain));
+				}else{
+					$stmt = $pdo_account->prepare("UPDATE web_account SET `appstopped` = ? WHERE `domain` = ?");
+					$stmt->execute(array($status,$domain));
+				}
+				return true;
+			}else{
+				return false;
+			}
+
+		} catch (PDOException $e) {
+			print('Error ' . $e->getMessage());
+			$error_message = "データベースへの接続エラーです。";
+			require("views/allerror.php");
+			$pdo_account = NULL;
+			die();
+		}
+	}
+
+	// error pages
+	function getErrorPages($domain)
+	{
+		try {
+			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+			// for customer
+			// $stmt = $pdo_account->prepare("SELECT * FROM customer WHERE `token` = ? AND `user_id` = ?  AND `status` = 0");
+			// $stmt->execute(array($token,$domain_userid));
+			// $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+			$epstmt = $pdo_account->prepare("SELECT * FROM error_pages WHERE `domain` = ?");
+			$epstmt->execute(array($domain));
+			$epdata = $epstmt->fetchAll(PDO::FETCH_ASSOC);
+			return $epdata;
+
+
+		} catch (PDOException $e) {
+			print('Error ' . $e->getMessage());
+			$error_message = "データベースへの接続エラーです。";
+			require("views/allerror.php");
+			$pdo_account = NULL;
+			die();
+		}
+	}
+
+	function errorPages($domain, $new_error,$statuscode,$url_spec)
+	{
+		// $pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
+
+		try {
+			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+
+			// for domain
+			$stmt = $pdo_account->prepare("SELECT COUNT(statuscode) as cnt FROM error_pages WHERE `domain` = ? and `statuscode` = ?");
+			$stmt->execute(array($domain, $statuscode));
+			$data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+				if ($data['cnt'] <= 0) {
+					$stmt_create = $pdo_account->prepare("INSERT INTO error_pages (`domain`,`statuscode`, `url`) VALUES (:domain, :statuscode, :url)") or die("insert error <br />". print_r($pdo_account->errorInfo(), true));
+					$stmt_create->bindParam(":domain", $domain, PDO::PARAM_STR);
+					$stmt_create->bindParam(":statuscode", $statuscode, PDO::PARAM_STR);
+					$stmt_create->bindParam(":url", $url_spec, PDO::PARAM_STR);
+					// $stmt_create->execute();
+					$pdo_account = NULL;
+
+					// $root_dir = 'c:/laragon/www/'.$web_dir.'/';
+				 //   if (!file_exists ($root_dir))
+				 //      {
+				 //          mkdir($root_dir,0777,true);  
+					//   }
+					// die();
+					// $this->ftpAccount($ftp_user, $password, $web_dir);
+					if($stmt_create->execute())
+					return "ok";
+					$pdo_account = NULL;
+					return "no ok";
+					// header('Location: /home.php');
+
+				}else{
+					return "already exist";
+				}
+
+			} catch (PDOException $e) {
+			print('Error ' . $e->getMessage());
+			$error_message = "データベースへの接続エラーです。";
+			require("views/allerror.php");
+			$pdo_account = NULL;
+			die();
+		}
+	}
 
 	function sendEmail($token,$tomail){
 	

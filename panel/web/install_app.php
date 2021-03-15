@@ -87,7 +87,7 @@ if ($zip->open($wep_app) === TRUE) {
 } else { 
     echo 'Unzipped Process failed'; 
 } 
-
+echo "string";
 
 die();
 ?>

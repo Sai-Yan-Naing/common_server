@@ -1,9 +1,13 @@
 <?php 
 $password = $_COOKIE["p"];
 $domain = $_COOKIE["d"];
+require("views/dheader.php"); 
+require_once('models/account.php');
+
+$account = new Account;
+$error_pages=$account->getErrorPages($domain);
 
 ?>
-<?php require("views/dheader.php") ?>
 <!-- Start of Wrapper  -->
     <div class="wrapper">
 
@@ -135,62 +139,27 @@ $domain = $_COOKIE["d"];
                                     <p>利用設定</p>
                                 </div>
                             </div>
+                            <div id="loop_error">
+                            <?php
+                                foreach($error_pages as $ep) {
+                            ?>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <p class="pl-4">401</p>
+                                    <p class="pl-4"><?php echo $ep['statuscode'] ?></p>
                                 </div>
                                 <div class="col-sm-7">
-                                    <p>ドキュメントルートのカスタムエラーページPATH</p>
+                                    <p><?php echo $ep['url'] ?></p>
                                 </div>
                                 <div class="col-sm-2">
                                     <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="ON" data-off="OFF" data-size="sm">  
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="pl-4">402</p>
-                                </div>
-                                <div class="col-sm-7">
-                                    <p>ドキュメントルートのカスタムエラーページPATH</p>
-                                </div>
-                                <div class="col-sm-2">
-                                    <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="ON" data-off="OFF" data-size="sm">  
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="pl-4">403</p>
-                                </div>
-                                <div class="col-sm-7">
-                                    <p>ドキュメントルートのカスタムエラーページPATH</p>
-                                </div>
-                                <div class="col-sm-2">
-                                    <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="ON" data-off="OFF" data-size="sm"> 
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="pl-4">404</p>
-                                </div>
-                                <div class="col-sm-7">
-                                    <p>ドキュメントルートのカスタムエラーページPATH</p>
-                                </div>
-                                <div class="col-sm-2">
-                                    <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="ON" data-off="OFF" data-size="sm"> 
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <p class="pl-4">500</p>
-                                </div>
-                                <div class="col-sm-7">
-                                    <p>ドキュメントルートのカスタムエラーページPATH</p>
-                                </div>
-                                <div class="col-sm-2">
-                                    <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="ON" data-off="OFF" data-size="sm"> 
-                                </div>
-                            </div>
+                            <?php
+                                }
+                             ?>
+                             </div>
                             <p>サイト転送</p>
+                            <button id="" href="javascript:;" class="pr-2" data-toggle="modal" data-target="#addnew_error">Add new error</button>
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -302,6 +271,41 @@ $domain = $_COOKIE["d"];
                 </div>
             </div>
 
+            <!-- Start add new error page -->
+            <div class="modal fade" id="addnew_error" tabindex="-1" role="dialog" aria-labelledby="statusURLModalTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <form >
+                            <div class="modal-header border-less">
+                                <h5 class="modal-title">Change IP Address Name</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body border-less">
+                                <div class="model-line-spacing row">
+                                    <label for="status-code2" class="col-sm-4 col-form-label">ステータスコード</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="status_code" name="status_code">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label for="url-spec2" class="col-sm-4 col-form-label">URL指定</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" id="url_spec" name="url_spec">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer border-less">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" id="adnewerror" data-dismiss="modal">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- End add new error page -->
+
             <!--Start Status Code and URL Modal -->
             <div class="modal fade" id="statusURLModal" tabindex="-1" role="dialog" aria-labelledby="statusURLModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -329,7 +333,7 @@ $domain = $_COOKIE["d"];
                             </div>
                             <div class="modal-footer border-less">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-primary" data-dismiss="modal">Save changes</button>
                             </div>
                         </form>
                     </div>
