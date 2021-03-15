@@ -142,7 +142,7 @@ CREATE TABLE `db_ftp` (
   `domain` varchar(255) NOT NULL,
   `web_dir` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,8 +151,32 @@ CREATE TABLE `db_ftp` (
 
 LOCK TABLES `db_ftp` WRITE;
 /*!40000 ALTER TABLE `db_ftp` DISABLE KEYS */;
-INSERT INTO `db_ftp` VALUES (1,'setmawhtay.com','8a3e82ec68bf0ea3cdb04605b293fe33c9fd593104eecf9997cbc2204b39f52d','D000123','setmawhtay.com','setmawhtay.com'),(2,'hello1.com','8a3e82ec68bf0ea3cdb04605b293fe33c9fd593104eecf9997cbc2204b39f52d','D000123','hello1.com','hello1.com'),(3,'hello2.com','4bb1f84a7b50447c450e2b1c84cde4676f36e9f0f36d30792f476852e644bcb4','D000123','hello2.com','hello2.com'),(4,'welcome123.com','8a3e82ec68bf0ea3cdb04605b293fe33c9fd593104eecf9997cbc2204b39f52d','D000123','welcome123.com','welcome123');
 /*!40000 ALTER TABLE `db_ftp` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `error_pages`
+--
+
+DROP TABLE IF EXISTS `error_pages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `error_pages` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `domain` varchar(255) COLLATE utf8_czech_ci DEFAULT NULL,
+  `statuscode` varchar(255) COLLATE utf8_czech_ci DEFAULT NULL,
+  `url` varchar(255) COLLATE utf8_czech_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci COMMENT='error pages';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `error_pages`
+--
+
+LOCK TABLES `error_pages` WRITE;
+/*!40000 ALTER TABLE `error_pages` DISABLE KEYS */;
+/*!40000 ALTER TABLE `error_pages` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -174,6 +198,7 @@ CREATE TABLE `web_account` (
   `wordpress_require` int NOT NULL DEFAULT '0',
   `eccube_require` int NOT NULL DEFAULT '0',
   `stopped` int NOT NULL DEFAULT '0',
+  `appstopped` int DEFAULT NULL,
   `ec_dir` varchar(255) CHARACTER SET sjis COLLATE sjis_japanese_ci DEFAULT '',
   `word_dir` varchar(255) CHARACTER SET sjis COLLATE sjis_japanese_ci NOT NULL DEFAULT '',
   `word_db` varchar(255) NOT NULL DEFAULT '',
@@ -182,7 +207,7 @@ CREATE TABLE `web_account` (
   `status` int DEFAULT NULL,
   `token` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,7 +216,6 @@ CREATE TABLE `web_account` (
 
 LOCK TABLES `web_account` WRITE;
 /*!40000 ALTER TABLE `web_account` DISABLE KEYS */;
-INSERT INTO `web_account` VALUES (1,'setmawhtay.com','8a3e82ec68bf0ea3cdb04605b293fe33c9fd593104eecf9997cbc2204b39f52d','setmawhtay.com',0,0,0,0,0,0,0,'','','','setmawhtay.com','D000123',NULL,'59af5517774624abac8e2494e81a61fb'),(2,'hello1.com','8a3e82ec68bf0ea3cdb04605b293fe33c9fd593104eecf9997cbc2204b39f52d','hello1.com',0,0,0,0,0,0,0,'','','','hello1.com','D000123',NULL,'581de0d55f64723cbb628e5a383b4e14'),(3,'hello2.com','4bb1f84a7b50447c450e2b1c84cde4676f36e9f0f36d30792f476852e644bcb4','hello2.com',0,0,0,0,0,0,0,'','','','hello2.com','D000123',NULL,'4b4fd4c3c80fc4e07fcd06e93aac6509'),(4,'welcome123.com','8a3e82ec68bf0ea3cdb04605b293fe33c9fd593104eecf9997cbc2204b39f52d','welcome123.com',0,0,0,0,0,0,0,'','','','welcome123','D000123',NULL,'f9fa195093a2f67292e29640abe9abb5');
 /*!40000 ALTER TABLE `web_account` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -204,4 +228,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-27 11:15:44
+-- Dump completed on 2021-03-15 10:26:09
