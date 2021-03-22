@@ -315,11 +315,22 @@ $(function() {
 
     // ------mail setting-------------
 
+    jQuery.validator.addMethod("emailaddress", function(value, element) {
+        return this.optional(element) || /^[a-zA-Z0-9]+?\.[a-zA-Z]{2,4}$/i.test(value);
+
+    }, "You cannot enter @ signature");
+
+
+    jQuery.validator.setDefaults({
+        debug: true,
+        success: "valid"
+    });
+
     $("form[id='mailSetting']").validate({
         rules: {
             email: {
                 required: true,
-                email: false,
+                emailaddress: true,
             },
             password: {
                 required: true,
@@ -552,12 +563,16 @@ $(function() {
         rules: {
             pass_word2: {
                 required: true,
+                minlength: 8,
+                maxlength: 70,
             }
         },
         // Specify validation error messages
         messages: {
             pass_word2: {
                 required: "Please enter password",
+                minlength: "Your password must be at least 8 characters long",
+                maxlength: "Your password must be maximum 70 characters long",
 
             }
         },
@@ -572,13 +587,16 @@ $(function() {
         rules: {
             password2: {
                 required: true,
+                minlength: 8,
+                maxlength: 70,
             }
         },
         // Specify validation error messages
         messages: {
             password2: {
                 required: "Please enter password",
-
+                minlength: "Your password must be at least 8 characters long",
+                maxlength: "Your password must be maximum 70 characters long",
             }
         },
         submitHandler: function(form) {
@@ -592,13 +610,16 @@ $(function() {
         rules: {
             password2: {
                 required: true,
+                minlength: 8,
+                maxlength: 70,
             }
         },
         // Specify validation error messages
         messages: {
             password2: {
                 required: "Please enter password",
-
+                minlength: "Your password must be at least 8 characters long",
+                maxlength: "Your password must be maximum 70 characters long",
             }
         },
         submitHandler: function(form) {
@@ -606,13 +627,72 @@ $(function() {
         }
     });
 
+    // -----------dhome.php password edit validate---------
+
+    $("form[id='user-change-password']").validate({
+        rules: {
+            pass_word2: {
+                required: true,
+                minlength: 8,
+                maxlength: 70,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            pass_word2: {
+                required: "Please enter password",
+                minlength: "Your password must be at least 8 characters long",
+                maxlength: "Your password must be maximum 70 characters long",
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+    // -----------dhome.php user added btn validate---------
+
+    $("form[id='add-user-btn']").validate({
+        rules: {
+            username2: {
+                required: true,
+                minlength: 8,
+                maxlength: 70,
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            username2: {
+                required: "Please enter username",
+                minlength: "Your password must be at least 8 characters long",
+                maxlength: "Your password must be maximum 70 characters long",
+            }
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+
 });
 
-// dhome add button click
+$(document).ready(function() {
 
-function addBasic() {
-    var foo = document.getElementById('basicSetting').innerHTML;
-    foo++;
-    document.getElementById('basicSetting').innerHTML = foo;
-    // alert("Hello World"); 
-}
+    // dhome added basic button click
+    $('#addedBasic').click(function() {
+        var $clone = $(".basicSet").clone(true);
+        $clone.first().appendTo("#basicSetClone");
+    });
+
+    $('.remove').click(function() {
+        // alert("hello World");
+        $('.basicSet').not(':first').last().remove();
+    });
+
+
+    // basic auth setting toggle
+    $(".basicSet").click(function() {
+        $(this).find('.data-item').fadeToggle();
+    });
+
+});

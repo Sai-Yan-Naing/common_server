@@ -58,7 +58,7 @@ $domain = $_COOKIE["d"];
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="e_mail">メールアドレス</label>
-                                                <input type="email" class="form-control" id="e_mail" name="email">
+                                                <input type="text" class="form-control" id="e_mail" name="email" placeholder="メールアドレス">
                                             </div>
                                         </div>
                                         <div class="col-sm-2 sign-domain">＠ドメイン名</div>
@@ -148,7 +148,7 @@ $domain = $_COOKIE["d"];
                             <div class="modal-body row border-less">
                                 <label for="pass_word2" class="col-sm-4 col-form-label">パスワード</label>
                                 <div class="col-sm-8">
-                                    <input type="password" class="form-control" id="pass_word2" name="password2" value="パスワード">
+                                    <input type="password" class="form-control" id="pass_word2" name="password2" value="password">
                                 </div>
                             </div>
                             <div class="modal-footer border-less">

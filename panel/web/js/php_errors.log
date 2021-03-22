@@ -61,3 +61,15 @@
 [11-Mar-2021 05:49:36 UTC] PHP Fatal error:  require_once(): Failed opening required 'config/all.php' (include_path='.;C:\php\pear') in C:\laragon\www\assistup\common_server\panel\web\models\account.php on line 5
 [11-Mar-2021 05:49:37 UTC] PHP Warning:  require_once(config/all.php): failed to open stream: No such file or directory in C:\laragon\www\assistup\common_server\panel\web\models\account.php on line 5
 [11-Mar-2021 05:49:37 UTC] PHP Fatal error:  require_once(): Failed opening required 'config/all.php' (include_path='.;C:\php\pear') in C:\laragon\www\assistup\common_server\panel\web\models\account.php on line 5
+[17-Mar-2021 10:13:32 UTC] PHP Warning:  require_once(config/all.php): failed to open stream: No such file or directory in C:\laragon\www\assistup\common_server\panel\web\js\site_onoff.php on line 2
+[17-Mar-2021 10:13:33 UTC] PHP Fatal error:  require_once(): Failed opening required 'config/all.php' (include_path='.;C:\php\pear') in C:\laragon\www\assistup\common_server\panel\web\js\site_onoff.php on line 2
+[17-Mar-2021 10:13:37 UTC] PHP Warning:  require_once(config/all.php): failed to open stream: No such file or directory in C:\laragon\www\assistup\common_server\panel\web\js\site_onoff.php on line 2
+[17-Mar-2021 10:13:37 UTC] PHP Fatal error:  require_once(): Failed opening required 'config/all.php' (include_path='.;C:\php\pear') in C:\laragon\www\assistup\common_server\panel\web\js\site_onoff.php on line 2
+[17-Mar-2021 10:13:44 UTC] PHP Warning:  require_once(config/all.php): failed to open stream: No such file or directory in C:\laragon\www\assistup\common_server\panel\web\js\site_onoff.php on line 2
+[17-Mar-2021 10:13:44 UTC] PHP Fatal error:  require_once(): Failed opening required 'config/all.php' (include_path='.;C:\php\pear') in C:\laragon\www\assistup\common_server\panel\web\js\site_onoff.php on line 2
+[17-Mar-2021 10:13:47 UTC] PHP Warning:  require_once(config/all.php): failed to open stream: No such file or directory in C:\laragon\www\assistup\common_server\panel\web\js\site_onoff.php on line 2
+[17-Mar-2021 10:13:47 UTC] PHP Fatal error:  require_once(): Failed opening required 'config/all.php' (include_path='.;C:\php\pear') in C:\laragon\www\assistup\common_server\panel\web\js\site_onoff.php on line 2
+[17-Mar-2021 10:14:18 UTC] PHP Warning:  require_once(config/all.php): failed to open stream: No such file or directory in C:\laragon\www\assistup\common_server\panel\web\js\site_onoff.php on line 2
+[17-Mar-2021 10:14:18 UTC] PHP Fatal error:  require_once(): Failed opening required 'config/all.php' (include_path='.;C:\php\pear') in C:\laragon\www\assistup\common_server\panel\web\js\site_onoff.php on line 2
+[17-Mar-2021 10:14:19 UTC] PHP Warning:  require_once(config/all.php): failed to open stream: No such file or directory in C:\laragon\www\assistup\common_server\panel\web\js\site_onoff.php on line 2
+[17-Mar-2021 10:14:19 UTC] PHP Fatal error:  require_once(): Failed opening required 'config/all.php' (include_path='.;C:\php\pear') in C:\laragon\www\assistup\common_server\panel\web\js\site_onoff.php on line 2

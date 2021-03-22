@@ -128,12 +128,16 @@ $error_pages=$account->getErrorPages($domain);
                         </div>
                         <div id="kihon-setting" class="container tab-pane fade"><br>
                             <p>エラーページ</p>
+                            <button id="" href="javascript:;" class="pr-2 btn btn-success" data-toggle="modal" data-target="#addnew_error">Add new error</button>
                             <div class="row">
                                 <div class="col-sm-3">
                                     <p>エラーコード</p>
                                 </div>
-                                <div class="col-sm-7">
+                                <div class="col-sm-5">
                                     <p>ファイルパス</p>
+                                </div>
+                                <div class="col-sm-2">
+                                    <p></p>
                                 </div>
                                 <div class="col-sm-2">
                                     <p>利用設定</p>
@@ -141,14 +145,19 @@ $error_pages=$account->getErrorPages($domain);
                             </div>
                             <div id="loop_error">
                             <?php
-                                foreach($error_pages as $ep) {
+                            // print_r($error_pages[0]['error_pages']);
+                            $temp=$error_pages[0]['error_pages'];
+                                foreach(json_decode($temp) as $ep) {
                             ?>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <p class="pl-4"><?php echo $ep['statuscode'] ?></p>
+                                    <p class="pl-4"><?php echo $ep->statuscode; ?></p>
                                 </div>
-                                <div class="col-sm-7">
-                                    <p><?php echo $ep['url'] ?></p>
+                                <div class="col-sm-5">
+                                    <p><?php echo $ep->url; ?></p>
+                                </div>
+                                <div class="col-sm-2">
+                                    <p><button id="" href="javascript:;" class="pr-2 btn btn-warning btn-sm error_edit" data-toggle="modal" data-target="#statusURLModal">Edit</button></p>
                                 </div>
                                 <div class="col-sm-2">
                                     <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="ON" data-off="OFF" data-size="sm">  
@@ -158,26 +167,6 @@ $error_pages=$account->getErrorPages($domain);
                                 }
                              ?>
                              </div>
-                            <p>サイト転送</p>
-                            <button id="" href="javascript:;" class="pr-2" data-toggle="modal" data-target="#addnew_error">Add new error</button>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label for="status-code">ステータスコード</label>
-                                        <input type="text" readonly class="form-control" id="status-code" value="401">
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label for="url-spec">URL指定</label>
-                                        <input type="text" readonly class="form-control" id="url-spec" value="ドキュメントルートのカスタムエラーページPATH">
-                                    </div>
-                                </div>
-                                <div class="col-sm-1 mt-5">
-                                    <a href="javascript:;" class="pr-2" data-toggle="modal" data-target="#statusURLModal"><i class="fas fa-pencil-alt"></i></a>
-                                    <a href="javascript:;" onclick="return confirm('Are you sure to delete?')"><i class="fas fa-trash-alt"></i></a>
-                                </div>
-                            </div>
                             <div class="row">
                                 <label for="basic-auth" class="col-sm-2 col-form-label">BASIC認</label>
                                 <div class="col-sm-5">
@@ -319,21 +308,21 @@ $error_pages=$account->getErrorPages($domain);
                             </div>
                             <div class="modal-body border-less">
                                 <div class="model-line-spacing row">
-                                    <label for="status-code2" class="col-sm-4 col-form-label">ステータスコード</label>
+                                    <label for="status_code" class="col-sm-4 col-form-label">ステータスコード</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="status-code2" name="status_code" value="401">
+                                        <input type="text" class="form-control" id="estatus_code" name="status_code" value="401">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label for="url-spec2" class="col-sm-4 col-form-label">URL指定</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="url-spec2" name="url_spec" value="ドキュメントルートのカスタムエラーページPATH">
+                                        <input type="text" class="form-control" id="eurl_spec" name="url_spec" value="ドキュメントルートのカスタムエラーページPATH">
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer border-less">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                                <button type="submit" class="btn btn-primary" id="edit_error" data-dismiss="modal">Save changes</button>
                             </div>
                         </form>
                     </div>

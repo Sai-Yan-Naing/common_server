@@ -7,19 +7,29 @@
 <link rel="stylesheet" type="text/css" href="css/global.css">
 <link rel="stylesheet" type="text/css" href="css/common.css">
 <link rel="stylesheet" type="text/css" href="css/contents.css">
-<link rel="stylesheet" href="css/server.css">
-<link rel="stylesheet" href="css/sidebar.css">
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
-<script src="js/common.js"></script>
-<script src="js/canvasjs.min.js"></script>
-<script src="js/jquery.validate.min.js"></script>
-<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-<script src="js/iis-service.js"></script>
+<link rel="stylesheet" type="text/css" href="css/server.css">
+<link rel="stylesheet" type="text/css" href="css/sidebar.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap4-toggle.min.css">
+<script type="text/javascript" src="js/fontawesome.js"></script>
+<script type="text/javascript" src="js/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap4-toggle.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/canvasjs.min.js"></script>
+<script type="text/javascript" src="js/iis-service.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		$('.menu-sidebar a').filter(function(){return this.href==location.href}).parent().addClass('active').siblings().removeClass('active')
+		$('.menu-sidebar a').click(function(){
+			$(this).parent().addClass('active').siblings().removeClass('active')	
+		})
+	})
+</script>
+
+
 </head>
 <body>
 <div id="header" class="pt-3">

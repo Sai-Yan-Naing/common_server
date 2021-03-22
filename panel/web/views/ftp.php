@@ -137,7 +137,7 @@ $domain = $_COOKIE["d"];
                                 <div class="row">
                                     <label for="pass_word3" class="col-sm-4 col-form-label">パスワード</label>
                                     <div class="col-sm-8">
-                                        <input type="password" class="form-control" id="pass_word3" name="pass_word2" value="パスワード">
+                                        <input type="password" class="form-control" id="pass_word3" name="pass_word2" value="password">
                                     </div>
                                 </div>
                             </div>

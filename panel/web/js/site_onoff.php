@@ -33,9 +33,9 @@ if(isset($site_onoff))
 	// echo $onoff;
 }
 
-if(isset($_GET['new_error']))
+if(isset($_GET['error']))
 {
-	$new_error= $_GET['new_error'];
+	$new_error= $_GET['error'];
 	$status_code= $_GET['status_code'];
 	$url_spec= $_GET['url_spec'];
 	echo Shell_Exec ("c:/laragon/www/app/error.cmd ". $_COOKIE['d']." ". $status_code." ".$url_spec);

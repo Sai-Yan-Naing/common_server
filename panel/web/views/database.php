@@ -121,7 +121,7 @@ $domain = $_COOKIE["d"];
                             <div class="modal-body row border-less">
                                 <label for="pass_word4" class="col-sm-4 col-form-label">パスワード</label>
                                 <div class="col-sm-8">
-                                    <input type="password" class="form-control" id="pass_word4" name="password2" value="パスワード">
+                                    <input type="password" class="form-control" id="pass_word4" name="password2" value="password">
                                 </div>
                             </div>
                             <div class="modal-footer border-less">

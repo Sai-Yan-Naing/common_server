@@ -1,6 +1,6 @@
         <!--Start of Sidebar  -->
         <nav id="sidebar"  style="margin-top: 95px;">
-            <ul class="list-unstyled components">
+            <ul class="list-unstyled components menu-sidebar">
                 <li class="active">
                     <a href="dhome.php">
                         <span class="icon"><i class="fas fa-server"></i></span><br>
@@ -28,3 +28,4 @@
             </ul>
         </nav>
         <!--End of Sidebar  -->
+

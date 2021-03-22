@@ -539,6 +539,7 @@ span {
 
 .data-item {
     overflow: hidden;
+    display: none;
 }
 
 .tab-content #kihon-setting p {
@@ -562,8 +563,10 @@ span {
 }
 
 .add-basic-auth:hover,
-.add-user:hover {
-    color: #fff;
+.add-basic-auth:focus,
+.add-user:hover,
+.add-user:focus {
+    color: #fff !important;
     background-color: #6c757d !important;
     border-color: #6c757d;
 }

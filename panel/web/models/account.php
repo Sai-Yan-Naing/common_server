@@ -620,9 +620,11 @@ class Account{
 			// $stmt->execute(array($token,$domain_userid));
 			// $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-			$epstmt = $pdo_account->prepare("SELECT * FROM error_pages WHERE `domain` = ?");
+			$epstmt = $pdo_account->prepare("SELECT error_pages FROM web_account WHERE `domain` = ?");
 			$epstmt->execute(array($domain));
 			$epdata = $epstmt->fetchAll(PDO::FETCH_ASSOC);
+			// print_r($epdata[0]["error_pages"]);
+			// die();
 			return $epdata;
 
 
@@ -635,7 +637,7 @@ class Account{
 		}
 	}
 
-	function errorPages($domain, $new_error,$statuscode,$url_spec)
+	function errorPages($domain, $error,$statuscode,$url_spec)
 	{
 		// $pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
 
@@ -643,35 +645,43 @@ class Account{
 			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
 
 			// for domain
-			$stmt = $pdo_account->prepare("SELECT COUNT(statuscode) as cnt FROM error_pages WHERE `domain` = ? and `statuscode` = ?");
-			$stmt->execute(array($domain, $statuscode));
+			$stmt = $pdo_account->prepare("SELECT * FROM web_account WHERE `domain` = ?");
+			$stmt->execute(array($domain));
 			$data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-				if ($data['cnt'] <= 0) {
-					$stmt_create = $pdo_account->prepare("INSERT INTO error_pages (`domain`,`statuscode`, `url`) VALUES (:domain, :statuscode, :url)") or die("insert error <br />". print_r($pdo_account->errorInfo(), true));
-					$stmt_create->bindParam(":domain", $domain, PDO::PARAM_STR);
-					$stmt_create->bindParam(":statuscode", $statuscode, PDO::PARAM_STR);
-					$stmt_create->bindParam(":url", $url_spec, PDO::PARAM_STR);
-					// $stmt_create->execute();
-					$pdo_account = NULL;
-
-					// $root_dir = 'c:/laragon/www/'.$web_dir.'/';
-				 //   if (!file_exists ($root_dir))
-				 //      {
-				 //          mkdir($root_dir,0777,true);  
-					//   }
+				if(count($data)>0)
+				{
+					// echo $error;
+					if($error=="new_error")
+					{
+						$temp=json_decode($data['error_pages']);
+						// $test=$data['error_pages'];
+						$error_pages['statuscode'] = $statuscode;
+						$error_pages['url'] =  $url_spec;
+						$temp[]=$error_pages;
+					}else{
+						$test=$data['error_pages'];
+						// $error_pages['statuscode'] = $statuscode;
+						// $error_pages['url'] =  $url_spec;
+						// $temp[]=$error_pages;
+						foreach (json_decode($test) as $key => $value) {
+							if((int)$value->statuscode==(int)$statuscode){
+								$temp[$key]['statuscode']=$statuscode;
+								$temp[$key]['url']=$url_spec;
+							}else{
+								$temp[$key]['statuscode']=$value->statuscode;
+								$temp[$key]['url']=$value->url;
+							}
+							
+							// echo "string";
+						}
+					}
+					$error_pages=json_encode($temp);
+					echo "ok123";
 					// die();
-					// $this->ftpAccount($ftp_user, $password, $web_dir);
-					if($stmt_create->execute())
-					return "ok";
-					$pdo_account = NULL;
-					return "no ok";
-					// header('Location: /home.php');
-
-				}else{
-					return "already exist";
+					$upstmt = $pdo_account->prepare("UPDATE web_account SET `error_pages` = ? WHERE `domain` = ?");
+					echo $upstmt->execute(array($error_pages,$domain));
 				}
-
 			} catch (PDOException $e) {
 			print('Error ' . $e->getMessage());
 			$error_message = "データベースへの接続エラーです。";
