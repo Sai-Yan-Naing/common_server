@@ -28,7 +28,7 @@ $domain = $_COOKIE["d"];
                         </div>
                         <div class="collapse" id="collapseDirectory">
                             <div class="wrap">
-                                <form action="" method="post" id="db-page">
+                                <form action="database_con.php" method="post" id="db-page">
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
                                             <span>データベース種別</span>
@@ -36,13 +36,13 @@ $domain = $_COOKIE["d"];
                                         <div class="col-sm-9">
                                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                                 <label class="btn btn-outline-primary active">
-                                                    <input type="radio" name="options" id="option1" autocomplete="off" checked> MYSQL
+                                                    <input type="radio" name="type" id="mysql" value="mysql" autocomplete="off" checked> MYSQL
                                                 </label>
                                                 <label class="btn btn-outline-primary">
-                                                    <input type="radio" name="options" id="option2" autocomplete="off"> MSSQL
+                                                    <input type="radio" name="type" id="mssql" value="mssql" autocomplete="off"> MSSQL
                                                 </label>
                                                 <label class="btn btn-outline-primary">
-                                                    <input type="radio" name="options" id="option3" autocomplete="off"> MARIADB
+                                                    <input type="radio" name="type" id="mariadb" value="mariadb" autocomplete="off"> MARIADB
                                                 </label>
                                             </div>
                                         </div>
@@ -56,13 +56,13 @@ $domain = $_COOKIE["d"];
                                     <div class="form-group row">
                                         <label for="username" class="col-sm-3 col-form-label">ユーザー名</label>
                                         <div class="col-sm-7">
-                                          <input type="text" class="form-control" id="username" name="user_name" placeholder="8～70文字、半角英数記号の組み合わせ">
+                                          <input type="text" class="form-control" id="username" name="db_username" placeholder="8～70文字、半角英数記号の組み合わせ">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="pass_word" class="col-sm-3 col-form-label">パスワード</label>
                                         <div class="col-sm-7">
-                                          <input type="password" class="form-control" id="pass_word" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
+                                          <input type="password" class="form-control" id="pass_word" name="db_password" placeholder="8～70文字、半角英数記号の組み合わせ">
                                         </div>
                                     </div>
                                     <div class="form-group text-center">
@@ -73,35 +73,21 @@ $domain = $_COOKIE["d"];
                             </div>
                         </div> 
                         <div class="db-title">利用中データベース</div>
-                        <div class="wrap2">
-                            <div class="form-group row">
-                                <label for="dbname2" class="col-sm-3 col-form-label">データベース名</label>
-                                <div class="col-sm-7">
-                                  <input type="text" readonly class="form-control" id="dbname2">
-                                </div>
+                        <div class="col-sm-10 mt-3">
+                            <ul class="nav nav-tabs" role="tablist">
+                              <li class="nav-item">
+                                <a class="nav-link links btn btn-outline-primary active dis_mysql" data-toggle="tab" db="mysql" href="#home" role="tab">MYSQL</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link links btn btn-outline-primary dis_mysql" data-toggle="tab" db="mssql" href="#profile" role="tab">MSSQL</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link links btn btn-outline-primary dis_mysql" data-toggle="tab" db="mariadb" href="#messages" role="tab">MARIADB</a>
+                              </li>
+                            </ul>
+                            <div class="tab-content" id="dis_database">
+                            <?php require_once('dis_dbaccount.php'); ?>
                             </div>
-                            <div class="form-group row">
-                                <label for="username2" class="col-sm-3 col-form-label">ユーザー名</label>
-                                <div class="col-sm-7">
-                                  <input type="text" readonly class="form-control" id="username2">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="pass_word2" class="col-sm-3 col-form-label">パスワード</label>
-                                <div class="col-sm-7">
-                                  <input type="text" readonly class="form-control" id="pass_word2">
-                                </div>
-                                <div class="col-sm-1 mt-3">
-                                    <a href="javascript:;" data-toggle="modal" data-target="#usePasswordModal"><i class="fas fa-pencil-alt"></i></a>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="conInfo" class="col-sm-3 col-form-label">接続先情報</label>
-                                <div class="col-sm-9">
-                                  <input type="text" readonly class="form-control" id="conInfo">
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                 </div>
@@ -110,7 +96,7 @@ $domain = $_COOKIE["d"];
             <!--Start database in use password Modal -->
             <div class="modal fade" id="usePasswordModal" tabindex="-1" role="dialog" aria-labelledby="usePasswordModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
-                    <form action="" id="database-use">
+                    <form action="">
                         <div class="modal-content">
                             <div class="modal-header border-less">
                                 <h5 class="modal-title" id="ipAddressNameModalTitle">Change Password</h5>
@@ -121,12 +107,12 @@ $domain = $_COOKIE["d"];
                             <div class="modal-body row border-less">
                                 <label for="pass_word4" class="col-sm-4 col-form-label">パスワード</label>
                                 <div class="col-sm-8">
-                                    <input type="password" class="form-control" id="pass_word4" name="password2" value="password">
+                                    <input type="password" class="form-control" id="edit_dbuserpass" dbuser="dbuser" name="password2">
                                 </div>
                             </div>
                             <div class="modal-footer border-less">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-primary"  id="change_db_pass">Save changes</button>
                             </div>
                         </div>
                     </form>

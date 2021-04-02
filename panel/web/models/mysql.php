@@ -78,6 +78,36 @@ class MySQL{
 		return true;
 	}
 
+		function changePassword($dbuser,$dbpass){
+			$dsn2 = 'mysql:host=localhost';
+			$pdo = new PDO(DSN, ROOT, ROOT_PASS);
+			$stmt = $pdo->prepare("ALTER USER '$dbuser'@'%' IDENTIFIED BY '$dbpass';");
+			$stmt->execute() or die("change password failed <br />". print_r($pdo->errorInfo(), true));
+			$stmt1 = $pdo->prepare("UPDATE db_account SET `pass` = ? WHERE `db_user` = ?");
+			$stmt1->execute(array($dbpass,$dbuser));
+			return true;
+	}
+
+	function getAll()
+	{
+		try {
+			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+
+			$stmt = $pdo_account->prepare("SELECT * FROM db_account WHERE `domain` = ?");
+			$stmt->execute(array($_COOKIE['d']));
+			$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+
+
+		} catch (PDOException $e) {
+			print('Error ' . $e->getMessage());
+			$error_message = "データベースへの接続エラーです。";
+			require("views/allerror.php");
+			$pdo_account = NULL;
+			die();
+		}
+	}
+
 	function domain_check($domain){
 		try {
 			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);

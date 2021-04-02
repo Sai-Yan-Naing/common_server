@@ -1,5 +1,5 @@
 <?php
-class MySQL{
+class MsSQL{
 	function __construct() {
 		require_once("config/all.php");
 	}
@@ -25,14 +25,16 @@ class MySQL{
 			require("views/mssqlerror.php");
 			return false;
 		}
-
+		$version="2016";
 		$dsn = constant("SQLSERVER_" . $version . "_DSN");
 		$user = constant("SQLSERVER_" . $version . "_USER");
 		$pass = constant("SQLSERVER_" . $version . "_PASS");
 	
 		try {
+			
 			$pdo = new PDO($dsn, $user, $pass);
 			$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+
 			$db = trim($pdo->quote($db), "'\"");
 
 			# データベースを作成
@@ -104,7 +106,7 @@ class MySQL{
 			$pdo_account = NULL;
 			return false;
 		}
-
+		// $version="2016";
 		$host_name = constant("SQLSERVER_" . $version . "_HOST_NAME");
 		$host_ip = constant("SQLSERVER_" . $version . "_HOST_IP");
 
@@ -112,7 +114,28 @@ class MySQL{
 		$stmt->execute(array($domain, $host_name, $host_ip, $db, $db_user, $db_password));
 		$stmt->closeCursor();
 		$pdo_account = NULL;
+		echo "test";
 		return true;
+	}
+
+	function getAll()
+	{
+		try {
+			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+
+			$stmt = $pdo_account->prepare("SELECT * FROM db_account_for_mssql WHERE `domain` = ?");
+			$stmt->execute(array($_COOKIE['d']));
+			$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			return $data;
+
+
+		} catch (PDOException $e) {
+			print('Error ' . $e->getMessage());
+			$error_message = "データベースへの接続エラーです。";
+			require("views/allerror.php");
+			$pdo_account = NULL;
+			die();
+		}
 	}
 
 	function checkDomain($domain){

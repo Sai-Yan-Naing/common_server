@@ -19,6 +19,7 @@
 <script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript" src="js/canvasjs.min.js"></script>
 <script type="text/javascript" src="js/iis-service.js"></script>
+<script type="text/javascript" src="js/common_ajax.js"></script>
 
 <script type="text/javascript">
 	$(function(){

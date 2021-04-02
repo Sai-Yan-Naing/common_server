@@ -651,31 +651,118 @@ class Account{
 
 				if(count($data)>0)
 				{
-					// echo $error;
 					if($error=="new_error")
 					{
 						$temp=json_decode($data['error_pages']);
 						// $test=$data['error_pages'];
 						$error_pages['statuscode'] = $statuscode;
 						$error_pages['url'] =  $url_spec;
+						$error_pages['stopped'] =  1;
 						$temp[]=$error_pages;
-					}else{
-						$test=$data['error_pages'];
+						// $test=$data['error_pages'];
+						// foreach (json_decode($test) as $key => $value) {
+						// 		$temp[$key]['id']=$key;
+						// 		$temp[$key]['statuscode']=$value->statuscode;
+						// 		$temp[$key]['url']=$value->url;
+						// 		$temp[$key]['stopped']=$value->stopped;
+						// 	}
+
+						// $error_pages['id'] = count($test);
 						// $error_pages['statuscode'] = $statuscode;
 						// $error_pages['url'] =  $url_spec;
+						// $error_pages['stopped'] =  1;
 						// $temp[]=$error_pages;
+					}
+					
+					$error_pages=json_encode($temp);
+					echo "ok123";
+					// die();
+					$upstmt = $pdo_account->prepare("UPDATE web_account SET `error_pages` = ? WHERE `domain` = ?");
+					echo $upstmt->execute(array($error_pages,$domain));
+				}
+			} catch (PDOException $e) {
+			print('Error ' . $e->getMessage());
+			$error_message = "データベースへの接続エラーです。";
+			require("views/allerror.php");
+			$pdo_account = NULL;
+			die();
+		}
+	}
+	function editErrorPages($domain, $error,$statuscode,$url_spec,$ekey)
+	{
+		// $pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
+
+		try {
+			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+
+			// for domain
+			$stmt = $pdo_account->prepare("SELECT * FROM web_account WHERE `domain` = ?");
+			$stmt->execute(array($domain));
+			$data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+				if(count($data)>0)
+				{
+						$test=$data['error_pages'];
 						foreach (json_decode($test) as $key => $value) {
-							if((int)$value->statuscode==(int)$statuscode){
+							if((int)$key==(int)$ekey){
 								$temp[$key]['statuscode']=$statuscode;
 								$temp[$key]['url']=$url_spec;
+								$temp[$key]['stopped']=$value->stopped;
 							}else{
 								$temp[$key]['statuscode']=$value->statuscode;
 								$temp[$key]['url']=$value->url;
+								$temp[$key]['stopped']=$value->stopped;
 							}
 							
 							// echo "string";
 						}
-					}
+					$error_pages=json_encode($temp);
+					echo "ok123";
+					// die();
+					$upstmt = $pdo_account->prepare("UPDATE web_account SET `error_pages` = ? WHERE `domain` = ?");
+					echo $upstmt->execute(array($error_pages,$domain));
+				}
+			} catch (PDOException $e) {
+			print('Error ' . $e->getMessage());
+			$error_message = "データベースへの接続エラーです。";
+			require("views/allerror.php");
+			$pdo_account = NULL;
+			die();
+		}
+	}
+
+	function onoffErrorPages($domain, $error,$statuscode,$onoff)
+	{
+		// $pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
+
+		try {
+			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+
+			// for domain
+			$stmt = $pdo_account->prepare("SELECT * FROM web_account WHERE `domain` = ?");
+			$stmt->execute(array($domain));
+			$data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+				if(count($data)>0)
+				{
+						$test=$data['error_pages'];
+						foreach (json_decode($test) as $key => $value) {
+							if((int)$value->statuscode==(int)$statuscode){
+								$temp[$key]['statuscode']=$value->statuscode;
+								$temp[$key]['url']=$value->url;
+								if($onoff=="off"){
+									$temp[$key]['stopped']=0;
+									echo Shell_Exec ("c:/laragon/www/app/error/onoff.cmd ". $_COOKIE['d']." ". $value->statuscode);
+								}else{
+									$temp[$key]['stopped']=1;
+									echo Shell_Exec ("c:/laragon/www/app/error.cmd ". $_COOKIE['d']." ". $value->statuscode." ".$value->url);
+								}
+							}else{
+								$temp[$key]['statuscode']=$value->statuscode;
+								$temp[$key]['url']=$value->url;
+								$temp[$key]['stopped']=$value->stopped;
+							}
+						}
 					$error_pages=json_encode($temp);
 					echo "ok123";
 					// die();

@@ -147,20 +147,20 @@ $error_pages=$account->getErrorPages($domain);
                             <?php
                             // print_r($error_pages[0]['error_pages']);
                             $temp=$error_pages[0]['error_pages'];
-                                foreach(json_decode($temp) as $ep) {
+                                foreach(json_decode($temp) as $key=>$ep) {
                             ?>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <p class="pl-4"><?php echo $ep->statuscode; ?></p>
+                                    <p class="pl-4" key="<?php echo $key; ?>" code="<?php echo $ep->statuscode; ?>"><?php echo $ep->statuscode; ?></p>
                                 </div>
                                 <div class="col-sm-5">
-                                    <p><?php echo $ep->url; ?></p>
+                                    <p path="<?php echo $ep->url; ?>"><?php echo $ep->url; ?></p>
                                 </div>
                                 <div class="col-sm-2">
                                     <p><button id="" href="javascript:;" class="pr-2 btn btn-warning btn-sm error_edit" data-toggle="modal" data-target="#statusURLModal">Edit</button></p>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="ON" data-off="OFF" data-size="sm">  
+                                    <input type="checkbox" data-toggle="toggle" <?php if($ep->stopped==1){ echo "checked";} ?> data-onstyle="success" class="error_onoff" data-offstyle="danger" data-on="ON" data-off="OFF" data-size="sm">  
                                 </div>
                             </div>
                             <?php
@@ -310,13 +310,13 @@ $error_pages=$account->getErrorPages($domain);
                                 <div class="model-line-spacing row">
                                     <label for="status_code" class="col-sm-4 col-form-label">ステータスコード</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="estatus_code" name="status_code" value="401">
+                                        <input type="text" class="form-control" id="estatus_code" key="key" code="code" name="status_code">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label for="url-spec2" class="col-sm-4 col-form-label">URL指定</label>
                                     <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="eurl_spec" name="url_spec" value="ドキュメントルートのカスタムエラーページPATH">
+                                        <input type="text" class="form-control" id="eurl_spec" name="url_spec">
                                     </div>
                                 </div>
                             </div>

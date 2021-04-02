@@ -35,12 +35,34 @@ if(isset($site_onoff))
 
 if(isset($_GET['error']))
 {
-	$new_error= $_GET['error'];
-	$status_code= $_GET['status_code'];
-	$url_spec= $_GET['url_spec'];
-	echo Shell_Exec ("c:/laragon/www/app/error.cmd ". $_COOKIE['d']." ". $status_code." ".$url_spec);
+	if($_GET['error']=="new_error")
+	{
+		$new_error= $_GET['error'];
+		$status_code= $_GET['status_code'];
+		$url_spec= $_GET['url_spec'];
+		echo Shell_Exec ("c:/laragon/www/app/error.cmd ". $_COOKIE['d']." ". $status_code." ".$url_spec);
+		echo $account->errorPages($_COOKIE['d'], $new_error,$status_code,$url_spec);
+	}else if($_GET['error']=="edit_error"){
+		$error= $_GET['error'];
+		$status_code= $_GET['status_code'];
+		$url_spec= $_GET['url_spec'];
+		$key= $_GET['key'];
+		$code= $_GET['code'];
+		echo Shell_Exec ("c:/laragon/www/app/error/editerror.cmd ". $_COOKIE['d']." ". $status_code." ".$url_spec." ".$code);
 
-	echo $account->errorPages($_COOKIE['d'], $new_error,$status_code,$url_spec);
+		echo $account->editErrorPages($_COOKIE['d'], $error,$status_code,$url_spec, $key);
+	}else{
+		$error= $_GET['error'];
+		$status_code= $_GET['status_code'];
+		$onoff= $_GET['onoff'];
+		// echo $onoff;
+		// die();
+		// echo Shell_Exec ("c:/laragon/www/app/error/onoff.cmd ". $_COOKIE['d']." ". $status_code);
+		echo $account->onoffErrorPages($_COOKIE['d'], $error,$status_code,$onoff);
+	}
+	
 
 }
+
+
 ?>

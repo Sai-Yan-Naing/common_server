@@ -615,6 +615,29 @@ span {
     padding: 14px 25px;
 }
 
+.links.btn.btn-outline-primary {
+    border-color: #007bff !important;
+    border-radius: 0;
+    color:  #007bff;
+    font-weight: 400;
+}
+
+.links.btn.btn-outline-primary:hover {
+    color: #fff;
+}
+
+.links.btn.btn-outline-primary.active {
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+    border-radius: 0;
+    font-weight: 400;
+}
+
+.tab-content .tab-bg.active {
+    border: 1px solid #007BFF !important;
+    background: #fff !important;
+}
+
 
 /*------------------ftp css--------------*/
 

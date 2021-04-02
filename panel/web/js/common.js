@@ -316,7 +316,7 @@ $(function() {
     // ------mail setting-------------
 
     jQuery.validator.addMethod("emailaddress", function(value, element) {
-        return this.optional(element) || /^[a-zA-Z0-9]+?\.[a-zA-Z]{2,4}$/i.test(value);
+        return this.optional(element) || /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value);
 
     }, "You cannot enter @ signature");
 
@@ -345,27 +345,6 @@ $(function() {
             },
             password: {
                 required: "Please enter password",
-                minlength: "Your password must be at least 8 characters long",
-                maxlength: "Your password must be maximum 70 characters long",
-            }
-        },
-        submitHandler: function(form) {
-            form.submit();
-        }
-    });
-
-    // -----------basic setting of password change-----------
-
-    $("form[id='passChange']").validate({
-        rules: {
-            password: {
-                minlength: 8,
-                maxlength: 70,
-            }
-        },
-        // Specify validation error messages
-        messages: {
-            password: {
                 minlength: "Your password must be at least 8 characters long",
                 maxlength: "Your password must be maximum 70 characters long",
             }
