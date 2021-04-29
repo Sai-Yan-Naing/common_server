@@ -23,12 +23,12 @@ $domain = $_COOKIE["d"];
                                 <span>データベース</span>
                             </div>
                             <div class="col-sm-9">
-                                <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseDirectory" aria-expanded="false" aria-controls="collapseDirectory"><span class="add-db-icon"><i class="fas fa-plus"></i></span>データベース追加</button>
+                                <button class="btn btn-success btn-sm common_modal" type="button" data-toggle="modal" data-target="#common_modal" re_url="database_create.php"><span class="add-db-icon"><i class="fas fa-plus"></i></span>データベース追加</button>
                             </div>
                         </div>
-                        <div class="collapse" id="collapseDirectory">
+                        <!-- <div  id="collapseDirectory">
                             <div class="wrap">
-                                <form action="database_con.php" method="post" id="db-page">
+                                <form action="database_con.php" method="post" id="database_create">
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
                                             <span>データベース種別</span>
@@ -71,18 +71,18 @@ $domain = $_COOKIE["d"];
                                     </div>
                                 </form>
                             </div>
-                        </div> 
+                        </div>  -->
                         <div class="db-title">利用中データベース</div>
                         <div class="col-sm-10 mt-3">
                             <ul class="nav nav-tabs" role="tablist">
                               <li class="nav-item">
-                                <a class="nav-link links btn btn-outline-primary active dis_mysql" data-toggle="tab" db="mysql" href="#home" role="tab">MYSQL</a>
+                                <a class="nav-link links btn btn-outline-primary active dis_mysql" data-toggle="tab" db="MYSQL" role="tab">MYSQL</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link links btn btn-outline-primary dis_mysql" data-toggle="tab" db="mssql" href="#profile" role="tab">MSSQL</a>
+                                <a class="nav-link links btn btn-outline-primary dis_mysql" data-toggle="tab" db="MSSQL" role="tab">MSSQL</a>
                               </li>
                               <li class="nav-item">
-                                <a class="nav-link links btn btn-outline-primary dis_mysql" data-toggle="tab" db="mariadb" href="#messages" role="tab">MARIADB</a>
+                                <a class="nav-link links btn btn-outline-primary dis_mysql" data-toggle="tab" db="MARIADB" role="tab">MARIADB</a>
                               </li>
                             </ul>
                             <div class="tab-content" id="dis_database">
@@ -92,35 +92,6 @@ $domain = $_COOKIE["d"];
 
                 </div>
             </div>
-
-            <!--Start database in use password Modal -->
-            <div class="modal fade" id="usePasswordModal" tabindex="-1" role="dialog" aria-labelledby="usePasswordModalTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <form action="">
-                        <div class="modal-content">
-                            <div class="modal-header border-less">
-                                <h5 class="modal-title" id="ipAddressNameModalTitle">Change Password</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body row border-less">
-                                <label for="pass_word4" class="col-sm-4 col-form-label">パスワード</label>
-                                <div class="col-sm-8">
-                                    <input type="password" class="form-control" id="edit_dbuserpass" dbuser="dbuser" name="password2">
-                                </div>
-                            </div>
-                            <div class="modal-footer border-less">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary"  id="change_db_pass">Save changes</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <!--End database in use password Modal -->
-
-
         </div>
         <!--End of Page Content  -->
 

@@ -143,47 +143,49 @@ $(function() {
             form.submit();
         }
     });
-
-    $("form[id='db-page']").validate({
-        rules: {
-            db_name: {
-                required: true,
-                minlength: 8,
-                maxlength: 70,
-            },
-            user_name: {
-                required: true,
-                minlength: 8,
-                maxlength: 70,
-            },
-            password: {
-                required: true,
-                minlength: 8,
-                maxlength: 70,
-            }
-        },
-        // Specify validation error messages
-        messages: {
-            db_name: {
-                required: "Please enter database name",
-                minlength: "Database name must be at least 8 characters long",
-                maxlength: "Usernamr must be maximum 70 characters long",
-            },
-            user_name: {
-                required: "Please enter user name",
-                minlength: "Username must be at least 8 characters long",
-                maxlength: "Usernamr must be maximum 70 characters long",
-            },
-            password: {
-                required: "Please enter password",
-                minlength: "Your password must be at least 8 characters long",
-                maxlength: "Your password must be maximum 70 characters long",
-            }
-        },
-        submitHandler: function(form) {
-            form.submit();
-        }
-    });
+ 
+    // $("form[id='database_create']").validate({
+    //     rules: {
+    //         db_name: {
+    //             required: true,
+    //             minlength: 8,
+    //             maxlength: 70,
+    //             number:true,
+    //         },
+    //         db_username: {
+    //             required: true,
+    //             minlength: 8,
+    //             maxlength: 70,
+    //         },
+    //         db_password: {
+    //             required: true,
+    //             minlength: 8,
+    //             maxlength: 70,
+    //         }
+    //     },
+    //     // Specify validation error messages
+    //     messages: {
+    //         db_name: {
+    //             required: "Please enter database name",
+    //             minlength: "Database name must be at least 8 characters long",
+    //             maxlength: "Usernamr must be maximum 70 characters long",
+    //             number:"number",
+    //         },
+    //         db_username: {
+    //             required: "Please enter user name",
+    //             minlength: "Username must be at least 8 characters long",
+    //             maxlength: "Usernamr must be maximum 70 characters long",
+    //         },
+    //         db_password: {
+    //             required: "Please enter password",
+    //             minlength: "Your password must be at least 8 characters long",
+    //             maxlength: "Your password must be maximum 70 characters long",
+    //         }
+    //     },
+    //     submitHandler: function(form) {
+    //         form.submit();
+    //     }
+    // });
 
     // For Free SSl
     $("form[id='free-ssl']").validate({

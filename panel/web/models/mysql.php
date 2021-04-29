@@ -6,21 +6,21 @@ class MySQL{
 
 	function addList($db, $db_user, $db_password, $domain){
 
-		if (strcmp($db, "") == 0 || strcmp($db_user, "") == 0  ||  strcmp($db_password, "") == 0) {
-			return false;
-		}
-		if (strpos($db, "mysql") !== FALSE || strpos($db, "performance_schema") !== FALSE || strpos($db, "japan_system_development") !== FALSE) {
-			return false;
-		}
-		if (strpos($db, "CONCAT") !== FALSE || strpos($db_user, "CONCAT") !== FALSE || strpos($db_password, "CONCAT") !== FALSE) {
-			return false;
-		}
-		if (strpos($db_user, "root") !== FALSE) {
-			return false;
-		}
-		if (strlen($db) != mb_strlen($db, 'UTF-8') || strlen($db_user) != mb_strlen($db_user, 'UTF-8') || strlen($db_password) != mb_strlen($db_password, 'UTF-8')){
-			return false;
-		}
+		// if (strcmp($db, "") == 0 || strcmp($db_user, "") == 0  ||  strcmp($db_password, "") == 0) {
+		// 	return false;
+		// }
+		// if (strpos($db, "mysql") !== FALSE || strpos($db, "performance_schema") !== FALSE || strpos($db, "japan_system_development") !== FALSE) {
+		// 	return false;
+		// }
+		// if (strpos($db, "CONCAT") !== FALSE || strpos($db_user, "CONCAT") !== FALSE || strpos($db_password, "CONCAT") !== FALSE) {
+		// 	return false;
+		// }
+		// if (strpos($db_user, "root") !== FALSE) {
+		// 	return false;
+		// }
+		// if (strlen($db) != mb_strlen($db, 'UTF-8') || strlen($db_user) != mb_strlen($db_user, 'UTF-8') || strlen($db_password) != mb_strlen($db_password, 'UTF-8')){
+		// 	return false;
+		// }
 
 		try {
 			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
@@ -55,7 +55,7 @@ class MySQL{
 
 	function addUserAndDB($db, $db_user, $db_password){
 		try {
-			$dsn2 = 'mysql:host=localhost';
+			$dsn2 = 'mysql:host=localhost:3306';
 			$pdo = new PDO($dsn2, ROOT, ROOT_PASS);
 			$db = trim($pdo->quote($db), "'\"");
 			$stmt = $pdo->prepare("CREATE DATABASE `$db`;");
@@ -79,12 +79,24 @@ class MySQL{
 	}
 
 		function changePassword($dbuser,$dbpass){
-			$dsn2 = 'mysql:host=localhost';
 			$pdo = new PDO(DSN, ROOT, ROOT_PASS);
 			$stmt = $pdo->prepare("ALTER USER '$dbuser'@'%' IDENTIFIED BY '$dbpass';");
 			$stmt->execute() or die("change password failed <br />". print_r($pdo->errorInfo(), true));
 			$stmt1 = $pdo->prepare("UPDATE db_account SET `pass` = ? WHERE `db_user` = ?");
 			$stmt1->execute(array($dbpass,$dbuser));
+			return true;
+	}
+
+	function deleteDB($dbid,$dbuser,$db){
+		
+			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+			$stmt = $pdo_account->prepare("DROP USER '$dbuser'@'%'");
+			$stmt->execute() or die("delete database user failed <br />". print_r($pdo_account->errorInfo(), true));
+			$stmt1 = $pdo_account->prepare("DROP DATABASE $db");
+			$stmt1->execute() or die("delete database failed <br />". print_r($pdo_account->errorInfo(), true));
+			$dstmt = $pdo_account->prepare("DELETE FROM `db_account` WHERE id = ?");
+			// $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
+			$dstmt->execute(array($dbid));
 			return true;
 	}
 
@@ -106,6 +118,17 @@ class MySQL{
 			$pdo_account = NULL;
 			die();
 		}
+	}
+
+	function getDB($id)
+	{
+		$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+			// 
+		$stmt1 = $pdo_account->prepare("SELECT * FROM db_account WHERE `id` = ?");
+		$stmt1->execute(array($id));
+		$data1 = $stmt1->fetch(PDO::FETCH_ASSOC);
+		$pdo_account = NULL;
+		return $data1;
 	}
 
 	function domain_check($domain){

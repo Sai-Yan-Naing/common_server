@@ -13,13 +13,17 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap4-toggle.min.css">
 <script type="text/javascript" src="js/fontawesome.js"></script>
 <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
-<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/bootstrap4-toggle.min.js"></script>
-<script type="text/javascript" src="js/common.js"></script>
 <script type="text/javascript" src="js/canvasjs.min.js"></script>
 <script type="text/javascript" src="js/iis-service.js"></script>
 <script type="text/javascript" src="js/common_ajax.js"></script>
+<script type="text/javascript" src="js/common_modal.js"></script>
+<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/synformvalidator.js"></script>
+<script type="text/javascript" src="js/common_validate.js"></script>
 
 <script type="text/javascript">
 	$(function(){
@@ -47,3 +51,5 @@
 		</div>
 	</div>
 </div>
+
+<?php require_once("common_modal.php") ?>

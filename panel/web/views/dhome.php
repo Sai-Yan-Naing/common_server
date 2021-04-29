@@ -36,7 +36,7 @@ $error_pages=$account->getErrorPages($domain);
 
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div id="app-install" class="container tab-pane active"><br>
+                        <div id="app-install" class="tab-pane active pr-3 pl-3"><br>
                             <form action="install_app.php" method="post" id="domain-homepage" />
                                 <div class="form-group row">
                                     <label for="application" class="col-sm-4 col-form-label">アプリケーション</label>
@@ -126,7 +126,7 @@ $error_pages=$account->getErrorPages($domain);
                                 </div>
                             </form>
                         </div>
-                        <div id="kihon-setting" class="container tab-pane fade"><br>
+                        <div id="kihon-setting" class=" pr-3 pl-3 tab-pane fade"><br>
                             <p>エラーページ</p>
                             <button id="" href="javascript:;" class="pr-2 btn btn-success" data-toggle="modal" data-target="#addnew_error">Add new error</button>
                             <div class="row">
@@ -226,7 +226,7 @@ $error_pages=$account->getErrorPages($domain);
                                 
                             </div>
                         </div>
-                        <div id="oyo-setting" class="container tab-pane fade"><br>
+                        <div id="oyo-setting" class=" pr-3 pl-3 tab-pane fade"><br>
                             <div class="oyo-set">WEB.config設定</div>
                             <div class="oyo-set">編集対象</div>
                             <div class="form-group row oyo-sett">

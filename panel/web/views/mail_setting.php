@@ -2,9 +2,12 @@
 
 $password = $_COOKIE["p"];
 $domain = $_COOKIE["d"];
-
+require_once('models/email.php');
+$getEmail = new Email;
+$allmail=$getEmail->getAll();
 ?>
 <?php require("views/dheader.php") ?>
+
 <!-- Start of Wrapper  -->
     <div class="wrapper">
 
@@ -30,12 +33,12 @@ $domain = $_COOKIE["d"];
                                 <span>メールアドレス</span>
                             </div>
                             <div class="col-sm-9">
-                                <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseDirectory" aria-expanded="false" aria-controls="collapseDirectory"><span class="add-db-icon"><i class="fas fa-plus"></i></span>メールアドレス追加</button>
+                                <button class="btn btn-success btn-sm common_modal" type="button" data-toggle="modal" data-target="#common_modal"  re_url="mail_setting_create.php"><span class="add-db-icon"><i class="fas fa-plus"></i></span>メールアドレス追加</button>
                             </div>
                         </div>
                         <div class="collapse" id="collapseDirectory">
                             <div class="wrap" style="overflow: hidden;">
-                                <form action="" method="post" id="mailSetting">
+                                
                                     <div class="row">
                                         <div class="col-sm-3"></div>
                                         <div class="col-sm-6">
@@ -54,6 +57,7 @@ $domain = $_COOKIE["d"];
                                         </div>
                                         <div class="col-sm-3"></div>
                                     </div>
+                                <form action="" method="post" id="">
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <div class="form-group">
@@ -61,69 +65,50 @@ $domain = $_COOKIE["d"];
                                                 <input type="text" class="form-control" id="e_mail" name="email" placeholder="メールアドレス">
                                             </div>
                                         </div>
-                                        <div class="col-sm-2 sign-domain">＠ドメイン名</div>
+                                        <div class="col-sm-2 sign-domain">@<?php echo $domain ?></div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="pass_word">パスワード</label>
-                                                <input type="password" class="form-control" name="password" id="pass_word" placeholder="8～70文字、半角英数記号の組み合わせ">
+                                                <input type="password" class="form-control" name="mail_pass_word" id="mail_pass_word" placeholder="8～70文字、半角英数記号の組み合わせ">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group float-right">
                                         <button type="reset" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#collapseDirectory">キャンセル</button>
-                                        <button type="submit" class="btn btn-outline-secondary">作成</button>
+                                        <button type="button"id="add_email" class="btn btn-outline-secondary">作成</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                        <div class="row mt-3 mb-3">
-                            <div class="col-sm-3">
+                        <div class="row mt-3 mb-3 font-weight-bold">
+                            <div class="col-sm-4">
                                 <span>登録メールアドレス</span>
                             </div>
-                            <div class="col-sm-9">
+                            <div class="col-sm-4">
                                 <span>パスワード</span>
                             </div>
+                            <div class="col-sm-4">
+                                <span>Action</span>
+                            </div>
                         </div>
+                        <?php 
+                        foreach ($allmail as $key => $mail) {
+                            
+                        ?>
                         <div class="form-group row">
-                            <label for="douser" class="col-sm-3 col-form-label">〇〇＠ドメイン名</label>
-                            <div class="col-sm-7">
-                              <input type="text" readonly class="form-control" id="douser" name="">
+                            <div class="col-sm-4">
+                                <label for="douser" class="col-form-label"><?php echo $mail['email'];?></label>
                             </div>
-                            <div class="col-sm-1 mt-2">
-                                <a href="javascript:;" class="pr-2" data-toggle="modal" data-target="#passwordModal"><i class="fas fa-pencil-alt"></i></a>
-                                <a href="javascript:;" onclick="return confirm('Are you sure to delete?')"><i class="fas fa-trash-alt"></i></a>
+                            
+                            <div class="col-sm-4">
+                              <?php echo $mail['password'];?>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="douser2" class="col-sm-3 col-form-label">〇〇＠ドメイン名</label>
-                            <div class="col-sm-7">
-                              <input type="text" readonly class="form-control" id="douser2" name="">
-                            </div>
-                            <div class="col-sm-1 mt-2">
-                                <a href="javascript:;" class="pr-2" data-toggle="modal" data-target="#passwordModal"><i class="fas fa-pencil-alt"></i></a>
-                                <a href="javascript:;" onclick="return confirm('Are you sure to delete?')"><i class="fas fa-trash-alt"></i></a>
+                            <div class="col-sm-4">
+                                <p><button id="" href="javascript:;" edit_id="<?php echo $mail['id'];?>" class="pr-2 btn btn-warning btn-sm common_modal"  data-toggle="modal" data-target="#common_modal"  re_url="mail_setting_edit.php"><i class="fas fa-edit text-white"></i></button>
+                                <button id="" href="javascript:;" class="pr-2 btn btn-danger btn-sm common_modal_delete"data-toggle="modal" data-target="#common_modal_delete"  re_url="mail_setting_delete.php" delete_id="<?php echo $mail['id'];?>"><i class="fas fa-trash text-white"></i></button></p>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="douser3" class="col-sm-3 col-form-label">〇〇＠ドメイン名</label>
-                            <div class="col-sm-7">
-                              <input type="text" readonly class="form-control" id="douser3" name="">
-                            </div>
-                            <div class="col-sm-1 mt-2">
-                                <a href="javascript:;" class="pr-2" data-toggle="modal" data-target="#passwordModal"><i class="fas fa-pencil-alt"></i></a>
-                                <a href="javascript:;" onclick="return confirm('Are you sure to delete?')"><i class="fas fa-trash-alt"></i></a>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="douser4" class="col-sm-3 col-form-label">〇〇＠ドメイン名</label>
-                            <div class="col-sm-7"> 
-                              <input type="text" readonly class="form-control" id="douser4" name="">
-                            </div>
-                            <div class="col-sm-1 mt-2">
-                                <a href="javascript:;" class="pr-2" data-toggle="modal" data-target="#passwordModal"><i class="fas fa-pencil-alt"></i></a>
-                                <a href="javascript:;" onclick="return confirm('Are you sure to delete?')"><i class="fas fa-trash-alt"></i></a>
-                            </div>
-                        </div>
+                        <?php } ?>
                         <div class="btn btn-outline-danger mt-3 mb-3">
                             WEBメールより追加いただいたメールアカウント、パスワードについては表示ができませんので予めご了承ください。​
                         </div>
@@ -135,25 +120,28 @@ $domain = $_COOKIE["d"];
         <!--End of Page Content  -->
 
         <!--Start register password Modal -->
-            <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalTitle" aria-hidden="true">
+            <div class="modal fade" id="editEmail" tabindex="-1" role="dialog" aria-labelledby="passwordModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <form action="" id="mailSetting-edit">
+                        <form action="" id="" method="post">
                             <div class="modal-header border-less">
-                                <h5 class="modal-title" id="ipAddressNameModalTitle">Change Password</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
+                                <h5 class="modal-title" id="">Change Password</h5>
+                            </div>
+                            <div class="modal-body row border-less">
+                                <label for="pass_word2" class="col-sm-4 col-form-label">メールアドレス</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" readonly id="edit_email" eid="test" name="email" value="">
+                                </div>
                             </div>
                             <div class="modal-body row border-less">
                                 <label for="pass_word2" class="col-sm-4 col-form-label">パスワード</label>
                                 <div class="col-sm-8">
-                                    <input type="password" class="form-control" id="pass_word2" name="password2" value="password">
+                                    <input type="password" class="form-control" id="edit_mail_pass" name="edit_mail_pass" value="">
                                 </div>
                             </div>
                             <div class="modal-footer border-less">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-primary" id="edit_email_form">Save changes</button>
                             </div>
                         </form>
                     </div>

@@ -34,7 +34,7 @@ $domain = $_COOKIE["d"];
 
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div id="ssl" class="container tab-pane active"><br>
+                        <div id="ssl" class=" pr-3 pl-3 tab-pane active"><br>
                             <form action="" method="post" id="free-ssl" />
                                 <div class="form-group row">
                                     <span class="col">無料SSL設定</span>
@@ -113,7 +113,7 @@ $domain = $_COOKIE["d"];
                                 </div>
                             </form>
                         </div>
-                        <div id="waf" class="container tab-pane fade"><br>
+                        <div id="waf" class=" pr-3 pl-3 tab-pane fade"><br>
                             <form action="" method="post" id="" />
                                 <div class="form-group row">
                                     <span class="col">WAF設定</span>
@@ -165,7 +165,7 @@ $domain = $_COOKIE["d"];
                                 </table>
                             </form>
                         </div>
-                        <div id="dir-access" class="container tab-pane fade"><br>
+                        <div id="dir-access" class=" pr-3 pl-3 tab-pane fade"><br>
                             <div class="row">
                                 <label for="add-dir" class="col-sm-6 col-form-label">ディレクトリアクセス制限</label>
                                 <div class="col-sm-6">
@@ -241,7 +241,7 @@ $domain = $_COOKIE["d"];
                             </div>
                             <!-- Accordion wrapper -->
                         </div>
-                        <div id="ip-restriction" class="container tab-pane fade"><br>
+                        <div id="ip-restriction" class=" pr-3 pl-3 tab-pane fade"><br>
                             <form action="" method="post" id="" />
                                 <div class="form-group row">
                                     <span class="col">IPアクセス制限</span>

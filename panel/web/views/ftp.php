@@ -2,7 +2,10 @@
 
 $password = $_COOKIE["p"];
 $domain = $_COOKIE["d"];
-
+require_once('models/ftp.php');
+$getFtp = new Ftp;
+$allftp=$getFtp->getAll();
+$getWeb = $getFtp->getWebaccount($_COOKIE['d']);
 ?>
 
 <?php require("views/dheader.php") ?>
@@ -19,24 +22,36 @@ $domain = $_COOKIE["d"];
                     <h6 class="wserver">Winserver Controlpanel Share server</h6>
                     
                     <div class="rcontent">
-                        <div class="ftp-title">ＦＴＰサーバー情報</div>
-                        <div class="row ftp-server">
+                        <div class="ftp-title mb-3">ＦＴＰサーバー情報</div>
+                        <div class="row mb-3">
                             <div class="col-sm-3">
                                 <span>ＦＴＰサーバー</span>
                             </div>
                             <div class="col-sm-9">
-                                <span>収納しているサーバーのＩＰを表示</span>
+                                <span>203.137.93.207</span>
                             </div>
                         </div>
-                        <div class="row">
+
+                        <div class="row mb-3">
+                            <div class="col-sm-3">
+                                <label>Root Folder</label>
+                            </div>
+                            <div class="col-sm-5">
+                                <label>/webroot/LocalUser/<?= $getWeb['user'] ?></label>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <div class="col-sm-3">
                                 <span>FTPアカウント</span>
                             </div>
                             <div class="col-sm-9">
-                                <button class="btn btn-outline-secondary" type="button" data-toggle="collapse" data-target="#collapseDirectory" aria-expanded="false" aria-controls="collapseDirectory"><span class="add-db-icon"><i class="fas fa-plus"></i></span>ＦＴＰユーザー追加</button>
+                                <button class="btn btn-success common_modal btn-sm" type="button" data-toggle="modal" data-target="#common_modal"   origin_url="ftp.php" re_url="ftp_create.php"><span class="add-db-icon"><i class="fas fa-plus"></i></span>ＦＴＰユーザー追加</button>
                             </div>
                         </div>
-                        <div class="collapse" id="collapseDirectory">
+
+                    
+                        <!-- <div class="collapse" id="collapseDirectory">
                             <div class="wrap">
                                 <form action="" method="post" id="ftpUser">
                                     <div class="form-group row">
@@ -46,9 +61,9 @@ $domain = $_COOKIE["d"];
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="pass_word" class="col-sm-3 col-form-label">パスワード</label>
+                                        <label for="ftp_pass_word" class="col-sm-3 col-form-label">パスワード</label>
                                         <div class="col-sm-8">
-                                          <input type="password" class="form-control" id="pass_word" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
+                                          <input type="password" class="form-control" id="ftp_pass_word" name="password" placeholder="8～70文字、半角英数記号の組み合わせ">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -71,45 +86,61 @@ $domain = $_COOKIE["d"];
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-3"></div>
+                                        <div class="col-sm-3">
+                                            <label>Root Folder</label>
+                                        </div>
                                         <div class="col-sm-5 mb-3">
-                                            <input type="text" name="" id="" class="form-control" placeholder="Domainのドキュメントルートを表示">
+                                            <label>/webroot/LocalUser/mgmg</label>
                                         </div>
                                     </div>
                                     <div class="form-group text-center">
                                         <button type="reset" class="btn btn-outline-secondary" data-toggle="collapse" data-target="#collapseDirectory">キャンセル</button>
-                                        <button type="submit" class="btn btn-outline-secondary">作成</button>
+                                        <button type="button" id="add_ftp" class="btn btn-outline-secondary">作成</button>
                                     </div>
                                 </form>
                             </div>
-                        </div>
-
+                        </div> -->
                         <div class="mt-3 mb-3">
                             利用中FTP情報
                         </div>
-                        <div class="wrap p-t-b-l-r-2">
-                            <form action="" method="post" id="">
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <label for="user_name">ユーザー名</label>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <input type="text" readonly class="form-control" id="user_name" name="username">
-                                    </div>
-                                    <div class="col-sm-1"></div>
-                                    <div class="col-sm-2 ">
-                                        <label for="password2" >パスワード</label>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <input type="password" readonly class="form-control" id="password2" name="password">
-                                    </div>
-                                    <div class="edit-delete-btn col-sm-1">
-                                        <a href="javascript:;" class="edit" data-toggle="modal" data-target="#ftpUseInformationModal"><i class="fas fa-pencil-alt"></i></a>
-                                        <a href="javascript:;" onclick="return confirm('Are you sure to delete?')"><i class="fas fa-trash-alt"></i></a>
-                                    </div>
-                                </div>
-                            </form>
+                        <div class="row mt-3 mb-3 font-weight-bold">
+                            <div class="col-sm-3">
+                                <span>FTP ユーザー名</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span>パスワード</span>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <span>Permission</span>
+                            </div>
+                            <div class="col-sm-3">
+                                <span>Action</span>
+                            </div>
                         </div>
+                        <?php 
+                        foreach ($allftp as $key => $ftp) {
+                            
+                        ?>
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <label for="douser" class="col-form-label"><?php echo $ftp['username'];?></label>
+                            </div>
+                            
+                            <div class="col-sm-3">
+                              <?php echo $ftp['password'];?>
+                            </div>
+                            
+                            <div class="col-sm-3">
+                              <?php echo $ftp['permission'];?>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <p><button edit_id="<?php echo $ftp['id'];?>" origin_url="ftp.php" re_url="ftp_edit.php" class="pr-2 btn btn-warning btn-sm common_modal" data-toggle="modal" data-target="#common_modal"><i class="fas fa-edit text-white"></i></button>
+                                <button id="" href="javascript:;" class="pr-2 btn btn-danger btn-sm common_modal_delete"delete_id="<?php echo $ftp['id'];?>" data-toggle="modal" data-target="#common_modal_delete"  origin_url="ftp.php" re_url="ftp_delete.php"><i class="fas fa-trash text-white"></i></button></p>
+                            </div>
+                        </div>
+                        <?php } ?>
                     </div>
                 </div> 
 
@@ -117,10 +148,10 @@ $domain = $_COOKIE["d"];
         </div>
 
             <!--Start ftp information in use Modal -->
-            <div class="modal fade" id="ftpUseInformationModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalTitle" aria-hidden="true">
+            <div class="modal fade" id="editFtp" tabindex="-1" role="dialog" aria-labelledby="passwordModalTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
-                        <form action="" method="" id="ftp-password">
+                        <form action="" method="" id="">
                             <div class="modal-header border-less">
                                 <h5 class="modal-title" id="ipAddressNameModalTitle">Change FTP Information Password</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -131,19 +162,19 @@ $domain = $_COOKIE["d"];
                                 <div class="model-line-spacing row">
                                     <label for="user_name2" class="col-sm-4 col-form-label">ユーザー名</label>
                                     <div class="col-sm-8">
-                                        <input type="text" readonly class="form-control" id="user_name2" value="ユーザー名">
+                                        <input type="text" readonly class="form-control" ftp="test" fid="test" id="edit_ftp" value="ユーザー名">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label for="pass_word3" class="col-sm-4 col-form-label">パスワード</label>
                                     <div class="col-sm-8">
-                                        <input type="password" class="form-control" id="pass_word3" name="pass_word2" value="password">
+                                        <input type="password" class="form-control" id="edit_ftp_pass" name="pass_word2" value="password">
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer border-less">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="button" id="edit_ftp_btn" class="btn btn-primary">Save changes</button>
                             </div>
                         </form>
                     </div>

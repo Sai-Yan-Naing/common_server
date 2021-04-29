@@ -5,26 +5,26 @@ class MsSQL{
 	}
 
 	function addUserAndDB($version, $db, $db_user, $db_password){
-		try {
-			if (!defined("SQLSERVER_" . $version . "_HOST_NAME")) {
-				throw new Exception();
-			}
-			if (strcmp($db, "") == 0 || strcmp($db_user, "") == 0  ||  strcmp($db_password, "") == 0) {
-				throw new Exception();
-			}
-			if (strpos($db, "CONCAT") !== false || strpos($db_user, "CONCAT") !== false || strpos($db_password, "CONCAT") !== false) {
-				throw new Exception();
-			}
-			if (strpos($db_user, "root") !== false) {
-				throw new Exception();
-			}
-			if (strlen($db) != mb_strlen($db, 'UTF-8') || strlen($db_user) != mb_strlen($db_user, 'UTF-8') || strlen($db_password) != mb_strlen($db_password, 'UTF-8')){
-				throw new Exception();
-			}
-		} catch (Exception $e) {
-			require("views/mssqlerror.php");
-			return false;
-		}
+		// try {
+		// 	if (!defined("SQLSERVER_" . $version . "_HOST_NAME")) {
+		// 		throw new Exception();
+		// 	}
+		// 	if (strcmp($db, "") == 0 || strcmp($db_user, "") == 0  ||  strcmp($db_password, "") == 0) {
+		// 		throw new Exception();
+		// 	}
+		// 	if (strpos($db, "CONCAT") !== false || strpos($db_user, "CONCAT") !== false || strpos($db_password, "CONCAT") !== false) {
+		// 		throw new Exception();
+		// 	}
+		// 	if (strpos($db_user, "root") !== false) {
+		// 		throw new Exception();
+		// 	}
+		// 	if (strlen($db) != mb_strlen($db, 'UTF-8') || strlen($db_user) != mb_strlen($db_user, 'UTF-8') || strlen($db_password) != mb_strlen($db_password, 'UTF-8')){
+		// 		throw new Exception();
+		// 	}
+		// } catch (Exception $e) {
+		// 	require("views/mssqlerror.php");
+		// 	return false;
+		// }
 		$version="2016";
 		$dsn = constant("SQLSERVER_" . $version . "_DSN");
 		$user = constant("SQLSERVER_" . $version . "_USER");
@@ -32,7 +32,7 @@ class MsSQL{
 	
 		try {
 			
-			$pdo = new PDO($dsn, $user, $pass);
+			$pdo = new PDO(SQLSERVER_2016_DSN, SQLSERVER_2016_USER, SQLSERVER_2016_PASS);
 			$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
 			$db = trim($pdo->quote($db), "'\"");
@@ -57,7 +57,7 @@ class MsSQL{
 			}
 			
 			# ユーザを作成
-			$stmt = $pdo->prepare("CREATE LOGIN [$db_user] WITH PASSWORD=N'$db_password', DEFAULT_DATABASE=[$db], CHECK_POLICY=ON, CHECK_EXPIRATION=OFF;");
+			$stmt = $pdo->prepare("CREATE LOGIN [$db_user] WITH PASSWORD=N'$db_password', DEFAULT_DATABASE=[$db], CHECK_POLICY=ON, CHECK_EXPIRATION=OFF; DENY VIEW ANY DATABASE TO [$db_user]");
 			$result = $stmt->execute();
 			$error_message = $stmt->errorInfo()[2];
 			$stmt->closeCursor();
@@ -83,7 +83,8 @@ class MsSQL{
 			}
 		} catch (PDOException $e) {
 			$error_message = $e->getMessage();
-			require("views/allerror.php");
+			die("test");
+			// require("views/allerror.php");
 			if (!is_null($stmt)) { $stmt->closeCursor(); }
 			$pdo = NULL;
 			return false;
@@ -118,6 +119,35 @@ class MsSQL{
 		return true;
 	}
 
+	function changePassword($dbuser,$dbpass){
+			$pdo = new PDO(SQLSERVER_2016_DSN, SQLSERVER_2016_USER, SQLSERVER_2016_PASS);
+			$stmt = $pdo->prepare("ALTER LOGIN $dbuser WITH PASSWORD = '$dbpass';");
+			$stmt->execute() or die("change password failed <br />". print_r($pdo->errorInfo(), true));
+			
+
+			try {
+			  $conn = new PDO(DSN, ROOT, ROOT_PASS);
+				  // set the PDO error mode to exception
+				  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+				  $sql = "UPDATE db_account_for_mssql SET pass='$dbpass' WHERE db_user='$dbuser'";
+
+				  // Prepare statement
+				  $stmt = $conn->prepare($sql);
+
+				  // execute the query
+				  $stmt->execute();
+
+				  // echo a message to say the UPDATE succeeded
+				  echo $stmt->rowCount() . " records UPDATED successfully";
+				} catch(PDOException $e) {
+				  echo $sql . "<br>" . $e->getMessage();
+				}
+
+				$conn = null;
+			return true;
+	}
+
 	function getAll()
 	{
 		try {
@@ -136,6 +166,34 @@ class MsSQL{
 			$pdo_account = NULL;
 			die();
 		}
+	}
+
+	function deleteDB($dbid,$dbuser,$db){
+		// return $dbid.$dbuser.$db;
+			// $dsn2 = 'mysql:host=localhost:3307';
+			$mspdo = new PDO(SQLSERVER_2016_DSN, SQLSERVER_2016_USER, SQLSERVER_2016_PASS);
+			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+			$stmt1 = $mspdo->prepare("DROP DATABASE $db");
+			$stmt1->execute() or die("delete database failed <br />". print_r($mspdo->errorInfo(), true));
+			
+			$stmt = $mspdo->prepare("DROP LOGIN $dbuser");
+			$stmt->execute() or die("delete database user failed <br />". print_r($mspdo->errorInfo(), true));
+			
+			$dstmt = $pdo_account->prepare("DELETE FROM `db_account_for_mssql` WHERE id = ?");
+			// $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
+			$dstmt->execute(array($dbid));
+			return true;
+	}
+
+	function getDB($id)
+	{
+		$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+			// 
+		$stmt1 = $pdo_account->prepare("SELECT * FROM db_account_for_mssql WHERE `id` = ?");
+		$stmt1->execute(array($id));
+		$data1 = $stmt1->fetch(PDO::FETCH_ASSOC);
+		$pdo_account = NULL;
+		return $data1;
 	}
 
 	function checkDomain($domain){

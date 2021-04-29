@@ -232,65 +232,10 @@ class Account{
 	}
 
 	function addMultiDomain($domain, $web_dir, $ftp_user, $password, $token){
-
-		// $this->addFtp($ftp_user, $password, $_COOKIE["d"], $domain, $web_dir);
-		// die();
-		$pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
-		$site_init=1;
-
-		try {
-			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
-
-			// for domain
-			$stmt = $pdo_account->prepare("SELECT COUNT(domain) as cnt FROM web_account WHERE `domain` = ?");
-			$stmt->execute(array($domain));
-			$data = $stmt->fetch(PDO::FETCH_ASSOC);
-
-			if ($data['cnt'] <= 0) {
-				$stmt_create = $pdo_account->prepare("INSERT INTO web_account (`domain`, `password`, `user`, `stopped`, `appstopped`, `web_dir`, `customer_id`, `token`) VALUES (:domain, :password, :user, :stopped, :appstopped, :web_dir, :customer_id, :token)") or die("insert error <br />". print_r($pdo_account->errorInfo(), true));
-				$stmt_create->bindParam(":domain", $domain, PDO::PARAM_STR);
-				$stmt_create->bindParam(":password", $pass_encrypted, PDO::PARAM_STR);
-				$stmt_create->bindParam(":user", $domain, PDO::PARAM_STR);
-				$stmt_create->bindParam(":stopped", $site_init, PDO::PARAM_INT);
-				$stmt_create->bindParam(":appstopped", $site_init, PDO::PARAM_INT);
-				$stmt_create->bindParam(":web_dir", $web_dir, PDO::PARAM_STR);
-				$stmt_create->bindParam(":customer_id", $_COOKIE["d"], PDO::PARAM_STR);
-				$stmt_create->bindParam(":token", $token, PDO::PARAM_STR);
-				$stmt_create->execute();
-				$pdo_account = NULL;
-
-				$root_dir = 'c:/laragon/www/'.$web_dir.'/';
-				$physicalpath='c:/laragon/www/';
-				$physicalpath=str_replace('/', '\rev_del', "c:/laragon/www/");
-				$physicalpath=str_replace('rev_del', '', "$physicalpath");
-				$physicalpath=$physicalpath.$web_dir;
-			   if (!file_exists ($root_dir))
-			      {
-			      	  // $last_id = $stmt_create->lastInsertId();
-			      	  mkdir($root_dir,0777,true);  
-			      	  $this->addFtp($ftp_user, $password, $_COOKIE["d"], $domain, $web_dir);
-					  $this->addDefaultFile($domain,$password,$web_dir);
-			          
-				  }
-
-				 Shell_Exec ("%windir%\system32\inetsrv\appcmd.exe add site /name:$domain /bindings:http://$domain:80 /physicalpath:$physicalpath");
-				 Shell_Exec ("%windir%\system32\inetsrv\appcmd.exe add apppool /name:$domain");
-				 Shell_Exec ("%windir%\system32\inetsrv\appcmd.exe set config /section:applicationPools /[name=$domain].processModel.identityType:ApplicationPoolIdentity");
-				 Shell_Exec ("%windir%\system32\inetsrv\appcmd.exe set site /site.name:$domain /[path='/'].applicationPool:$domain");
-
-				 // add to host file
-				 $fp = fopen('C:\Windows\System32\drivers\etc\hosts','a');
-				fwrite($fp, "127.0.0.1      $domain" . "\n");  
-				fclose($fp);
-
-				// die();
-				return true;
-				// header('Location: /home.php');
-
-			}else{
-				return false;
-			}
-
+		try{
+		$ip='127.0.0.1';
+			echo system('E:scripts/test.bat '.$domain.' '.$web_dir.' '.$password.' '.$ip);
+			return true;
 
 		} catch (PDOException $e) {
 			print('Error ' . $e->getMessage());
