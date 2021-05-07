@@ -3,9 +3,11 @@
 $password = $_COOKIE["p"];
 $domain = $_COOKIE["d"];
 require_once('models/ftp.php');
+require_once('models/common.php');
 $getFtp = new Ftp;
+$getweball = new Common;
 $allftp=$getFtp->getAll();
-$getWeb = $getFtp->getWebaccount($_COOKIE['d']);
+$getWeb = $getweball->getWebaccount($_COOKIE['d']);
 ?>
 
 <?php require("views/dheader.php") ?>

@@ -1,5 +1,5 @@
 <?php
-// define("PASS_KEY", "cee358b7cd218370be64e518934687be");
+define("PASS_KEY", "cee358b7cd218370be64e518934687be");
 
 define("ROOT", 'root');
 define("ROOT_PASS", "");

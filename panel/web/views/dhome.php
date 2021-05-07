@@ -1,8 +1,8 @@
 <?php 
 $password = $_COOKIE["p"];
 $domain = $_COOKIE["d"];
-require("views/dheader.php"); 
 require_once('models/account.php');
+require("views/dheader.php"); 
 
 $account = new Account;
 $error_pages=$account->getErrorPages($domain);

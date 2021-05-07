@@ -202,3 +202,23 @@ function change_mail_text(change)
 {
 	$("#change_mail_text").text(change)
 }
+
+// $(document).on('click','.download_file',function(){
+// 	$path=$(this).attr('path');
+// 	$file=$(this).attr('file');
+
+// 	$re_url = $(this).attr('re_url');
+// 	$url = document.URL.split('/');
+// 	$url=$url[0]+"//"+$url[2];
+
+// 	// document.getElementById("display_modal").innerHTML = "loading";
+// 	$.ajax({
+// 	    type: "POST",
+// 	    url: $url+"/"+$re_url,
+// 	    data: {path: $path, file:$file},
+// 	    success: function(data){
+// 	    	alert(data)
+// 	        // document.getElementById("display_modal").innerHTML = data;
+// 	    }
+// 	});
+// });

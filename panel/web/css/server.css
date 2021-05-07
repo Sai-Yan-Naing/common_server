@@ -46,7 +46,7 @@ span {
 #content {
     width: 100%;
     padding: 20px;
-    min-height: 100vh;
+    min-height: 90vh;
     transition: all 0.3s;
 }
 
@@ -333,7 +333,7 @@ span {
     margin-left: 15px;
 }
 
-.site-security thead th {
+/*.site-security thead th {
     border-top: 1px solid #000000!important;
 }
 
@@ -345,7 +345,7 @@ span {
 .site-security th {
     border-left: 1px solid #000000!important;
     border-right: 1px solid #000000!important;
-}
+}*/
 
 .site-security .table-title {
     background-color: #4472c4;

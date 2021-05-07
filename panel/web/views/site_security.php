@@ -4,7 +4,8 @@ $password = $_COOKIE["p"];
 $domain = $_COOKIE["d"];
 
 ?>
-<?php require("views/dheader.php") ?>
+<?php require("views/dheader.php"); ?>
+
 <!-- Start of Wrapper  -->
     <div class="wrapper">
 
