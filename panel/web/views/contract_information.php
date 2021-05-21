@@ -19,7 +19,7 @@ $domain = $_COOKIE["d"];
                     <div class="m-40"><span>ドメイン</span></div><br>
                     <div class="m-40"><a href="#"><span>ご契約情報</span></a></div><br>
                     <div class="m-40"><a href="mail_information.php"><span >ドメイン</span></a></div><br>
-                    <div class="m-40"><a href="#"><span>自動バックアップ</span></a></div><br>
+                    <div class="m-40"><a href="backup.php"><span>自動バックアップ</span></a></div><br>
                 </div>
                 <div class="col-sm-10">
                     <h6 class="wserver">Winserver Controlpanel Share server</h6>

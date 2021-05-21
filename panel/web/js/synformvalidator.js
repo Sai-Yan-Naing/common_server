@@ -2,7 +2,7 @@ function minLength($id,$num,$message)
 {
 	$error = $("#"+$id+"_error");
 	if($("#"+$id).val().length<$num && $("#"+$id).val().length>0){
-		$("#"+$id).focus();
+		// $("#"+$id).focus();
 		$error.html($message);
 		return true;
 	}else{
@@ -15,7 +15,7 @@ function maxLength($id,$num,$message)
 {
 	$error = $("#"+$id+"_error");
 	if($("#"+$id).val().length>$num){
-		$("#"+$id).focus();
+		// $("#"+$id).focus();
 		$error.html($message);
 		return true;
 	}else{
@@ -28,7 +28,7 @@ function required($id,$message)
 {
 	$error = $("#"+$id+"_error");
 	if($("#"+$id).val()=="" || $("#"+$id).val()==null){
-		$("#"+$id).focus();
+		// $("#"+$id).focus();
 		$error.html($message);
 		return true;
 	}else{
@@ -46,7 +46,7 @@ function required_checkbox($id,$message)
     });
 	$error = $("#"+$id+"_error");
 	if($cb=="" || $cb==null){
-		$("#"+$id).focus();
+		// $("#"+$id).focus();
 		$error.html($message);
 		return true;
 	}else{

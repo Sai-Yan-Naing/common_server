@@ -72,7 +72,7 @@ $(function() {
     });
 
     // For Domain Homepage
-    $("form[id='domain-homepage']").validate({
+    $("form[id='app-install-form']").validate({
         rules: {
             url: {
                 required: true,

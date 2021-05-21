@@ -233,28 +233,34 @@ class Account{
 
 	function addMultiDomain($domain, $web_dir, $ftp_user, $password, $token){
 		try{
-		$ip='127.0.0.1';
-			echo system('E:scripts/test.bat '.$domain.' '.$web_dir.' '.$password.' '.$ip);
+			$plan = 4;
+			$pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
+
+			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+			$stmt = $pdo_account->prepare("INSERT INTO web_account (`domain`, `password`, `user`, `plan`, `customer_id`) VALUES (?, ?, ?, ?, ?)");
+			$stmt->execute(array($domain, $pass_encrypted, $ftp_user, $plan, $_COOKIE['d'])) or die("insert error <br />". print_r($pdo_account->errorInfo(), true));
+			$stmt1 = $pdo_account->prepare("INSERT INTO db_ftp (`username`, `password`, `domain`, `permission`) VALUES (?, ?, ?, ?)");
+			$stmt1->execute(array($ftp_user, $password, $domain, "F,R,W")) or die("insert error <br />". print_r($pdo_account->errorInfo(), true));
+			$pdo_account = NULL;
+
+			$ip='127.0.0.1';
+			echo system('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/test.ps1" '.$domain.' '.$ftp_user.' '.$password.' '.$ip);
+
 			return true;
 
 		} catch (PDOException $e) {
 			print('Error ' . $e->getMessage());
 			$error_message = "データベースへの接続エラーです。";
-			require("views/allerror.php");
+			// require("views/allerror.php");
 			$pdo_account = NULL;
 			die();
 		}
 	}
 
 	function getMultiDomain($customer_id){
-		// $pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
 
 		try {
 			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
-			// for customer
-			// $stmt = $pdo_account->prepare("SELECT * FROM customer WHERE `token` = ? AND `user_id` = ?  AND `status` = 0");
-			// $stmt->execute(array($token,$domain_userid));
-			// $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
 			$dstmt = $pdo_account->prepare("SELECT * FROM web_account WHERE `customer_id` = ?");
 			$dstmt->execute(array($customer_id));
@@ -264,261 +270,259 @@ class Account{
 
 		} catch (PDOException $e) {
 			print('Error ' . $e->getMessage());
-			$error_message = "データベースへの接続エラーです。";
-			require("views/allerror.php");
 			$pdo_account = NULL;
 			die();
 		}
 	}
 
-	function deleteDomain(int $domainid)
-	{
-		// echo gettype($domainid);
-		// die();
-		try {
-			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+	// function deleteDomain(int $domainid)
+	// {
+	// 	// echo gettype($domainid);
+	// 	// die();
+	// 	try {
+	// 		$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
 
-			$stmt = $pdo_account->prepare("SELECT * FROM `web_account` WHERE `id` = ?");
-			$stmt->execute(array($domainid));
-			$data = $stmt->fetch(PDO::FETCH_ASSOC);
-			$temp=$data['web_dir'];
-			$ftp_temp=$data['domain'];
+	// 		$stmt = $pdo_account->prepare("SELECT * FROM `web_account` WHERE `id` = ?");
+	// 		$stmt->execute(array($domainid));
+	// 		$data = $stmt->fetch(PDO::FETCH_ASSOC);
+	// 		$temp=$data['web_dir'];
+	// 		$ftp_temp=$data['domain'];
 
-			$dstmt = $pdo_account->prepare("DELETE FROM `web_account` WHERE id = ?");
-			// $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
-			if($dstmt->execute(array($domainid)))
-			{
-				$root_dir = 'c:/laragon/www/'.$temp;
-				echo $root_dir;
-				// die();
-				if(file_exists($root_dir)){
-					// die("error");
-					if(!$this->rrmdir($root_dir)) {
-					  echo ("Could not remove $root_dir");
-					  die();
-					}
-				}
+	// 		$dstmt = $pdo_account->prepare("DELETE FROM `web_account` WHERE id = ?");
+	// 		// $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
+	// 		if($dstmt->execute(array($domainid)))
+	// 		{
+	// 			$root_dir = 'c:/laragon/www/'.$temp;
+	// 			echo $root_dir;
+	// 			// die();
+	// 			if(file_exists($root_dir)){
+	// 				// die("error");
+	// 				if(!$this->rrmdir($root_dir)) {
+	// 				  echo ("Could not remove $root_dir");
+	// 				  die();
+	// 				}
+	// 			}
 
-				if ($ftp_temp) {
-					$ftpstmt = $pdo_account->prepare("SELECT * FROM `db_ftp` WHERE `domain` = ?");
-					if($ftpstmt->execute(array($ftp_temp))){
-						$ftpdata = $ftpstmt->fetch(PDO::FETCH_ASSOC);
-						echo $ftpdata['domain'];
-						$dftp_stmt = $pdo_account->prepare("DELETE FROM `db_ftp` WHERE domain = ?");
-						// $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
-						$dftp_stmt->execute(array($ftp_temp));
-						// if($dftp_stmt->execute(array($ftp_temp)))
-						// {
-						// 	die();
-						// }
+	// 			if ($ftp_temp) {
+	// 				$ftpstmt = $pdo_account->prepare("SELECT * FROM `db_ftp` WHERE `domain` = ?");
+	// 				if($ftpstmt->execute(array($ftp_temp))){
+	// 					$ftpdata = $ftpstmt->fetch(PDO::FETCH_ASSOC);
+	// 					echo $ftpdata['domain'];
+	// 					$dftp_stmt = $pdo_account->prepare("DELETE FROM `db_ftp` WHERE domain = ?");
+	// 					// $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
+	// 					$dftp_stmt->execute(array($ftp_temp));
+	// 					// if($dftp_stmt->execute(array($ftp_temp)))
+	// 					// {
+	// 					// 	die();
+	// 					// }
 						
 
-					}
+	// 				}
 					
-				}
+	// 			}
 				
-				return true;
-			}
-			return false;
+	// 			return true;
+	// 		}
+	// 		return false;
 
 
-		} catch (PDOException $e) {
-			print('Error ' . $e->getMessage());
-			$error_message = "データベースへの接続エラーです。";
-			require("views/allerror.php");
-			$pdo_account = NULL;
-			die();
-		}
-	}
+	// 	} catch (PDOException $e) {
+	// 		print('Error ' . $e->getMessage());
+	// 		$error_message = "データベースへの接続エラーです。";
+	// 		require("views/allerror.php");
+	// 		$pdo_account = NULL;
+	// 		die();
+	// 	}
+	// }
 
-	function addFtp($ftp_user, $password, $customer_id, $domain, $web_dir)
-	{
-		$pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
+	// function addFtp($ftp_user, $password, $customer_id, $domain, $web_dir)
+	// {
+	// 	$pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
 
-		try {
-			$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
+	// 	try {
+	// 		$pdo_account = new PDO(DSN, ROOT, ROOT_PASS);
 
-			// for domain
-			$stmt = $pdo_account->prepare("SELECT COUNT(username) as cnt FROM db_ftp WHERE `username` = ? and `password` = ? and `web_dir` = ?");
-			$stmt->execute(array($domain, $password, $web_dir));
-			$data = $stmt->fetch(PDO::FETCH_ASSOC);
+	// 		// for domain
+	// 		$stmt = $pdo_account->prepare("SELECT COUNT(username) as cnt FROM db_ftp WHERE `username` = ? and `password` = ? and `web_dir` = ?");
+	// 		$stmt->execute(array($domain, $password, $web_dir));
+	// 		$data = $stmt->fetch(PDO::FETCH_ASSOC);
 
-				if ($data['cnt'] <= 0) {
-					$stmt_create = $pdo_account->prepare("INSERT INTO db_ftp (`username`, `password`, `customer_id`, `domain`, `web_dir`) VALUES (:username, :password, :customer_id, :domain, :web_dir)") or die("insert error <br />". print_r($pdo_account->errorInfo(), true));
-					$stmt_create->bindParam(":username", $domain, PDO::PARAM_STR);
-					$stmt_create->bindParam(":password", $pass_encrypted, PDO::PARAM_STR);
-					$stmt_create->bindParam(":customer_id", $customer_id, PDO::PARAM_STR);
-					$stmt_create->bindParam(":domain", $domain, PDO::PARAM_STR);
-					$stmt_create->bindParam(":web_dir", $web_dir, PDO::PARAM_STR);
-					// $stmt_create->bindParam(":status", 1, PDO::PARAM_INT);
-					// $stmt_create->bindParam(":token", $token, PDO::PARAM_STR);
-					$stmt_create->execute();
-					$pdo_account = NULL;
+	// 			if ($data['cnt'] <= 0) {
+	// 				$stmt_create = $pdo_account->prepare("INSERT INTO db_ftp (`username`, `password`, `customer_id`, `domain`, `web_dir`) VALUES (:username, :password, :customer_id, :domain, :web_dir)") or die("insert error <br />". print_r($pdo_account->errorInfo(), true));
+	// 				$stmt_create->bindParam(":username", $domain, PDO::PARAM_STR);
+	// 				$stmt_create->bindParam(":password", $pass_encrypted, PDO::PARAM_STR);
+	// 				$stmt_create->bindParam(":customer_id", $customer_id, PDO::PARAM_STR);
+	// 				$stmt_create->bindParam(":domain", $domain, PDO::PARAM_STR);
+	// 				$stmt_create->bindParam(":web_dir", $web_dir, PDO::PARAM_STR);
+	// 				// $stmt_create->bindParam(":status", 1, PDO::PARAM_INT);
+	// 				// $stmt_create->bindParam(":token", $token, PDO::PARAM_STR);
+	// 				$stmt_create->execute();
+	// 				$pdo_account = NULL;
 
-					// $root_dir = 'c:/laragon/www/'.$web_dir.'/';
-				 //   if (!file_exists ($root_dir))
-				 //      {
-				 //          mkdir($root_dir,0777,true);  
-					//   }
-					// die();
-					// $this->ftpAccount($ftp_user, $password, $web_dir);
-					return true;
-					// header('Location: /home.php');
+	// 				// $root_dir = 'c:/laragon/www/'.$web_dir.'/';
+	// 			 //   if (!file_exists ($root_dir))
+	// 			 //      {
+	// 			 //          mkdir($root_dir,0777,true);  
+	// 				//   }
+	// 				// die();
+	// 				// $this->ftpAccount($ftp_user, $password, $web_dir);
+	// 				return true;
+	// 				// header('Location: /home.php');
 
-				}else{
-					return false;
-				}
+	// 			}else{
+	// 				return false;
+	// 			}
 
-			} catch (PDOException $e) {
-			print('Error ' . $e->getMessage());
-			$error_message = "データベースへの接続エラーです。";
-			require("views/allerror.php");
-			$pdo_account = NULL;
-			die();
-		}
-	}
+	// 		} catch (PDOException $e) {
+	// 		print('Error ' . $e->getMessage());
+	// 		$error_message = "データベースへの接続エラーです。";
+	// 		require("views/allerror.php");
+	// 		$pdo_account = NULL;
+	// 		die();
+	// 	}
+	// }
 
-	function ftpAccount($ftp_user, $bpassword, $web_dir)
-	{
-		//user info
-		$username = $ftp_user;
-		$password = md5($bpassword);
-		$userDir = "c:/laragon/www/".$web_dir;
+	// function ftpAccount($ftp_user, $bpassword, $web_dir)
+	// {
+	// 	//user info
+	// 	$username = $ftp_user;
+	// 	$password = md5($bpassword);
+	// 	$userDir = "c:/laragon/www/".$web_dir;
 
-		//location of filezilla
-		$fileloc = "C:/FileZilla Server/";
-		$filelocfile = ($fileloc."FileZilla Server.xml");
-		//echo $filelocfile;
+	// 	//location of filezilla
+	// 	$fileloc = "C:/FileZilla Server/";
+	// 	$filelocfile = ($fileloc."FileZilla Server.xml");
+	// 	//echo $filelocfile;
 
-		////////////////
-		// start add filezilla user
-		////////////////
+	// 	////////////////
+	// 	// start add filezilla user
+	// 	////////////////
 
-		//Check to see if user name is already used
-		$fp = fopen($filelocfile,"r");
-		$data = fread($fp,filesize($filelocfile));
-		$pos1 = strpos($data,'<User Name="' . $username . '"');//find user name
-		//echo (".".$pos1.".");
-		fclose($fp);
+	// 	//Check to see if user name is already used
+	// 	$fp = fopen($filelocfile,"r");
+	// 	$data = fread($fp,filesize($filelocfile));
+	// 	$pos1 = strpos($data,'<User Name="' . $username . '"');//find user name
+	// 	//echo (".".$pos1.".");
+	// 	fclose($fp);
 
-		//if user not found .. add
-		if($pos1 == ""){
-		echo "adding user......";
+	// 	//if user not found .. add
+	// 	if($pos1 == ""){
+	// 	echo "adding user......";
 
-		// user setting for FileZilla FTP
+	// 	// user setting for FileZilla FTP
 
-		$fileread = 1;   //Files Read  1 = YES  0 = NO
-		$filewrite = 1;  //Files Write
-		$filedelete = 1; //Files Delete
-		$fileappend = 1; //Files Append, must have Write on
-		$dircreate = 1;  //Directory Create
-		$dirdelete = 1;  //Directory Delete
-		$dirlist = 1;    //Directory List
-		$dirsubdirs = 1; //Directory + Subdirs
+	// 	$fileread = 1;   //Files Read  1 = YES  0 = NO
+	// 	$filewrite = 1;  //Files Write
+	// 	$filedelete = 1; //Files Delete
+	// 	$fileappend = 1; //Files Append, must have Write on
+	// 	$dircreate = 1;  //Directory Create
+	// 	$dirdelete = 1;  //Directory Delete
+	// 	$dirlist = 1;    //Directory List
+	// 	$dirsubdirs = 1; //Directory + Subdirs
 		 
-		// Aktuelle Config wird eingelesen
-		$lines = file($filelocfile);
+	// 	// Aktuelle Config wird eingelesen
+	// 	$lines = file($filelocfile);
 
 
-		// Copy Config for backup
-		rename($filelocfile, $fileloc . date("Y-m-d;H-i-s")." FileZilla Server.xml" );
+	// 	// Copy Config for backup
+	// 	rename($filelocfile, $fileloc . date("Y-m-d;H-i-s")." FileZilla Server.xml" );
 		 
 
-		// open Config for writing 
-		$file = fopen($filelocfile,"a");
+	// 	// open Config for writing 
+	// 	$file = fopen($filelocfile,"a");
 
-		for($i=0; $i < sizeof($lines); $i++)
-		{
-		fwrite ($file, $lines[$i]);
+	// 	for($i=0; $i < sizeof($lines); $i++)
+	// 	{
+	// 	fwrite ($file, $lines[$i]);
 		 
-		// write new information on top of list after "<Users>" 
-		if (strstr($lines[$i],"<Users>"))
-		{
+	// 	// write new information on top of list after "<Users>" 
+	// 	if (strstr($lines[$i],"<Users>"))
+	// 	{
 
-		fwrite($file, '<User Name="' . $username . '">
-		<Option Name="Pass">' . $password . '</Option>
-		<Option Name="Group"/>
-		<Option Name="Bypass server userlimit">0</Option>
-		<Option Name="User Limit">0</Option>
-		<Option Name="IP Limit">0</Option>
-		<Option Name="Enabled">1</Option>
-		<Option Name="Comments"/>
-		<Option Name="ForceSsl">0</Option>
-		<IpFilter>
-		<Disallowed/>
-		<Allowed/>
-		</IpFilter>
-		<Permissions>
-		<Permission Dir="'.$userDir.'">
-		<Option Name="FileRead">' . $fileread . '</Option>
-		<Option Name="FileWrite">' . $filewrite . '</Option>
-		<Option Name="FileDelete">' . $filedelete . '</Option>
-		<Option Name="FileAppend">' . $fileappend . '</Option>
-		<Option Name="DirCreate">' . $dircreate . '</Option>
-		<Option Name="DirDelete">' . $dirdelete . '</Option>
-		<Option Name="DirList">' . $dirlist . '</Option>
-		<Option Name="DirSubdirs">' . $dirsubdirs . '</Option>
-		<Option Name="IsHome">1</Option>
-		<Option Name="AutoCreate">0</Option>
-		</Permission>
-		</Permissions>
-		<SpeedLimits DlType="0" DlLimit="10" ServerDlLimitBypass="0" UlType="0" UlLimit="10" ServerUlLimitBypass="0">
-		<Download/>
-		<Upload/>
-		</SpeedLimits>
-		</User>
-		');
-		}
-		}
+	// 	fwrite($file, '<User Name="' . $username . '">
+	// 	<Option Name="Pass">' . $password . '</Option>
+	// 	<Option Name="Group"/>
+	// 	<Option Name="Bypass server userlimit">0</Option>
+	// 	<Option Name="User Limit">0</Option>
+	// 	<Option Name="IP Limit">0</Option>
+	// 	<Option Name="Enabled">1</Option>
+	// 	<Option Name="Comments"/>
+	// 	<Option Name="ForceSsl">0</Option>
+	// 	<IpFilter>
+	// 	<Disallowed/>
+	// 	<Allowed/>
+	// 	</IpFilter>
+	// 	<Permissions>
+	// 	<Permission Dir="'.$userDir.'">
+	// 	<Option Name="FileRead">' . $fileread . '</Option>
+	// 	<Option Name="FileWrite">' . $filewrite . '</Option>
+	// 	<Option Name="FileDelete">' . $filedelete . '</Option>
+	// 	<Option Name="FileAppend">' . $fileappend . '</Option>
+	// 	<Option Name="DirCreate">' . $dircreate . '</Option>
+	// 	<Option Name="DirDelete">' . $dirdelete . '</Option>
+	// 	<Option Name="DirList">' . $dirlist . '</Option>
+	// 	<Option Name="DirSubdirs">' . $dirsubdirs . '</Option>
+	// 	<Option Name="IsHome">1</Option>
+	// 	<Option Name="AutoCreate">0</Option>
+	// 	</Permission>
+	// 	</Permissions>
+	// 	<SpeedLimits DlType="0" DlLimit="10" ServerDlLimitBypass="0" UlType="0" UlLimit="10" ServerUlLimitBypass="0">
+	// 	<Download/>
+	// 	<Upload/>
+	// 	</SpeedLimits>
+	// 	</User>
+	// 	');
+	// 	}
+	// 	}
 
-		// Close xml file
-		fclose($file);
+	// 	// Close xml file
+	// 	fclose($file);
 
-		//added user now reload FileZilla Server XML file to add user
-		// passthru($fileloc.'filezillaserver.exe /reload-config');
-		system('"' . $fileloc.'FileZilla server.exe' . '"' . '/reload-config');
-		Echo (" filezilla reloaded, user active");
-		}else{
-		echo "user name ".$username." already used";//did not add user, user name already used
-		die();
-		}
+	// 	//added user now reload FileZilla Server XML file to add user
+	// 	// passthru($fileloc.'filezillaserver.exe /reload-config');
+	// 	system('"' . $fileloc.'FileZilla server.exe' . '"' . '/reload-config');
+	// 	Echo (" filezilla reloaded, user active");
+	// 	}else{
+	// 	echo "user name ".$username." already used";//did not add user, user name already used
+	// 	die();
+	// 	}
 
-		// $this->addDefaultFile($username,$bpassword,$web_dir);
-		// echo copy("c:/laragon/www/test/index.php","c:/laragon/www/".$web_dir);
+	// 	// $this->addDefaultFile($username,$bpassword,$web_dir);
+	// 	// echo copy("c:/laragon/www/test/index.php","c:/laragon/www/".$web_dir);
 
-		////////////////
-		// end add filezilla user
-		////////////////
-	}
+	// 	////////////////
+	// 	// end add filezilla user
+	// 	////////////////
+	// }
 
-	function addDefaultFile($username,$password,$web_dir)
-	{
-		$default_file = fopen("c:/laragon/www/".$web_dir."/index.html", "w") or die("Unable to open file!");
-		$txt = "Welcome<br>".$username."<br>";
-		fwrite($default_file, $txt);
-		$txt = "Password<br>".$password;
-		fwrite($default_file, $txt);
-		fclose($default_file);
-	}
+	// function addDefaultFile($username,$password,$web_dir)
+	// {
+	// 	$default_file = fopen("c:/laragon/www/".$web_dir."/index.html", "w") or die("Unable to open file!");
+	// 	$txt = "Welcome<br>".$username."<br>";
+	// 	fwrite($default_file, $txt);
+	// 	$txt = "Password<br>".$password;
+	// 	fwrite($default_file, $txt);
+	// 	fclose($default_file);
+	// }
 
-	function rrmdir($dir) {
-	  if (is_dir($dir)) {
-	    $objects = scandir($dir);
-	    foreach ($objects as $object) {
-	      if ($object != "." && $object != "..") {
-	        if (filetype($dir."/".$object) == "dir") 
-	           $this->rrmdir($dir."/".$object); 
-	        else unlink   ($dir."/".$object);
-	      }
-	    }
-	    reset($objects);
-	    rmdir($dir);
-	    return true;
-	  }
+	// function rrmdir($dir) {
+	//   if (is_dir($dir)) {
+	//     $objects = scandir($dir);
+	//     foreach ($objects as $object) {
+	//       if ($object != "." && $object != "..") {
+	//         if (filetype($dir."/".$object) == "dir") 
+	//            $this->rrmdir($dir."/".$object); 
+	//         else unlink   ($dir."/".$object);
+	//       }
+	//     }
+	//     reset($objects);
+	//     rmdir($dir);
+	//     return true;
+	//   }
 
-	 }
+	//  }
 
-	 function Site($app, $status, $domain){
+	function Site($app, $status, $domain){
 		// $pass_encrypted = hash_hmac('sha256', $password, PASS_KEY);
 
 		try {
@@ -604,19 +608,6 @@ class Account{
 						$error_pages['url'] =  $url_spec;
 						$error_pages['stopped'] =  1;
 						$temp[]=$error_pages;
-						// $test=$data['error_pages'];
-						// foreach (json_decode($test) as $key => $value) {
-						// 		$temp[$key]['id']=$key;
-						// 		$temp[$key]['statuscode']=$value->statuscode;
-						// 		$temp[$key]['url']=$value->url;
-						// 		$temp[$key]['stopped']=$value->stopped;
-						// 	}
-
-						// $error_pages['id'] = count($test);
-						// $error_pages['statuscode'] = $statuscode;
-						// $error_pages['url'] =  $url_spec;
-						// $error_pages['stopped'] =  1;
-						// $temp[]=$error_pages;
 					}
 					
 					$error_pages=json_encode($temp);
@@ -697,10 +688,10 @@ class Account{
 								$temp[$key]['url']=$value->url;
 								if($onoff=="off"){
 									$temp[$key]['stopped']=0;
-									echo Shell_Exec ("c:/laragon/www/app/error/onoff.cmd ". $_COOKIE['d']." ". $value->statuscode);
+									echo Shell_Exec ("c:/laragon/www/app/error/onoff.cmd ". $data['user']." ". $value->statuscode);
 								}else{
 									$temp[$key]['stopped']=1;
-									echo Shell_Exec ("c:/laragon/www/app/error.cmd ". $_COOKIE['d']." ". $value->statuscode." ".$value->url);
+									echo Shell_Exec ("c:/laragon/www/app/error.cmd ". $data['user']." ". $value->statuscode." ".$value->url);
 								}
 							}else{
 								$temp[$key]['statuscode']=$value->statuscode;

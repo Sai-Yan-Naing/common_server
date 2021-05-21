@@ -40,7 +40,7 @@ $(document).on('click','#adnewerror',function(){
 		    url: $url+"/site_onoff.php",
 		    data: {error: "new_error", status_code: $status_code, url_spec: $url_spec},
 		    success: function(data){
-		        alert(data);
+		        // alert(data);
 				// $result="<div class='row'><div class='col-sm-3'><p class='pl-4'>statuscode</p></div><div class='col-sm-7'><p>path</p></div><div class='col-sm-2'><div class='toggle btn btn-danger off btn-sm' data-toggle='toggle' role='button' style='width: 0px; height: 0px;'><input type='checkbox' data-toggle='toggle' data-onstyle='success' data-offstyle='danger' data-on='ON' data-off='OFF' data-size='sm'><div class='toggle-group'><label for=' class='btn btn-success btn-sm toggle-on'><font style='vertical-align: inherit;'><font style='vertical-align: inherit;'>ON</font></font></label><label for=' class='btn btn-danger btn-sm toggle-off'><font style='vertical-align: inherit;'><font style='vertical-align: inherit;'>OFF OFF</font></font></label><span class='toggle-handle btn btn-light btn-sm'></span></div></div></div></div>"
 		  //       $("#loop_error").append($result)
 		        // alert(document.URL);
@@ -72,7 +72,7 @@ $(document).on('click','#edit_error',function(){
 		    url: $url+"/site_onoff.php",
 		    data: {error: "edit_error", status_code: $status_code, url_spec: $url_spec, key: $key, code: $code},
 		    success: function(data){
-		        alert(data);
+		        // alert(data);
 				// $result="<div class='row'><div class='col-sm-3'><p class='pl-4'>statuscode</p></div><div class='col-sm-7'><p>path</p></div><div class='col-sm-2'><div class='toggle btn btn-danger off btn-sm' data-toggle='toggle' role='button' style='width: 0px; height: 0px;'><input type='checkbox' data-toggle='toggle' data-onstyle='success' data-offstyle='danger' data-on='ON' data-off='OFF' data-size='sm'><div class='toggle-group'><label for=' class='btn btn-success btn-sm toggle-on'><font style='vertical-align: inherit;'><font style='vertical-align: inherit;'>ON</font></font></label><label for=' class='btn btn-danger btn-sm toggle-off'><font style='vertical-align: inherit;'><font style='vertical-align: inherit;'>OFF OFF</font></font></label><span class='toggle-handle btn btn-light btn-sm'></span></div></div></div></div>"
 		  //       $("#loop_error").append($result)
 		        // alert(document.URL);
@@ -102,7 +102,7 @@ $(document).on('change','.error_onoff',function(){
 		    url: $url+"/site_onoff.php",
 		    data: {error: "onoff", status_code: $status_code, onoff: $onoff},
 		    success: function(data){
-		        alert(data);
+		        // alert(data);
 				// $result="<div class='row'><div class='col-sm-3'><p class='pl-4'>statuscode</p></div><div class='col-sm-7'><p>path</p></div><div class='col-sm-2'><div class='toggle btn btn-danger off btn-sm' data-toggle='toggle' role='button' style='width: 0px; height: 0px;'><input type='checkbox' data-toggle='toggle' data-onstyle='success' data-offstyle='danger' data-on='ON' data-off='OFF' data-size='sm'><div class='toggle-group'><label for=' class='btn btn-success btn-sm toggle-on'><font style='vertical-align: inherit;'><font style='vertical-align: inherit;'>ON</font></font></label><label for=' class='btn btn-danger btn-sm toggle-off'><font style='vertical-align: inherit;'><font style='vertical-align: inherit;'>OFF OFF</font></font></label><span class='toggle-handle btn btn-light btn-sm'></span></div></div></div></div>"
 		  //       $("#loop_error").append($result)
 		        // alert(document.URL);

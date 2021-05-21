@@ -4,15 +4,19 @@ $password = $_COOKIE["p"];
 $domain = $_COOKIE["d"];
 
 ?>
-<?php require("views/header.php") ?>
+<?php
+require_once('models/account.php');
+require("views/header.php") ?>
 <?php 
 
-require_once('models/account.php');
+
 require_once('views/directory_size.php');
 
 $account = new Account;
-$multidomain=$account->getMultiDomain($_COOKIE['d'], $_COOKIE['p']);
+$multidomain=$account->getMultiDomain($_COOKIE['d']);
 ?>
+<span style="display: none;" re_url="checker" id="domain_checker_fm" tb="web_account"></span>
+<span style="display: none;" re_url="checker" id="ftp_user_checker_fm" tb="db_ftp"></span>
 <!-- Start of Wrapper  -->
     <div class="wrapper">
 
@@ -20,7 +24,7 @@ $multidomain=$account->getMultiDomain($_COOKIE['d'], $_COOKIE['p']);
         <nav id="sidebar"  style="margin-top: 85px;">
             <ul class="list-unstyled components">
                 <li class="active">
-                    <a href="#">
+                    <a href="home.php">
                         <span class="icon"><i class="fas fa-tv"></i></span><br>
                         <span class="title">サーバー設定</span>
                     </a>
@@ -46,10 +50,10 @@ $multidomain=$account->getMultiDomain($_COOKIE['d'], $_COOKIE['p']);
         	<h6 class="win-cpanel">Winserver Controlpanel</h6>
     		<form class="keiyaku-id">
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <label for="contract-id">契約ID</label>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-8">
                         <input type="text" class="form-control" id="contract-id" value="<?php echo $_COOKIE['d']; ?>" readonly>
                     </div>
                 </div>
@@ -73,12 +77,12 @@ $multidomain=$account->getMultiDomain($_COOKIE['d'], $_COOKIE['p']);
 
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div id="shared-server" class="container tab-pane active"><br>
+                        <div id="shared-server" class="tab-pane active"><br>
                             <table class="table table-borderless">
 							  <thead>
 							    <tr>
 							      <th>契約ドメイン</th>
-							      <th></th>
+							      <th>Site Setting</th>
 							      <th>使用容量</th>
 							      <th>サイト</th>
 							      <th>アプリケーションプール</th>
@@ -90,21 +94,23 @@ $multidomain=$account->getMultiDomain($_COOKIE['d'], $_COOKIE['p']);
 							  	foreach($multidomain as $domain) {
                                     ?>
 							  		<tr>
-                                        <td><?php echo $domain['domain'] ?></td>
+                                        <td><a href="http://<?php echo $domain['domain'] ?>" class="link-success" target="_blank"><?php echo $domain['domain'] ?></a></td>
                                         <td>
-                                            <a href="dhome.php" class="btn btn-outline-primary btn-sm">設定</a>
+
+                                            <button type="button" class="btn btn-outline-primary btn-sm" disable>設定</button>
                                         </td>
                                         <td>
-                                            <span class="btn btn-outline-secondary btn-sm"><?php echo sizeFormat(folderSize("c:/laragon/www/$domain[web_dir]")) ?></span>
+                                            <span><?php echo sizeFormat(folderSize("E:/webroot/LocalUser/$domain[user]")) ?></span>
                                         </td>
                                         <td>
-                                            <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="起動" data-off="停止" data-size="sm" class="site-onoff site" id="<?php echo $domain['domain'] ?>" <?php if($domain['stopped']==1){echo "checked";}  ?>>
+                                            <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="起動" data-off="停止" data-size="sm" class="site-onoff site" id="<?php echo $domain['user'] ?>" <?php if($domain['stopped']==0){echo "checked";}  ?>>
                                         </td>
                                         <td>
-                                            <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="起動" data-off="停止" data-size="sm" class="site-onoff app" id="<?php echo $domain['domain'] ?>" <?php if($domain['appstopped']==1){echo "checked";} ?>>
+                                            <input type="checkbox" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-on="起動" data-off="停止" data-size="sm" class="site-onoff app" id="<?php echo $domain['user'] ?>" <?php if($domain['appstopped']==0){echo "checked";} ?>>
                                         </td>
                                         <td>
-                                            <a href="delete_website.php?domainid=<?php echo $domain['id'] ?>" class="btn btn-danger btn-sm">削除</a>
+                                            <!-- <a href="delete_website.php?domainid=<?php echo $domain['id'] ?>" class="btn btn-danger btn-sm">削除</a> -->
+                                            <button type="button" class="btn btn-danger btn-sm" disable>削除</button>
                                         </td>
                                     </tr>
                                 <?php
@@ -113,12 +119,13 @@ $multidomain=$account->getMultiDomain($_COOKIE['d'], $_COOKIE['p']);
 							  </tbody>
 							</table>
 							<div class="conButton">
-								<a href="add_multi_domain.php" class="domainAdd btn btn-outline-primary btn-sm" role="button">マルチドメイン追加</a>
+                                <!-- <a href="add_multi_domain.php" class="domainAdd btn btn-outline-primary btn-sm" role="button">マルチドメイン追加</a> -->
+								<button class="domainAdd btn btn-outline-primary btn-sm common_modal"  data-toggle="modal" data-target="#common_modal" re_url="add_multi_domain.php">マルチドメイン追加</button>
 								<a href="#"  class="domainAcq btn btn-outline-secondary btn-sm">ドメイン取得</a>
 								<a href="add_server.php" class="addServer btn btn-outline-primary btn-sm">サーバー追加</a>
 							</div>
                         </div>
-                        <div id="vps-desktop" class="container tab-pane fade"><br>
+                        <div id="vps-desktop" class="tab-pane fade"><br>
                             <table class="table table-borderless">
 							  <thead>
 							    <tr>

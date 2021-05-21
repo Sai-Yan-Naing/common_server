@@ -31,10 +31,10 @@ $getWeb = $getweball->getWebaccount($_COOKIE['d']);
                         </li>
                       </ul>
                       <ul class="navbar-nav">
-                        <li class="mr-3 mr-l3 common_path" style="cursor: pointer;"><a data-toggle="modal" data-target="#upload_file"><i class="fas fa-upload text-light fa-lg"></i></a></li>
-                        <li class="mr-3 mr-l3 common_path" style="cursor: pointer;"><a data-toggle="modal" data-target="#newFolder"><i class="fas fa-folder text-warning fa-lg"></i></a></li>
-                        <li class="mr-3 mr-l3 common_path" style="cursor: pointer;"><a data-toggle="modal" data-target="#newFile"><i class="fas fa-file text-white fa-lg"></i></a></li>
-                        <li class="mr-3 mr-l3"></li>
+                        <li class="mr-3" style="cursor: pointer;"><a data-toggle="modal" data-target="#upload_file"><i class="fas fa-upload text-light fa-lg"></i></a></li>
+                        <li class="mr-3" style="cursor: pointer;"><a class="fm_common_c" action="newDir"  data-toggle="modal" data-target="#fm_common_modal" file_name="" re_url="filemanager_confirm"><i class="fas fa-folder text-warning fa-lg"></i></a></li>
+                        <li class="mr-3" style="cursor: pointer;"><a class="fm_common_c" action="newFile"  data-toggle="modal" data-target="#fm_common_modal" file_name="" re_url="filemanager_confirm"><i class="fas fa-file text-white fa-lg"></i></a></li>
+                        <li class="mr-3"></li>
                       </ul>
 
                     </nav>
@@ -85,39 +85,56 @@ $getWeb = $getweball->getWebaccount($_COOKIE['d']);
                                   <th><?= date("Y-m-d h:i:sA", filemtime($dir.'/'.$value)) ?></th>
                                   <th><?= filetype($dir.'/'.$value)?></th>
                                   <th><?php echo sizeFormat(folderSize($dir.'/'.$value)) ?></th>
-                                  <th class="row" colspan="2">
-                                    <span class=" col-sm-3"></span>
-                                    <button class="btn text-secondary zip_filefolder col-sm-3" re_url="filemanager_confirm.php" path="<?=$value?>" fun="zip">
-                                      <i class="fas fa-file-archive"></i>
+                                  <th class="d-flex justify-content-end" colspan="2">
+                                    <span class=""></span>
+                                    <button class="btn text-success fm_common_c" action="zip" file="dir"  data-toggle="modal" data-target="#fm_common_modal" file_name="<?= $value ?>" re_url="filemanager_confirm">
+                                      Zip
                                     </button>
-                                    <button class="btn text-info col-sm-3 dir_rename" data-toggle="modal" data-target="#dir_rename" file_name="<?= $value ?>" re_url="filemanager_confirm"><i class="fas fa-edit text-warning"></i>
+                                    <button class="btn text-success fm_common_c" action="rename" file="dir" data-toggle="modal" data-target="#fm_common_modal" file_name="<?= $value ?>" re_url="filemanager_confirm">Rename
                                     </button>
-                                    <button class="btn text-danger delete_filedir col-sm-3" re_url="filemanager_confirm" path="<?=$value?>" action="delete_dir">
+                                    <button class="btn text-danger delete_filedir" re_url="filemanager_confirm" path="<?=$value?>" action="delete_dir">
                                       <i class="far fa-trash-alt"></i>
                                     </button>
                                   </th>
                                 </tr>
                                 <?php 
                               }
+                              $ext = array('html','css','php','js', 'txt');
+ 
+                              $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+                               
+                              $url = $protocol . $_SERVER['HTTP_HOST'];
                               foreach ($files_list as $key => $value) {
+                                $extension = getFileExt($dir.'/'.$value);
                                 ?>
                                 <tr>
-                                  <th class="align-baseline open_file" style="cursor: pointer;" data-toggle="modal" data-target="#open_file" file_name="<?= $value ?>" re_url="filemanager_confirm"><div><i class="fas fa-file text-secondary fa-lg"></i> <?= $value ?></div></th>
+                                  
+                                  <th class="align-baseline open_file" style="cursor: pointer;" data-toggle="modal" <?php if (in_array($extension, $ext)){ echo 'data-target="#open_file"'; } ?> file_name="<?= $value ?>" re_url="filemanager_confirm"><div><i class="fas fa-file text-secondary fa-lg"></i> <?= $value ?></div></th>
+                                
                                   <th><?= date("Y-m-d h:i:sA", filemtime($dir.'/'.$value)) ?></th>
                                   <th><?= filetype($dir.'/'.$value)?></th>
                                   <th path="E:\webroot\LocalUser" file="<?=$value?>">
                                     <?php echo sizeFormat(filesize($dir.'/'.$value)) ?>
                                   </th>
-                                  <th class="row" colspan="2">
-                                    <a href="filemanager_confirm.php?download=<?=$value?>&common_path=" class="btn text-success col-sm-3 download_file">
+                                  <th class="d-flex justify-content-end" colspan="2">
+                                    <a href="filemanager_confirm.php?download=<?=$value?>&common_path=" class="btn text-success download_file">
                                       <i class="fa fa-download"></i>
                                     </a>
-                                    <button class="btn text-secondary col-sm-3" re_url="filemanager_confirm" path="<?=$value?>">
-                                      <i class="fas fa-file-archive"></i>
+                                    <button class="btn text-success fm_common_c" action="zip"  file="file" data-toggle="modal" data-target="#fm_common_modal" file_name="<?= $value ?>" re_url="filemanager_confirm">
+                                      Zip
                                     </button>
-                                    <button class="btn text-info col-sm-3 file_rename" data-toggle="modal" data-target="#file_rename" file_name="<?= $value ?>" re_url="filemanager_confirm"><i class="fas fa-edit text-warning"></i>
+                                    <?php 
+                                      if(getFileExt($dir.'/'.$value)=="zip")
+                                      {?>
+                                        <button class="btn text-success fm_common_c" action="unzip" data-toggle="modal" data-target="#fm_common_modal" file_name="<?= $value ?>" re_url="filemanager_confirm">
+                                        UnZip
+                                      </button>
+                                     <?php 
+                                      }
+                                      ?>
+                                    <button class="btn text-success fm_common_c" action="rename" file="file" data-toggle="modal" data-target="#fm_common_modal" file_name="<?= $value ?>" re_url="filemanager_confirm">Rename
                                     </button>
-                                    <button class="btn text-danger delete_filedir col-sm-3" re_url="filemanager_confirm" path="<?=$value?>"  action="delete_file">
+                                    <button class="btn text-danger delete_filedir" re_url="filemanager_confirm" path="<?=$value?>"  action="delete_file">
                                       <i class="far fa-trash-alt"></i>
                                     </button>
                                   </th>
@@ -138,57 +155,18 @@ $getWeb = $getweball->getWebaccount($_COOKIE['d']);
     </div>
     <!-- End of Wrapper  -->  
 
-    <div class="modal fade" id="newFile">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">New File</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form re_url="filemanager_confirm" action="file_create" modal="newFile" method="post" id="file_create">
-              <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" name="newfile">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-success" form="file_create">Create</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal fade" id="newFolder">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">New Folder</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form re_url="filemanager_confirm" action="folder_create" modal="newFolder" method="post" id="folder_create">
-              <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" name="folder">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-success" form="folder_create">Create</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <?php
+      function getFileExt($dir)
+      {
+        $ext = pathinfo($dir, PATHINFO_EXTENSION);
 
+        // Returns html
+        // echo $ext;
+        return $ext;
+      }
+     ?>
     <div class="modal fade" id="upload_file">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Upload File</h5>
@@ -197,16 +175,16 @@ $getWeb = $getweball->getWebaccount($_COOKIE['d']);
             </button>
           </div>
           <div class="modal-body">
-            <form re_url="filemanager_confirm" action="upload" modal="upload_file" method="post" enctype="multipart/form-data" id="upload_newfile">
-              <div class="form-group">
-                <label>Name</label>
-                <input type="file" class="form-control" name="fileToUpload">
+            <form re_url="filemanager_confirm" action="upload" modal="upload_file" method="post" enctype="multipart/form-data" id="upload_newfile" style="position: relative;">
+              <label class="ps_absolute">Drag and Drop File here</label>
+              <div style="position: relative; height: 200px">
+                <input type="file" class="form-control" name="fileToUpload" id="upload_">
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-success" form="upload_newfile">Create</button>
+            <button type="submit" class="btn btn-success" form="upload_newfile">Save</button>
           </div>
         </div>
       </div>
@@ -220,53 +198,31 @@ $getWeb = $getweball->getWebaccount($_COOKIE['d']);
       </div>
     </div>
 
-    <div class="modal fade" id="file_rename">
+    <div class="modal fade" id="fm_common_modal">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Rename File</h5>
+            <h5 class="modal-title" id="fm_modal_title">fm_modal_title</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <form re_url="filemanager_confirm" action="rename_file" modal="file_rename" method="post" id="rename_file">
+            <form re_url="filemanager_confirm" action="action" modal="fm_common_modal" method="post" id="fm_common_modal_form">
               <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" name="file_rename">
-                <input type="hidden" name="origin_name">
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-success" form="rename_file">save</button>
-          </div>
-        </div>
-      </div>
-    </div>
+                <label id="fm_form_label">Name</label>
+                <input type="text" class="form-control" name="fm_form_name">
 
-    <div class="modal fade" id="dir_rename">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Rename Directory</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form re_url="filemanager_confirm" action="rename_dir" modal="dir_rename" method="post" id="rename_dir">
-              <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" name="dir_rename">
+                <label id="fm_common_path">Extract to</label>
+                <input type="hidden" class="form-control" name="to">
+
                 <input type="hidden" name="origin_name">
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-success" form="rename_dir">save</button>
+            <button type="submit" class="btn btn-success" form="fm_common_modal_form">save</button>
           </div>
         </div>
       </div>
@@ -283,6 +239,29 @@ $getWeb = $getweball->getWebaccount($_COOKIE['d']);
     font-size: 13px;
     line-height: 16px;
     width:100%;
+  }
+  #upload_{
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    opacity: 0;
+  }
+  .ps_absolute
+  {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    border: 3px solid green; 
+    font-weight: bold;
   }
 </style>
 <?php require("views/footer.php") ?>

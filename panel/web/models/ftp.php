@@ -42,10 +42,11 @@ class Ftp{
 					// $stmt_create->bindParam(":status", 1, PDO::PARAM_INT);
 					// $stmt_create->bindParam(":token", $token, PDO::PARAM_STR);
 					// echo $domain.$ftpuser.$ftp_pass_word.$ftp_folder.$permission;
-					// echo Shell_Exec ("E:\scripts\add_ftp.bat ". $ftpuser." ".$ftp_pass_word." ".$ftp_folder." ".$per." new");
+					// echo system('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/add_ftp.ps1" '. $ftpuser." ".$ftp_pass_word." ".$ftp_folder." ".$per." new");
+					// echo system('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/test.ps1" '.$domain.' '.$ftp_user.' '.$password.' '.$ip);
 					// die();
 					if($stmt_create->execute()){
-					 Shell_Exec ("E:\scripts\add_ftp.bat ". $ftpuser." ".$ftp_pass_word." ".$ftp_folder." ".$per." new");	
+					 Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/add_ftp.ps1" '. $ftpuser." ".$ftp_pass_word." ".$ftp_folder." ".$per." new");	
 					}else{
 						die("error");
 					}
@@ -124,7 +125,7 @@ class Ftp{
 			$stmt = $pdo_account->prepare("UPDATE db_ftp SET `password` = ?, `permission`=? WHERE `id` = ?");
 			if($stmt->execute(array($ftp_pass_word,$permission,$id))){
 				// die($ftpuser.$ftp_pass_word.$ftp_folder.$per);
-				Shell_Exec ("E:\scripts\add_ftp.bat ". $ftpuser." ".$ftp_pass_word." ".$ftp_folder." ".$per." edit");	
+				Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/add_ftp.ps1" '. $ftpuser." ".$ftp_pass_word." ".$ftp_folder." ".$per." edit");	
 			}else{
 				die("error");
 			}
@@ -141,7 +142,7 @@ class Ftp{
 			$dstmt = $pdo_account->prepare("DELETE FROM `db_ftp` WHERE id = ?");
 			// $ddata = $dstmt->fetchAll(PDO::FETCH_ASSOC);
 			$dstmt->execute(array($id));
-			echo Shell_Exec ("E:\scripts\add_ftp.bat ". $ftpuser." "."noneed"." ".$ftp_folder." "."noneed"." delete");
+			echo Shell_Exec ('powershell.exe -executionpolicy bypass -NoProfile -File "E:\scripts/add_ftp.ps1" '. $ftpuser." "."noneed"." ".$ftp_folder." "."noneed"." delete");
 			// die();
 			return true;
 	}

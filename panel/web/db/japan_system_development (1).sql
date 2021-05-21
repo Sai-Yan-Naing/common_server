@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 29, 2021 at 03:45 PM
+-- Generation Time: May 21, 2021 at 04:18 PM
 -- Server version: 8.0.22
 -- PHP Version: 7.4.15
 
@@ -33,6 +33,37 @@ CREATE TABLE `add_email` (
   `email` varchar(255) COLLATE utf8_czech_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_czech_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+--
+-- Dumping data for table `add_email`
+--
+
+INSERT INTO `add_email` (`id`, `domain`, `email`, `password`) VALUES
+(1, 'capital_sai.test', 'saiyannaing@capital_sai.test', 'welcome123'),
+(2, 'capital_sai.test', 'saiyannaing1@capital_sai.test', 'welcome123'),
+(4, 'capital_sai1.test', 'saiyannaing@capital_sai1.test', 'welcome123'),
+(5, 'capital_sai1.test', 'saiyannaing123@capital_sai1.test', 'welcome123');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `back_data`
+--
+
+CREATE TABLE `back_data` (
+  `id` int NOT NULL,
+  `domain` varchar(255) CHARACTER SET utf8 COLLATE utf8_czech_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_czech_ci DEFAULT NULL,
+  `scheduler` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+
+--
+-- Dumping data for table `back_data`
+--
+
+INSERT INTO `back_data` (`id`, `domain`, `name`, `scheduler`) VALUES
+(1, 'capital_sai.test', 'capital_sai', 1),
+(2, 'capital_sai1.test', 'capital_sai1', 1);
 
 -- --------------------------------------------------------
 
@@ -84,6 +115,16 @@ CREATE TABLE `db_account` (
   `pass` varchar(255) CHARACTER SET sjis COLLATE sjis_japanese_ci NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `db_account`
+--
+
+INSERT INTO `db_account` (`id`, `domain`, `db_name`, `db_user`, `db_count`, `pass`) VALUES
+(1, 'capital_sai.test', '562_dbname', '563_username', 1, 'welcome123'),
+(2, 'capital_sai.test', 'wp_version_563', 'wp_version_563', 1, 'welcome123'),
+(3, 'capital_sai1.test', 'wp_version_five_db', 'wp_version_five_user', 1, 'welcome123'),
+(4, 'capital_sai1.test', 'wp_version_five_db1', 'wp_version_five_user1', 1, 'welcome123');
+
 -- --------------------------------------------------------
 
 --
@@ -131,6 +172,14 @@ CREATE TABLE `db_ftp` (
   `permission` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `db_ftp`
+--
+
+INSERT INTO `db_ftp` (`id`, `username`, `password`, `customer_id`, `domain`, `permission`) VALUES
+(1, 'capital_sai', 'welcome123', NULL, 'capital_sai.test', 'F,R,W'),
+(2, 'capital_sai1', 'welcome123', NULL, 'capital_sai1.test', 'F,R,W');
+
 -- --------------------------------------------------------
 
 --
@@ -143,14 +192,6 @@ CREATE TABLE `error_pages` (
   `statuscode` varchar(255) COLLATE utf8_czech_ci DEFAULT NULL,
   `url` varchar(255) COLLATE utf8_czech_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci COMMENT='error pages';
-
---
--- Dumping data for table `error_pages`
---
-
-INSERT INTO `error_pages` (`id`, `domain`, `statuscode`, `url`) VALUES
-(1, 'setmawhtay.com', '404', ''),
-(2, 'setmawhtay.com', '407', '');
 
 -- --------------------------------------------------------
 
@@ -186,12 +227,8 @@ CREATE TABLE `web_account` (
 --
 
 INSERT INTO `web_account` (`id`, `domain`, `password`, `user`, `mysql_cnt`, `mssql_cnt`, `plan`, `pass_change_require`, `wordpress_require`, `eccube_require`, `stopped`, `appstopped`, `ec_dir`, `word_dir`, `word_db`, `web_dir`, `customer_id`, `status`, `token`, `error_pages`) VALUES
-(1, 'setmawhtay.com', '4bb1f84a7b50447c450e2b1c84cde4676f36e9f0f36d30792f476852e644bcb4', 'setmawhtay.com', 0, 0, 0, 0, 0, 0, 1, 1, '', '', '', 'setmawhtay.com', 'D000123', 1, '51a2bfa91a6065e5e878dd695ddcdc8b', '[{\"url\": \"errors/404.html\", \"statuscode\": \"404\"}]'),
-(2, 'mgmg.test', '4bb1f84a7b50447c450e2b1c84cde4676f36e9f0f36d30792f476852e644bcb4', 'mgmg', 0, 0, 0, 0, 0, 0, 1, 1, '', '', '', 'mgmg.test', 'D000123', NULL, '15a4cf8c80f5c9f42339486c1bb258aa', '[{\"url\": \"errors/408.html\", \"stopped\": 1, \"statuscode\": \"404\"}, {\"url\": \"errors/405.html\", \"stopped\": 0, \"statuscode\": \"405\"}, {\"url\": \"errors/406.html\", \"stopped\": 1, \"statuscode\": \"406\"}, {\"url\": \"errors/407.html\", \"stopped\": 1, \"statuscode\": \"407\"}, {\"url\": \"errors/408.html\", \"stopped\": 1, \"statuscode\": \"408\"}, {\"url\": \"errors/409.html\", \"stopped\": 1, \"statuscode\": \"409\"}, {\"url\": \"errors/410.html\", \"stopped\": 1, \"statuscode\": \"410\"}, {\"url\": \"errors/411.html\", \"stopped\": 1, \"statuscode\": \"411\"}, {\"url\": \"\", \"stopped\": 1, \"statuscode\": \"\"}]'),
-(3, 'mgmg1.test', '4bb1f84a7b50447c450e2b1c84cde4676f36e9f0f36d30792f476852e644bcb4', 'mgmg1.test', 0, 0, 0, 0, 0, 0, 1, 1, '', '', '', 'mgmg1.test', 'D000123', NULL, '64815247a5a9e8612c3c89feafe8deac', '[{\"url\": \"errors/404.html\", \"statuscode\": \"404\"}]'),
-(4, 'welcome.test', '4bb1f84a7b50447c450e2b1c84cde4676f36e9f0f36d30792f476852e644bcb4', 'welcome.test', 0, 0, 0, 0, 0, 0, 1, 1, '', '', '', 'welcome.test', 'D000123', NULL, '43b4f9849738e1ecadef5e8a1514308d', NULL),
-(5, 'hello1.test', '4bb1f84a7b50447c450e2b1c84cde4676f36e9f0f36d30792f476852e644bcb4', 'hello1.test', 0, 0, 0, 0, 0, 0, 1, 1, '', '', '', 'hello1.test', 'D000123', NULL, '4e7b2382f3f179f42bc4743449bd761e', NULL),
-(8, 'ethical-sai.test', '4bb1f84a7b50447c450e2b1c84cde4676f36e9f0f36d30792f476852e644bcb4', 'ethical-sai.test', 0, 0, 0, 0, 0, 0, 1, 1, '', '', '', 'ethical-sai.test', 'D000123', NULL, 'c6587cd80c212d4203b9725449928780', NULL);
+(1, 'capital_sai.test', '8a3e82ec68bf0ea3cdb04605b293fe33c9fd593104eecf9997cbc2204b39f52d', 'capital_sai', 0, 0, 4, 0, 0, 0, 0, NULL, '', '', '', NULL, 'D000123', NULL, NULL, '[{\"url\": \"errors/405.html\", \"stopped\": 1, \"statuscode\": \"404\"}]'),
+(2, 'capital_sai1.test', '8a3e82ec68bf0ea3cdb04605b293fe33c9fd593104eecf9997cbc2204b39f52d', 'capital_sai1', 0, 0, 4, 0, 0, 0, 0, NULL, '', '', '', NULL, 'D000123', NULL, NULL, '[{\"url\": \"errors/405.html\", \"stopped\": 1, \"statuscode\": \"404\"}]');
 
 --
 -- Indexes for dumped tables
@@ -201,6 +238,12 @@ INSERT INTO `web_account` (`id`, `domain`, `password`, `user`, `mysql_cnt`, `mss
 -- Indexes for table `add_email`
 --
 ALTER TABLE `add_email`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `back_data`
+--
+ALTER TABLE `back_data`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -260,7 +303,13 @@ ALTER TABLE `web_account`
 -- AUTO_INCREMENT for table `add_email`
 --
 ALTER TABLE `add_email`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `back_data`
+--
+ALTER TABLE `back_data`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -272,7 +321,7 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `db_account`
 --
 ALTER TABLE `db_account`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `db_account_for_mariadb`
@@ -290,19 +339,19 @@ ALTER TABLE `db_account_for_mssql`
 -- AUTO_INCREMENT for table `db_ftp`
 --
 ALTER TABLE `db_ftp`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `error_pages`
 --
 ALTER TABLE `error_pages`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `web_account`
 --
 ALTER TABLE `web_account`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

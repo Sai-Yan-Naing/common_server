@@ -48,5 +48,12 @@
 		</div>
 	</div>
 </div>
+<div id="page-loading" style="display: none;">
+	<div class="d-flex justify-content-center">
+	  <div class="spinner-border" role="status" style="width: 5rem; height: 5rem; ">
+	    <span class="sr-only">Loading...</span>
+	  </div>
+	</div>
+</div>
 
 <?php require_once("common_modal.php") ?>

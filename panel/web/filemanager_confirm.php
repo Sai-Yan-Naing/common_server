@@ -18,15 +18,16 @@ $getWeb = $getweball->getWebaccount($_COOKIE['d']);
 // die($_POST['foldername']);
    
 $dir = "E:\webroot\LocalUser/".$getWeb['user'].'/';
+$dir2 = "E:\webroot\LocalUser/".$getWeb['user'];
 // die($_POST['path']);
-if(isset($_POST['newfile']) and $_POST['action']=='file_create')
+if(isset($_POST['fm_form_name']) and $_POST['action']=='newFile')
 {
-	if($_POST['common_path']!=null and $_POST['common_path']!=''){
-		$_dir=$dir.$_POST['common_path'].'/';
-	}else{
+	if($_POST['common_path']==null || $_POST['common_path']==''){
 		$_dir=$dir;
+	}else{
+		$_dir=$dir.$_POST['common_path'].'/';
 	}
-	echo createFile($_dir.$_POST['newfile']);
+	echo createFile($_dir.$_POST['fm_form_name']);
 	echo filepath($dir,$_POST['common_path']);
 	die();
 }else if(isset($_FILES['fileToUpload']) and $_POST['action']=='upload')
@@ -40,15 +41,14 @@ if(isset($_POST['newfile']) and $_POST['action']=='file_create')
 	uploadFile($_dir,$_FILES['fileToUpload']);
 	echo filepath($dir,$_POST['common_path']);
 	die();
-}else if(isset($_POST['folder']) and $_POST['action']=='folder_create')
+}else if(isset($_POST['fm_form_name']) and $_POST['action']=='newDir')
 {
-	if($_POST['common_path']!=null and $_POST['common_path']!=''){
-		// uploadFile($dir.$_POST['common_path'].'/',$_FILES['fileToUpload']);
-		$_dir=$dir.$_POST['common_path'].'/';
-	}else{
+	if($_POST['common_path']==null || $_POST['common_path']==''){
 		$_dir=$dir;
+	}else{
+		$_dir=$dir.$_POST['common_path'].'/';
 	}
-	mkdir($_dir.$_POST['folder']);
+	mkdir($_dir.$_POST['fm_form_name']);
 	echo filepath($dir,$_POST['common_path']);
 	die();
 }else if(isset($_POST['file_name']) and $_POST['action']=='open_file')
@@ -69,10 +69,27 @@ if(isset($_POST['newfile']) and $_POST['action']=='file_create')
 	}
 	echo save_file($_dir.$_POST['openfile_name'],$_POST['text_editor_open']);
 	// die($_dir.$_POST['openfile_name']);
-}else if(isset($_POST['path']) and $_POST['type']=='zip')
+}else if(isset($_POST['fm_form_name']) and $_POST['action']=='zip')
 {
-	echo compressed($_POST['path']);
-	die('zip');
+	if($_POST['common_path']==null || $_POST['common_path']==''){
+		$_dir=$dir;
+	}else{
+		$_dir=$dir.$_POST['common_path'].'/';
+	}
+	echo compressed($_dir,$_POST['origin_name'],$_POST['fm_form_name']);
+	echo filepath($dir,$_POST['common_path']);
+	die();
+}else if(isset($_POST['fm_form_name']) and $_POST['action']=='unzip')
+{
+	if($_POST['common_path']==null || $_POST['common_path']==''){
+		$_dir=$dir;
+	}else{
+		$_dir=$dir.$_POST['common_path'].'/';
+	}
+	// echo $dir2.$_POST['to'];
+	echo uncompressed($_dir.$_POST['fm_form_name'],$dir2.$_POST['to']);
+	echo filepath($dir,$_POST['common_path']);
+	die();
 }else if(isset($_POST['foldername']))
 {
 	// array_push($_SESSION['cart'],$_POST['foldername']);
@@ -92,25 +109,15 @@ if(isset($_POST['newfile']) and $_POST['action']=='file_create')
 	}
 	unlink($_dir.$_POST['path']);
 	filepath($dir,$_POST['common_path']);
-}else if(isset($_POST['file_rename']) and $_POST['action']=='rename_file')
-{
-	if($_POST['common_path']==null || $_POST['common_path']==''){
-		$_dir=$dir;
-	}else{
-		// uploadFile($dir.$_POST['common_path'].'/',$_POST['file_rename']);
-		$_dir=$dir.$_POST['common_path'].'/';
-	}
-	rename($_dir.$_POST['origin_name'],$_dir.$_POST['file_rename']);
-	echo filepath($dir,$_POST['common_path']);
-	die();
-}else if(isset($_POST['dir_rename']) and $_POST['action']=='rename_dir')
+}else if(isset($_POST['fm_form_name']) and $_POST['action']=='rename')
 {
 	if($_POST['common_path']==null || $_POST['common_path']==''){
 		$_dir=$dir;
 	}else{
 		$_dir=$dir.$_POST['common_path'].'/';
 	}
-	rename($_dir.$_POST['origin_name'],$_dir.$_POST['dir_rename']);
+	// echo uncompressed($_dir.$_POST['fm_form_name'],$dir2.$_POST['to']);
+	rename($_dir.$_POST['origin_name'],$_dir.$_POST['fm_form_name']);
 	echo filepath($dir,$_POST['common_path']);
 	die();
 }else if(isset($_POST['path']) and $_POST['action']=='delete_dir')
@@ -165,28 +172,28 @@ function uploadFile($dir,$file)
 
 	// Check if image file is a actual image or fake image
 	// if(isset($_POST["submit"])) {
-	//   $check = getimagesize($file["tmp_name"]);
-	//   if($check !== false) {
-	//     echo "File is an image - " . $check["mime"] . ".";
-	//     $uploadOk = 1;
-	//   } else {
-	//     echo "File is not an image.";
-	//     $uploadOk = 0;
-	//   }
+	  // $check = getimagesize($file["tmp_name"]);
+	  // if($check !== false) {
+	  //   echo "File is an image - " . $check["mime"] . ".";
+	  //   $uploadOk = 1;
+	  // } else {
+	  //   echo "File is not an image.";
+	  //   $uploadOk = 0;
+	  // }
 	// }
 
 	// Check if file already exists
-	if (file_exists($target_file)) {
-	  echo "Sorry, file already exists.";
-	  $uploadOk = 0;
-	  die();
-	}
+	// if (file_exists($target_file)) {
+	//   echo "Sorry, file already exists.";
+	//   $uploadOk = 0;
+	//   die();
+	// }
 
 	// Check file size
-	if ($file["size"] > 500000) {
-	  echo "Sorry, your file is too large.";
-	  $uploadOk = 0;
-	}
+	// if ($file["size"] > 500000) {
+	//   echo "Sorry, your file is too large.";
+	//   $uploadOk = 0;
+	// }
 
 	// Allow certain file formats
 	// if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
@@ -279,31 +286,76 @@ function save_file($file,$data)
 	return "successfully saved";
 }
 
-function compressed($name)
+class FlxZipArchive extends ZipArchive 
 {
-	// Enter the name of directory
-	$pathdir = 'E:\\webroot\\LocalUser\\'; 
-	  
-	// Enter the name to creating zipped directory
-	$zipcreated = 'test.zip';
-	  
-	// Create new zip class
-	$zip = new ZipArchive;
-	   
-	if($zip -> open($zipcreated, ZipArchive::CREATE ) === TRUE) {
-	      
-	    // Store the path into the variable
-	    $dir = opendir($pathdir);
-	       
-	    while($file = readdir($dir)) {
-	        if(is_file($pathdir.$file)) {
-	            $zip -> addFile($pathdir.$file, $file);
-	        }
-	    }
-	    $zip ->close();
-	    return "zipped";
+ public function addDir($location, $name) 
+ {
+       $this->addEmptyDir($name);
+       $this->addDirDo($location, $name);
+
+	// die("hello1");
+ } 
+ private function addDirDo($location, $name) 
+ {
+    $name .= '/';
+    $location .= '/';
+    $dir = opendir ($location);
+    while ($file = readdir($dir))
+    {
+        if ($file == '.' || $file == '..') continue;
+        $do = (filetype( $location . $file) == 'dir') ? 'addDir' : 'addFile';
+        $this->$do($location . $file, $name . $file);
+    }
+ } 
+}
+function compressed($dir,$origin,$name)
+{
+	$the_folder = $dir;
+	$zip_file_name = $pathdir.$name.".zip";
+	if(is_file($dir.$origin))
+	{
+		zipFile($dir,$origin,$name);
+	}else
+	{
+		$the_folder = $dir.$origin.'/';
+		$zip_file_name = $dir.$name.'.zip';
+		$za = new FlxZipArchive;
+		$res = $za->open($zip_file_name, ZipArchive::CREATE);
+		if($res === TRUE) 
+		{
+		    $za->addDir($the_folder, basename($the_folder));
+		    $za->close();
+		}
+		else{
+		echo 'Could not create a zip archive';
+		}
 	}
-	return "no zip";
+	
+}
+
+
+function zipFile($dir,$origin,$name)
+{
+	$pathdir = $dir; 
+	$origin_ = $dir.$origin; 
+	$zipcreated = $pathdir.$name.".zip";
+
+// die($origin);
+	$zip = new ZipArchive();
+	$zip->open($zipcreated, ZipArchive::CREATE);
+	  
+	$zip->addFile($origin_,$origin);
+	  
+	$zip->close();
+}
+
+function uncompressed($from, $to)
+{
+	// die($from.$to);
+	$zip = new ZipArchive();
+	$zip->open($from, ZipArchive::CREATE);
+	$zip->extractTo($to);
+	$zip->close();
 }
 
 
@@ -351,25 +403,25 @@ function compressed($name)
           <th>
           	<?php echo sizeFormat(folderSize($dir.$value)) ?>
        	  </th>
-          <th class="row" colspan="2">
-          	<span class=" col-sm-3"></span>
-          	<button class="btn text-secondary zip_filefolder col-sm-3" re_url="filemanager_confirm.php" path="<?=$value?>" fun="zip">
-          		<i class="fas fa-file-archive"></i>
-          	</button>
-            <button class="btn text-info col-sm-3 dir_rename" data-toggle="modal" data-target="#dir_rename" file_name="<?= $value ?>" re_url="filemanager_confirm">
-              	<i class="fas fa-edit text-warning"></i>
+          <th class="d-flex justify-content-end" colspan="2">
+          	<span class=""></span>
+            <button class="btn text-success fm_common_c" action="zip"  data-toggle="modal" data-target="#fm_common_modal" file_name="<?= $value ?>" re_url="filemanager_confirm">
+              Zip
             </button>
-          	<button class="btn text-danger delete_filedir col-sm-3" re_url="filemanager_confirm" path="<?=$value?>" action="delete_dir">
+            <button class="btn text-success fm_common_c" action="rename" file="dir" data-toggle="modal" data-target="#fm_common_modal" file_name="<?= $value ?>" re_url="filemanager_confirm">Rename
+            </button>
+          	<button class="btn text-danger delete_filedir" re_url="filemanager_confirm" path="<?=$value?>" action="delete_dir">
           		<i class="far fa-trash-alt"></i>
           	</button>
           </th>
         </tr>
         <?php 
     	}
+    	$ext = array('html','css','php','js', 'txt');         
         foreach ($files_list as $key => $value) {
             ?>
             <tr>
-              <th class="align-baseline open_file" style="cursor: pointer;" data-toggle="modal" data-target="#open_file" file_name="<?= $value ?>" re_url="filemanager_confirm">
+              <th class="align-baseline open_file" style="cursor: pointer;" data-toggle="modal" <?php if (in_array(getFileExt($dir.'/'.$value), $ext)){ echo 'data-target="#open_file"'; } ?> file_name="<?= $value ?>" re_url="filemanager_confirm">
               	<div><i class="fas fa-file text-secondary fa-lg"></i> <?= $value ?></div>
               </th>
               <th>
@@ -381,17 +433,25 @@ function compressed($name)
               <th path="<?=$dir?>" file="<?=$value?>">
               	<?php echo sizeFormat(filesize($dir.$value)) ?>
               </th>
-              <th class="row" colspan="2">
-              	<a href="filemanager_confirm.php?download=<?=$value?>" class="btn text-success col-sm-3 download_file">
+              <th class="d-flex justify-content-end" colspan="2">
+              	<a href="filemanager_confirm.php?download=<?=$value?>" class="btn text-success download_file">
               		<i class="fa fa-download"></i>
               	</a>
-                <button class="btn text-secondary col-sm-3" re_url="filemanager_confirm.php" path="<?=$value?>">
-                	<i class="fas fa-file-archive"></i>
+                <button class="btn text-success fm_common_c" action="zip"  data-toggle="modal" data-target="#fm_common_modal" file_name="<?= $value ?>" re_url="filemanager_confirm">
+                  Zip
                 </button>
-              	<button class="btn text-info col-sm-3 file_rename" data-toggle="modal" data-target="#file_rename" file_name="<?= $value ?>" re_url="filemanager_confirm">
-              		<i class="fas fa-edit text-warning"></i>
-              	</button>
-                <button class="btn text-danger delete_filedir col-sm-3" re_url="filemanager_confirm" path="<?=$value?>" action="delete_file">
+                <?php 
+                  if(getFileExt($dir.'/'.$value)=="zip")
+                  {?>
+                    <button  class="btn text-success fm_common_c" action="unzip" data-toggle="modal" data-target="#fm_common_modal" file_name="<?= $value ?>" re_url="filemanager_confirm">
+                    UnZip
+                  </button>
+                 <?php 
+                  }
+                  ?>
+                <button class="btn text-success fm_common_c" action="rename" file="file" data-toggle="modal" data-target="#fm_common_modal" file_name="<?= $value ?>" re_url="filemanager_confirm">Rename
+                </button>
+                <button class="btn text-danger delete_filedir" re_url="filemanager_confirm" path="<?=$value?>" action="delete_file">
                 	<i class="far fa-trash-alt"></i>
                 </button>
             </th>
@@ -403,3 +463,14 @@ function compressed($name)
 	}
   
 ?> 
+
+ <?php
+      function getFileExt($dir)
+      {
+        $ext = pathinfo($dir, PATHINFO_EXTENSION);
+
+        // Returns html
+        // echo $ext;
+        return $ext;
+      }
+     ?>

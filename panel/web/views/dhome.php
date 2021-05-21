@@ -1,9 +1,10 @@
 <?php 
+
 $password = $_COOKIE["p"];
 $domain = $_COOKIE["d"];
 require_once('models/account.php');
 require("views/dheader.php"); 
-
+require_once 'common.php';
 $account = new Account;
 $error_pages=$account->getErrorPages($domain);
 
@@ -24,7 +25,7 @@ $error_pages=$account->getErrorPages($domain);
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#app-install">アプリケーションインストール</a>
+                            <a class="nav-link active" data-toggle="tab" href="#page-body">アプリケーションインストール</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#kihon-setting">基本設定</a>
@@ -33,37 +34,45 @@ $error_pages=$account->getErrorPages($domain);
                             <a class="nav-link" data-toggle="tab" href="#oyo-setting">応用設定</a>
                         </li>
                     </ul>
-
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div id="app-install" class="tab-pane active pr-3 pl-3"><br>
-                            <form action="install_app.php" method="post" id="domain-homepage" />
+                        <div id="page-body" class="tab-pane active pr-3 pl-3"><br>
+                            <form action="install_app.php" method="post" id="app-install-form" re_url="install_app"/>
                                 <div class="form-group row">
-                                    <label for="application" class="col-sm-4 col-form-label">アプリケーション</label>
-                                    <div class="col-sm-3 custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="wordpress" name="app" value="wordpress" class="custom-control-input" checked="checked">
-                                        <label class="custom-control-label" for="wordpress">Wordpress</label>
-                                    </div>
-                                    <div class="col-sm-3 custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="eccube" name="app" value="eccube" class="custom-control-input">
-                                        <label class="custom-control-label" for="eccube">ECCUBE</label>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="install-method" class="col-sm-4 col-form-label">インストール方法</label>
+                                    <label for="application" class="col-sm-3 col-form-label">アプリケーション</label>
                                     <div class="col-sm-8">
-                                        <input type="text" readonly class="form-control-plaintext" id="install-method" value="新規インストール">
+                                        <div class="form-check-inline">
+                                          <label class="form-check-label">
+                                            <input type="radio" class="form-check-input app" name="app" value="WORDPRESS" name="app" checked re_url="app_version">Word Press
+                                          </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                          <label class="form-check-label">
+                                            <input type="radio" class="form-check-input app" name="app" value="ECCUBE" name="app" re_url="app_version">EC-CUBE
+                                          </label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label for="version" class="col-sm-4 col-form-label">バージョン</label>
-                                    <div class="col-sm-3 custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="ver-4" name="version" value="4.9.12" class="custom-control-input" checked="checked">
-                                        <label class="custom-control-label" for="ver-4">4.9.12</label>
+                                    <label for="install-method" class="col-sm-3 col-form-label">インストール方法</label>
+                                    <div class="col-sm-8">
+                                        <label for="install-method" class="col-form-label">新規インストール</label>
                                     </div>
-                                    <div class="col-sm-3 custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="ver-5" name="version" value="5.5.0" class="custom-control-input">
-                                        <label class="custom-control-label" for="ver-5">5.5.0</label>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="version" class="col-sm-3 col-form-label">バージョン</label>
+                                    <div class="col-sm-8" id="version">
+                                        <?php
+                                        foreach ($values=app_version("WORDPRESS") as $key => $value) {
+                                        ?>
+                                            <div class="form-check-inline">
+                                              <label class="form-check-label">
+                                                <input type="radio" class="form-check-input" name="app-version" <?php if($values[0]==$value){ echo "checked";}?> value="<?=$value?>"><?= $value ?>
+                                              </label>
+                                            </div>
+                                        <?php
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -266,7 +275,7 @@ $error_pages=$account->getErrorPages($domain);
                     <div class="modal-content">
                         <form >
                             <div class="modal-header border-less">
-                                <h5 class="modal-title">Change IP Address Name</h5>
+                                <h5 class="modal-title">Add Error page</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>

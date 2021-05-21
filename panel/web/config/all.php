@@ -9,6 +9,7 @@ define("MAROOT", 'root');
 define("MAROOT_PASS", "");
 define("MADSN", 'mysql:host=localhost:3307');
 
+
 // define("STARTER_PLAN", 1);
 // define("COMMON_PLAN", 1);
 // define("PREMIUM_PLAN", 1);

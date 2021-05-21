@@ -18,7 +18,7 @@ $(document).on('click','.delete_filedir',function(){
 	        document.getElementById("changebody").innerHTML = data;
 	        $('.download_file').each(function(i, obj) {
 			    $temp=$(this).attr('href');
-				$(this).attr('href',$temp+'&common_path='+$_path);
+				$(this).attr('href',$temp+'&common_path='+$common_path);
 			});
 	    }
 	});
@@ -26,20 +26,63 @@ $(document).on('click','.delete_filedir',function(){
 
 $(document).on('click','.open_file',function(){
 	$file_name=$(this).attr('file_name');
+	var extension = $file_name.substr( ($file_name.lastIndexOf('.') +1) );
+	var fileExtension = ['html','css','php','js', 'txt'];
 	$re_url = $(this).attr('re_url');
 	$url = document.URL.split('/');
 	$url=$url[0]+"//"+$url[2];
 	$common_path=$("#common_path").attr('path');
-	document.getElementById("file_open").innerHTML = "loading";
-	$.ajax({
-	    type: "POST",
-	    url: $url+"/"+$re_url+".php",
-	    data: {file_name:$file_name,common_path:$common_path, action:'open_file'},
-	    success: function(data){
-	    	document.getElementById("file_open").innerHTML = data;
-	    }
-	});
+	if(fileExtension.indexOf(extension) > -1)
+	{
+		
+		document.getElementById("file_open").innerHTML = "loading";
+			$.ajax({
+			    type: "POST",
+			    url: $url+"/"+$re_url+".php",
+			    data: {file_name:$file_name,common_path:$common_path, action:'open_file'},
+			    success: function(data){
+			    	document.getElementById("file_open").innerHTML = data;
+			    }
+			});
+		
+	}else
+	{
+		alert("This file is unsupported format.");
+	}
 });
+
+function openFile(file) {
+    var extension = file.substr( (file.lastIndexOf('.') +1) );
+     switch(extension) {
+        case 'jpg':
+        case 'png':
+        case 'gif':
+            alert('was jpg png gif');  // There's was a typo in the example where
+        break;                         // the alert ended with pdf instead of gif.
+        case 'zip':
+            $error="Zip";
+        break;
+        case 'rar':
+            $error="Rar";
+        break;
+        case 'pdf':
+            alert('was pdf');
+        break;
+        case 'php':
+            alert('was php');
+        break;
+        case 'html':
+            alert('was html');
+        break;
+        case 'js':
+            alert('was js');
+        break;
+        default:
+            alert('This File is unsupported format');
+    }
+};
+
+
 
 $(document).on('click','#save_file', function(){
 	$text_editor_open = $("#text_editor_open").val();
@@ -61,19 +104,76 @@ $(document).on('click','#save_file', function(){
 	});
 });
 
-$(document).on('click','.file_rename,.dir_rename',function(){
-	$rename = 'file';
-	if($(this).hasClass('dir_rename'))
+$(document).on('click','.fm_common_c',function(){
+	$root_dir = $("#fm_common_path").next();
+	$root_dir.attr('type','hidden');
+	$("#fm_common_path").css('display','none');
+	$action = $(this).attr('action');
+	if($action=='unzip')
 	{
-		$rename = 'dir';
+		$title="Unzip File";
+		$label="File name";
+		$root_dir.attr('type','text');
+		$("#fm_common_path").css('display','block')
+	}else if($action=='zip')
+	{
+		$title="Zip File";
+		if($(this).attr('file')=='dir')
+		{
+			$title="Zip Directory";
+		}
+		
+		$label="File name";
+	}else if($action=='rename')
+	{
+		$title="Rename File";
+		if($(this).attr('file')=='dir')
+		{
+			$title="Rename Directory";
+		}
+		$label="Name";
+	}else if($action=='newFile')
+	{
+		$title="Create a new File";
+		$label="Name";
+	}else if($action=='newDir')
+	{
+		$title="Create a new Directory";
+		$label="Name";
 	}
-	$("#rename_"+$rename).children().children('input').val($(this).attr('file_name'));
+	
+	$("#fm_modal_title").html($title);
+	$("#fm_form_label").html($label);
+	$common_path=$("#common_path").attr('path');
+	if($common_path=='' || $common_path==null)
+	{
+		$common_path='/';
+	}else{
+		$common_path='/'+$common_path+'/';
+	}
+	$("#fm_common_modal_form").attr('action',$action)
+	$("#fm_common_modal_form").children().children('input').val($(this).attr('file_name'));
+	$root_dir.val($common_path)
+})
+
+$(document).on('change','#upload_',function(){
+	  var file = $('#upload_')[0].files[0].name;
+	  $('.ps_absolute').text(file);
 })
 
 $(function () {
 
-        $('#upload_newfile,#folder_create,#file_create,#rename_file,#rename_dir').on('submit', function (e) {
-// alert(1)
+        $('#upload_newfile,#fm_common_modal_form').on('submit', function (e) {
+
+        	if($(this).attr('action')=='upload')
+        	{
+        		$size = $('#upload_')[0].files[0].size;
+				  if($size>2097152)
+				  {
+				  	alert('File size is greater than 2MB')
+				  	return false;
+				  }
+        	}
           e.preventDefault();
 			$url = document.URL.split('/');
 			$url=$url[0]+"//"+$url[2];
@@ -88,7 +188,7 @@ $(function () {
 			$formdata = new FormData(this);
 			$formdata.append('common_path',$common_path);
 			$formdata.append('action',$action);
-		// alert(2)
+		// alert($modal)
 		//  event.preventDefault();
 			$.ajax({
 			    type: "POST",
@@ -109,34 +209,13 @@ $(function () {
 			    	$($this).trigger("reset");
 			    	$('.download_file').each(function(i, obj) {
 					    $temp=$(this).attr('href');
-						$(this).attr('href',$temp+'&common_path='+$_path);
+						$(this).attr('href',$temp+'&common_path='+$common_path);
 					});
 			    }
 			});
 
 		});
     });
-
-
-$(document).on('click','.zip_filefolder',function(){
-	$path=$(this).attr('path');
-	$fun=$(this).attr('fun');
-	$re_url = $(this).attr('re_url');
-	$url = document.URL.split('/');
-	$url=$url[0]+"//"+$url[2];
-
-	// document.getElementById("file_open").innerHTML = "loading";
-	$.ajax({
-	    type: "POST",
-	    url: $url+"/"+$re_url,
-	    data: {path:$path,type:$fun},
-	    success: function(data){
-	    	alert(data);
-	    	window.location.href = document.URL;
-	    	// document.getElementById("file_open").innerHTML = data;
-	    }
-	});
-});
 
 $(document).on('click',".folder_click",function(){
 	// alert(1)
@@ -191,24 +270,3 @@ $(document).on('click',".folder_click",function(){
 		}
 	})
 });
-
-// $(document).on('click','.download_file',function(){
-// 	$file_name=$(this).attr('file_name');
-
-// 	$re_url = $(this).attr('re_url');
-// 	$url = document.URL.split('/');
-// 	$url=$url[0]+"//"+$url[2];
-
-// 	$common_path=$("#common_path").attr('path');
-
-// 	// document.getElementById("display_modal").innerHTML = "loading";
-// 	$.ajax({
-// 	    type: "POST",
-// 	    url: $url+"/"+$re_url+".php",
-// 	    data: {common_path: $common_path, file_name:$file_name, action:'download'},
-// 	    success: function(data){
-// 	    	alert(data)
-// 	        // document.getElementById("display_modal").innerHTML = data;
-// 	    }
-// 	});
-// });

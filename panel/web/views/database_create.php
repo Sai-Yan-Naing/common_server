@@ -5,7 +5,8 @@
 </div>
 <!-- Modal body -->
 <div class="modal-body">
-
+<span style="display: none;" re_url="checker" id="db_name_checker_fm" tb="db_account"></span>
+<span style="display: none;" re_url="checker" id="db_username_checker_fm" tb="db_account"></span>
                 <form action="database_con.php" method="post" id="database_create">
                 	<input type="hidden" name="action" value="new">
                     <div class="row mb-3">
@@ -29,14 +30,14 @@
                     <div class="form-group row">
                         <label for="db_name" class="col-sm-4 col-form-label">データベース名</label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" id="db_name" name="db_name" placeholder="8～70文字、半角英数記号の組み合わせ">
+                          <input type="text" class="form-control" id="db_name" name="db_name"  column="db_name" placeholder="8～70文字、半角英数記号の組み合わせ">
                           <label for="db_name" id="db_name_error" class="error"></label>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="db_username" class="col-sm-4 col-form-label">ユーザー名</label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" id="db_username" name="db_username" placeholder="8～70文字、半角英数記号の組み合わせ">
+                          <input type="text" class="form-control" id="db_username" name="db_username" column="db_user" placeholder="8～70文字、半角英数記号の組み合わせ">
                           <label for="db_username" id="db_username_error" class="error"></label>
                         </div>
                     </div>

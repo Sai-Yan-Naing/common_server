@@ -114,7 +114,6 @@ class MySQL{
 		} catch (PDOException $e) {
 			print('Error ' . $e->getMessage());
 			$error_message = "データベースへの接続エラーです。";
-			require("views/allerror.php");
 			$pdo_account = NULL;
 			die();
 		}

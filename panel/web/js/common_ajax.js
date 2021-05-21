@@ -202,23 +202,95 @@ function change_mail_text(change)
 {
 	$("#change_mail_text").text(change)
 }
+// Back up
+$(document).on('click change','.data_backup', function(){
+	
+	// $path=$(this).attr('path');
+	$re_url = $(this).attr('re_url');
+	$url = document.URL.split('/');
+	$url=$url[0]+"//"+$url[2];
 
-// $(document).on('click','.download_file',function(){
-// 	$path=$(this).attr('path');
-// 	$file=$(this).attr('file');
+	// $common_path=$("#common_path").attr('path');
+	$action = $(this).attr('action');
+	$data = "";
+	// alert($(this).prop('checked'))
+	// return false;
+	$ischeck = $(this).prop('checked');
+	if($action =='auto_backup')
+	{
+		if($ischeck == true)
+		{
+			$onoff= 1;
+		}else{
+			$onoff= 0;
+		}
+		$data=$onoff;
+	}else{
+		if(!isconfirm())
+		{
+			return false;
+		}
+	}
 
-// 	$re_url = $(this).attr('re_url');
-// 	$url = document.URL.split('/');
-// 	$url=$url[0]+"//"+$url[2];
+	$.ajax({
+	    type: "POST",
+	    url: $url+"/"+$re_url+".php",
+	    data: {data:$data, action:$action},
+	    success: function(data){
+	    	if(data.includes("error"))
+	    	{
+	    		window.location.href = document.URL;
+	    	}else if(data.includes("auto_backup"))
+	    	{
+	    		alert("success");
+	    	}else{
+	    		$("#changeBackup").html(data);
+	    	}
+	    	
+	    }
+	});
+});
 
-// 	// document.getElementById("display_modal").innerHTML = "loading";
-// 	$.ajax({
-// 	    type: "POST",
-// 	    url: $url+"/"+$re_url,
-// 	    data: {path: $path, file:$file},
-// 	    success: function(data){
-// 	    	alert(data)
-// 	        // document.getElementById("display_modal").innerHTML = data;
-// 	    }
-// 	});
-// });
+function isconfirm()
+{
+	return confirm("Are you sure");
+}
+
+$(document).on('change','.app',function(){
+	$re_url = $(this).attr('re_url');
+	$app = $(this).val();
+	$url = document.URL.split('/');
+	$url=$url[0]+"//"+$url[2];
+	$.ajax({
+	    type: "POST",
+	    url: $url+"/"+$re_url+".php",
+	    data: {app:$app},
+	    success: function(data){
+	    	$("#version").html(data)
+	    }
+	});
+});
+
+$(document).on('submit','#app-install-form',function(e){
+	$re_url = $(this).attr('re_url');
+	$formdata = new FormData(this);
+	$url = document.URL.split('/');
+	$url=$url[0]+"//"+$url[2];
+	alert(1)
+	$.ajax({
+	    type: "POST",
+	    url: $url+"/"+$re_url+".php",
+	    data:  $formdata,
+	   contentType: false,
+	         cache: false,
+	   processData:false,
+        beforeSend: function () {
+            $('#page-body').html($("#page-loading"));
+        	$("#page-loading").css({"display": "block"});
+        },
+	    success: function(data){
+	    	window.location.href = document.URL;
+	    }
+	});
+});
+
